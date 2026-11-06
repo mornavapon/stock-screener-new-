@@ -12,26 +12,26 @@
 </head>
 <body class="bg-slate-950 text-slate-100 flex h-screen overflow-hidden">
 
-    <!-- Sidebar สำหรับเลือก Watchlist -->
-    <aside class="w-72 bg-slate-900 border-r border-slate-800 flex flex-col justify-between">
+    <!-- Sidebar สำหรับเลือก Watchlist (รองรับสร้างไม่จำกัด และ Export/Import) -->
+    <aside class="w-72 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
         <div class="p-4 border-b border-slate-800">
             <h1 class="text-xl font-bold text-emerald-400 mb-1">Tablet Screener</h1>
             <p class="text-xs text-slate-400" id="last-update">กำลังโหลดข้อมูล...</p>
         </div>
 
-        <!-- รายการ Watchlists (สร้างได้ไม่จำกัด เลื่อนดูได้) -->
+        <!-- รายการ Watchlists (มี Scrollbar กรณีมีเยอะ) -->
         <div class="flex-1 overflow-y-auto p-4 space-y-2" id="watchlist-nav"></div>
 
         <!-- สร้าง Watchlist ใหม่ และ Export/Import -->
-        <div class="p-4 border-t border-slate-800 space-y-2">
+        <div class="p-4 border-t border-slate-800 space-y-2 bg-slate-900">
             <div class="flex gap-2">
                 <input type="text" id="new-wl-name" placeholder="ชื่อ Watchlist ใหม่..." class="flex-1 bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
-                <button onclick="createWatchlist()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded text-sm font-medium transition cursor-pointer">+</button>
+                <button onclick="createWatchlist()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded text-sm font-medium transition cursor-pointer text-white font-bold">+</button>
             </div>
-            <div class="flex gap-2 pt-2">
-                <button onclick="exportWatchlists()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 transition cursor-pointer">Export JSON</button>
-                <label class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 text-center transition cursor-pointer">
-                    Import JSON <input type="file" id="import-file" class="hidden" onchange="importWatchlists(event)">
+            <div class="flex gap-2 pt-1">
+                <button onclick="exportWatchlists()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 transition cursor-pointer text-center">Export JSON</button>
+                <label class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 text-center transition cursor-pointer text-slate-200">
+                    Import JSON <input type="file" id="import-file" class="hidden" accept=".json" onchange="importWatchlists(event)">
                 </label>
             </div>
         </div>
@@ -41,11 +41,11 @@
     <main class="flex-1 flex flex-col h-screen overflow-hidden">
         
         <!-- Header -->
-        <header class="bg-slate-900 border-b border-slate-800 p-4 flex flex-wrap justify-between items-center gap-4">
+        <header class="bg-slate-900 border-b border-slate-800 p-4 flex flex-wrap justify-between items-center gap-4 shrink-0">
             <div class="flex items-center gap-3">
-                <h2 id="current-wl-title" class="text-xl font-semibold">เลือก Watchlist</h2>
-                <button onclick="renameCurrentWatchlist()" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2 py-1 rounded border border-slate-700">เปลี่ยนชื่อ</button>
-                <button onclick="deleteCurrentWatchlist()" class="text-xs text-rose-400 hover:text-rose-300 bg-slate-800 px-2 py-1 rounded border border-slate-700">ลบ</button>
+                <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400">เลือก Watchlist</h2>
+                <button onclick="renameCurrentWatchlist()" class="text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
+                <button onclick="deleteCurrentWatchlist()" class="text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
             </div>
 
             <!-- ช่องค้นหาเพื่อเพิ่มหุ้น -->
@@ -55,76 +55,76 @@
             </div>
         </header>
 
-        <!-- ผลลัพธ์หุ้นใน Watchlist (Table Result พร้อม Fix Header) -->
-        <div class="flex-1 overflow-auto p-4">
-            <div class="bg-slate-900 rounded-lg border border-slate-800 overflow-hidden">
-                <table class="w-full text-left border-collapse">
-                    <thead class="sticky top-0 bg-slate-800 z-20 text-slate-300 text-xs border-b border-slate-700 shadow-md">
+        <!-- ผลลัพธ์หุ้นใน Watchlist (Fixed Header ตรึงนิ่งไม่เลื่อนตาม) -->
+        <div class="flex-1 overflow-y-auto p-4">
+            <div class="bg-slate-900 rounded-lg border border-slate-800 shadow-xl">
+                <table class="w-full text-left border-collapse relative">
+                    <thead class="sticky top-0 bg-slate-900 z-30 text-slate-200 text-xs shadow-md border-b border-slate-700">
                         <tr>
-                            <th class="p-3">
+                            <th class="p-3 bg-slate-900">
                                 <div class="flex items-center gap-1">
                                     <span>TICKER / NAME</span>
-                                    <div class="flex gap-0.5 ml-1">
-                                        <button onclick="sortStocks('ticker', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]" title="A-Z">A↓</button>
-                                        <button onclick="sortStocks('ticker', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]" title="Z-A">Z↑</button>
+                                    <div class="flex gap-1 ml-1">
+                                        <button onclick="sortStocks('ticker', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer" title="A-Z">A↓</button>
+                                        <button onclick="sortStocks('ticker', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer" title="Z-A">Z↑</button>
                                     </div>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>PRICE</span>
-                                    <button onclick="sortStocks('price', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                    <button onclick="sortStocks('price', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>MARKET CAP</span>
-                                    <button onclick="sortStocks('marketCap', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                    <button onclick="sortStocks('marketCap', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>P/E</span>
-                                    <button onclick="sortStocks('pe', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↑</button>
+                                    <button onclick="sortStocks('pe', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↑</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>P/BV</span>
-                                    <button onclick="sortStocks('pb', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↑</button>
+                                    <button onclick="sortStocks('pb', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↑</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>DIV YIELD (%)</span>
-                                    <button onclick="sortStocks('dividendYield', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                    <button onclick="sortStocks('dividendYield', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>ROE (%)</span>
-                                    <button onclick="sortStocks('roe', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                    <button onclick="sortStocks('roe', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>D/E</span>
-                                    <button onclick="sortStocks('de', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↑</button>
+                                    <button onclick="sortStocks('de', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↑</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>GPM (%)</span>
-                                    <button onclick="sortStocks('gpm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                    <button onclick="sortStocks('gpm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">
+                            <th class="p-3 text-right bg-slate-900">
                                 <div class="flex items-center justify-end gap-1">
                                     <span>NPM (%)</span>
-                                    <button onclick="sortStocks('npm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                    <button onclick="sortStocks('npm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
                                 </div>
                             </th>
-                            <th class="p-3 text-center">จัดการ</th>
+                            <th class="p-3 text-center bg-slate-900">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody id="stock-table-body" class="divide-y divide-slate-800 text-sm"></tbody>
@@ -135,8 +135,14 @@
 
     <script>
         let globalData = { updated_at: "", stocks: [] };
-        let watchlists = JSON.parse(localStorage.getItem('tablet_watchlists')) || { "Watchlist 1": [] };
-        let currentWL = Object.keys(watchlists)[0] || "Watchlist 1";
+        
+        // โหลดข้อมูล Watchlists จาก localStorage (รองรับหลาย Watchlist ไม่จำกัด)
+        let watchlists = JSON.parse(localStorage.getItem('tablet_watchlists'));
+        if (!watchlists || typeof watchlists !== 'object' || Object.keys(watchlists).length === 0) {
+            watchlists = { "Watchlist 1": [], "Watchlist 2": [] };
+        }
+        
+        let currentWL = Object.keys(watchlists)[0];
         let currentSort = { key: null, order: 'asc' };
 
         async function loadData() {
@@ -148,7 +154,7 @@
                 renderTable();
             } catch (err) {
                 console.error("ไม่สามารถโหลดข้อมูลหุ้นได้:", err);
-                document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ (รัน Action ใน GitHub ก่อน)";
+                document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ";
             }
         }
 
@@ -157,8 +163,8 @@
             nav.innerHTML = '';
             Object.keys(watchlists).forEach(name => {
                 const btn = document.createElement('button');
-                btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center ${name === currentWL ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800'}`;
-                btn.innerHTML = `<span>${name}</span> <span class="text-xs opacity-75">(${watchlists[name].length})</span>`;
+                btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center ${name === currentWL ? 'bg-emerald-600 text-white font-bold' : 'text-slate-300 hover:bg-slate-800'}`;
+                btn.innerHTML = `<span>${name}</span> <span class="text-xs opacity-75">(${(watchlists[name] || []).length})</span>`;
                 btn.onclick = () => { currentWL = name; renderWatchlistNav(); renderTable(); };
                 nav.appendChild(btn);
             });
@@ -168,26 +174,34 @@
         function createWatchlist() {
             const input = document.getElementById('new-wl-name');
             const name = input.value.trim();
-            if (name && !watchlists[name]) {
-                watchlists[name] = [];
-                saveAndRefresh();
-                input.value = '';
-                currentWL = name;
-                renderWatchlistNav();
-                renderTable();
+            if (!name) return;
+            if (watchlists[name]) {
+                alert("มีชื่อ Watchlist นี้อยู่แล้ว");
+                return;
             }
+            watchlists[name] = [];
+            saveAndRefresh();
+            input.value = '';
+            currentWL = name;
+            renderWatchlistNav();
+            renderTable();
         }
 
         function renameCurrentWatchlist() {
             const newName = prompt("เปลี่ยนชื่อ Watchlist เป็น:", currentWL);
-            if (newName && newName.trim() && !watchlists[newName.trim()]) {
-                watchlists[newName.trim()] = watchlists[currentWL];
-                delete watchlists[currentWL];
-                currentWL = newName.trim();
-                saveAndRefresh();
-                renderWatchlistNav();
-                renderTable();
+            if (!newName || !newName.trim()) return;
+            const trimmed = newName.trim();
+            if (trimmed === currentWL) return;
+            if (watchlists[trimmed]) {
+                alert("มีชื่อ Watchlist นี้อยู่แล้ว");
+                return;
             }
+            watchlists[trimmed] = watchlists[currentWL];
+            delete watchlists[currentWL];
+            currentWL = trimmed;
+            saveAndRefresh();
+            renderWatchlistNav();
+            renderTable();
         }
 
         function deleteCurrentWatchlist() {
@@ -214,14 +228,15 @@
 
             dropdown.innerHTML = matched.map(s => `
                 <div onclick="addStockToCurrentWL('${s.ticker}')" class="p-2 hover:bg-slate-700 cursor-pointer text-xs flex justify-between border-b border-slate-700">
-                    <span class="font-bold">${s.ticker}</span>
-                    <span class="text-slate-400 truncate max-w-[180px]">${s.name}</span>
+                    <span class="font-bold text-emerald-400">${s.ticker}</span>
+                    <span class="text-slate-300 truncate max-w-[180px]">${s.name}</span>
                 </div>
             `).join('');
             dropdown.classList.remove('hidden');
         }
 
         function addStockToCurrentWL(ticker) {
+            if (!watchlists[currentWL]) watchlists[currentWL] = [];
             if (!watchlists[currentWL].includes(ticker)) {
                 watchlists[currentWL].push(ticker);
                 saveAndRefresh();
@@ -261,6 +276,9 @@
                 stocksInWL.sort((a, b) => {
                     let valA = a[currentSort.key];
                     let valB = b[currentSort.key];
+                    if (valA === undefined || valA === null) valA = 0;
+                    if (valB === undefined || valB === null) valB = 0;
+                    
                     if (typeof valA === 'string') {
                         return currentSort.order === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
                     }
@@ -269,7 +287,7 @@
             }
 
             if (stocksInWL.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="11" class="p-8 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
                 return;
             }
 
@@ -289,7 +307,7 @@
                     <td class="p-3 text-right font-mono">${s.gpm ? s.gpm.toFixed(2) + '%' : '-'}</td>
                     <td class="p-3 text-right font-mono">${s.npm ? s.npm.toFixed(2) + '%' : '-'}</td>
                     <td class="p-3 text-center">
-                        <button onclick="removeStock('${s.ticker}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">ลบ</button>
+                        <button onclick="removeStock('${s.ticker}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">ลบ</button>
                     </td>
                 </tr>
             `).join('');
@@ -316,16 +334,18 @@
             reader.onload = function(e) {
                 try {
                     const imported = JSON.parse(e.target.result);
-                    if (typeof imported === 'object' && imported !== null) {
+                    if (typeof imported === 'object' && imported !== null && !Array.isArray(imported)) {
                         watchlists = imported;
                         currentWL = Object.keys(watchlists)[0] || "Watchlist 1";
                         saveAndRefresh();
                         renderWatchlistNav();
                         renderTable();
                         alert("นำเข้า Watchlists สำเร็จ!");
+                    } else {
+                        alert("รูปแบบไฟล์ JSON ไม่ถูกต้อง");
                     }
                 } catch (err) {
-                    alert("ไฟล์ JSON ไม่ถูกต้อง");
+                    alert("ไม่สามารถอ่านไฟล์ JSON ได้");
                 }
             };
             reader.readAsText(file);

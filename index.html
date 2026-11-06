@@ -19,12 +19,10 @@
             <p class="text-xs text-slate-400" id="last-update">กำลังโหลดข้อมูล...</p>
         </div>
 
-        <!-- รายการ Watchlists -->
-        <div class="flex-1 overflow-y-auto p-4 space-y-2" id="watchlist-nav">
-            <!-- เรนเดอร์ด้วย JavaScript -->
-        </div>
+        <!-- รายการ Watchlists (สร้างได้ไม่จำกัด เลื่อนดูได้) -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-2" id="watchlist-nav"></div>
 
-        <!-- สร้าง Watchlist ใหม่ -->
+        <!-- สร้าง Watchlist ใหม่ และ Export/Import -->
         <div class="p-4 border-t border-slate-800 space-y-2">
             <div class="flex gap-2">
                 <input type="text" id="new-wl-name" placeholder="ชื่อ Watchlist ใหม่..." class="flex-1 bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
@@ -42,7 +40,7 @@
     <!-- พื้นที่หลัก (Main Content) -->
     <main class="flex-1 flex flex-col h-screen overflow-hidden">
         
-        <!-- Header แสดงชื่อ Watchlist ปัจจุบัน และช่อง Search & Add -->
+        <!-- Header -->
         <header class="bg-slate-900 border-b border-slate-800 p-4 flex flex-wrap justify-between items-center gap-4">
             <div class="flex items-center gap-3">
                 <h2 id="current-wl-title" class="text-xl font-semibold">เลือก Watchlist</h2>
@@ -50,40 +48,86 @@
                 <button onclick="deleteCurrentWatchlist()" class="text-xs text-rose-400 hover:text-rose-300 bg-slate-800 px-2 py-1 rounded border border-slate-700">ลบ</button>
             </div>
 
-            <!-- ช่องค้นหาเพื่อเพิ่มหุ้นเข้า Watchlist ปัจจุบัน -->
+            <!-- ช่องค้นหาเพื่อเพิ่มหุ้น -->
             <div class="relative w-80">
                 <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()" class="w-full bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
                 <div id="search-results-dropdown" class="absolute left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
             </div>
         </header>
 
-        <!-- ผลลัพธ์หุ้นใน Watchlist (Table Result) -->
+        <!-- ผลลัพธ์หุ้นใน Watchlist (Table Result พร้อม Fix Header) -->
         <div class="flex-1 overflow-auto p-4">
             <div class="bg-slate-900 rounded-lg border border-slate-800 overflow-hidden">
                 <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-800 text-slate-300 text-sm border-b border-slate-700">
+                    <thead class="sticky top-0 bg-slate-800 z-20 text-slate-300 text-xs border-b border-slate-700 shadow-md">
+                        <tr>
                             <th class="p-3">
-                                <div class="flex items-center gap-2">
-                                    <span>Ticker / Name</span>
-                                    <!-- ปุ่ม Sort A-Z / Z-A สีเขียวเด่นชัด -->
-                                    <div class="flex gap-1">
-                                        <button onclick="sortStocks('asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-1.5 py-0.5 rounded transition cursor-pointer" title="Sort A -> Z">A↓</button>
-                                        <button onclick="sortStocks('desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-1.5 py-0.5 rounded transition cursor-pointer" title="Sort Z -> A">Z↑</button>
+                                <div class="flex items-center gap-1">
+                                    <span>TICKER / NAME</span>
+                                    <div class="flex gap-0.5 ml-1">
+                                        <button onclick="sortStocks('ticker', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]" title="A-Z">A↓</button>
+                                        <button onclick="sortStocks('ticker', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]" title="Z-A">Z↑</button>
                                     </div>
                                 </div>
                             </th>
-                            <th class="p-3 text-right">Price</th>
-                            <th class="p-3 text-right">P/E</th>
-                            <th class="p-3 text-right">P/B</th>
-                            <th class="p-3 text-right">ROE (%)</th>
-                            <th class="p-3 text-right">Div Yield (%)</th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>PRICE</span>
+                                    <button onclick="sortStocks('price', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>MARKET CAP</span>
+                                    <button onclick="sortStocks('marketCap', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>P/E</span>
+                                    <button onclick="sortStocks('pe', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↑</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>P/BV</span>
+                                    <button onclick="sortStocks('pb', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↑</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>DIV YIELD (%)</span>
+                                    <button onclick="sortStocks('dividendYield', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>ROE (%)</span>
+                                    <button onclick="sortStocks('roe', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>D/E</span>
+                                    <button onclick="sortStocks('de', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↑</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>GPM (%)</span>
+                                    <button onclick="sortStocks('gpm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">
+                                <div class="flex items-center justify-end gap-1">
+                                    <span>NPM (%)</span>
+                                    <button onclick="sortStocks('npm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1 py-0.5 rounded text-[10px]">↓</button>
+                                </div>
+                            </th>
                             <th class="p-3 text-center">จัดการ</th>
                         </tr>
                     </thead>
-                    <tbody id="stock-table-body" class="divide-y divide-slate-800 text-sm">
-                        <!-- ข้อมูลหุ้นจะถูกเรนเดอร์ตรงนี้ -->
-                    </tbody>
+                    <tbody id="stock-table-body" class="divide-y divide-slate-800 text-sm"></tbody>
                 </table>
             </div>
         </div>
@@ -93,9 +137,8 @@
         let globalData = { updated_at: "", stocks: [] };
         let watchlists = JSON.parse(localStorage.getItem('tablet_watchlists')) || { "Watchlist 1": [] };
         let currentWL = Object.keys(watchlists)[0] || "Watchlist 1";
-        let currentSortOrder = null; // 'asc' หรือ 'desc'
+        let currentSort = { key: null, order: 'asc' };
 
-        // โหลดข้อมูลกลางจาก stocks_data.json
         async function loadData() {
             try {
                 const res = await fetch('stocks_data.json');
@@ -105,11 +148,10 @@
                 renderTable();
             } catch (err) {
                 console.error("ไม่สามารถโหลดข้อมูลหุ้นได้:", err);
-                document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ (ลองกดรัน Action ใน GitHub)";
+                document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ (รัน Action ใน GitHub ก่อน)";
             }
         }
 
-        // เรนเดอร์เมนู Sidebar Watchlists
         function renderWatchlistNav() {
             const nav = document.getElementById('watchlist-nav');
             nav.innerHTML = '';
@@ -117,13 +159,12 @@
                 const btn = document.createElement('button');
                 btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center ${name === currentWL ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800'}`;
                 btn.innerHTML = `<span>${name}</span> <span class="text-xs opacity-75">(${watchlists[name].length})</span>`;
-                btn.onclick = () => { currentWL = name; currentSortOrder = null; renderWatchlistNav(); renderTable(); };
+                btn.onclick = () => { currentWL = name; renderWatchlistNav(); renderTable(); };
                 nav.appendChild(btn);
             });
             document.getElementById('current-wl-title').innerText = currentWL;
         }
 
-        // สร้าง Watchlist ใหม่
         function createWatchlist() {
             const input = document.getElementById('new-wl-name');
             const name = input.value.trim();
@@ -137,7 +178,6 @@
             }
         }
 
-        // เปลี่ยนชื่อ Watchlist ปัจจุบัน
         function renameCurrentWatchlist() {
             const newName = prompt("เปลี่ยนชื่อ Watchlist เป็น:", currentWL);
             if (newName && newName.trim() && !watchlists[newName.trim()]) {
@@ -150,7 +190,6 @@
             }
         }
 
-        // ลบ Watchlist ปัจจุบัน
         function deleteCurrentWatchlist() {
             if (Object.keys(watchlists).length <= 1) {
                 alert("ต้องมี Watchlist อย่างน้อย 1 รายการ");
@@ -165,7 +204,6 @@
             }
         }
 
-        // ค้นหาหุ้นจาก Universe เพื่อเพิ่มเข้า Watchlist
         function searchUniverse() {
             const keyword = document.getElementById('search-stock-input').value.toLowerCase();
             const dropdown = document.getElementById('search-results-dropdown');
@@ -183,7 +221,6 @@
             dropdown.classList.remove('hidden');
         }
 
-        // เพิ่มหุ้นเข้า Watchlist ปัจจุบัน
         function addStockToCurrentWL(ticker) {
             if (!watchlists[currentWL].includes(ticker)) {
                 watchlists[currentWL].push(ticker);
@@ -195,7 +232,6 @@
             document.getElementById('search-results-dropdown').classList.add('hidden');
         }
 
-        // ลบหุ้นออกจาก Watchlist ปัจจุบัน
         function removeStock(ticker) {
             watchlists[currentWL] = watchlists[currentWL].filter(t => t !== ticker);
             saveAndRefresh();
@@ -203,29 +239,37 @@
             renderTable();
         }
 
-        // ฟังก์ชัน Sort ชื่อหุ้น A->Z และ Z->A
-        function sortStocks(order) {
-            currentSortOrder = order;
+        function sortStocks(key, order) {
+            currentSort = { key, order };
             renderTable();
         }
 
-        // เรนเดอร์ตารางหุ้น
+        function formatMarketCap(marketCap) {
+            if (!marketCap) return '-';
+            if (marketCap >= 1e12) return (marketCap / 1e12).toFixed(2) + 'T';
+            if (marketCap >= 1e9) return (marketCap / 1e9).toFixed(2) + 'B';
+            if (marketCap >= 1e6) return (marketCap / 1e6).toFixed(2) + 'M';
+            return marketCap.toLocaleString();
+        }
+
         function renderTable() {
             const tbody = document.getElementById('stock-table-body');
             const tickers = watchlists[currentWL] || [];
-            
             let stocksInWL = globalData.stocks.filter(s => tickers.includes(s.ticker));
 
-            // ทำการ Sort ถ้ามีการกดปุ่ม
-            if (currentSortOrder) {
+            if (currentSort.key) {
                 stocksInWL.sort((a, b) => {
-                    if (currentSortOrder === 'asc') return a.ticker.localeCompare(b.ticker);
-                    return b.ticker.localeCompare(a.ticker);
+                    let valA = a[currentSort.key];
+                    let valB = b[currentSort.key];
+                    if (typeof valA === 'string') {
+                        return currentSort.order === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                    }
+                    return currentSort.order === 'asc' ? valA - valB : valB - valA;
                 });
             }
 
             if (stocksInWL.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
                 return;
             }
 
@@ -233,13 +277,17 @@
                 <tr class="hover:bg-slate-800/50 transition">
                     <td class="p-3">
                         <div class="font-bold text-emerald-400">${s.ticker}</div>
-                        <div class="text-xs text-slate-400">${s.name}</div>
+                        <div class="text-xs text-slate-400 truncate max-w-[150px]">${s.name}</div>
                     </td>
-                    <td class="p-3 text-right font-mono">${s.price.toLocaleString()}</td>
+                    <td class="p-3 text-right font-mono">${s.price ? s.price.toLocaleString() : '-'}</td>
+                    <td class="p-3 text-right font-mono">${formatMarketCap(s.marketCap)}</td>
                     <td class="p-3 text-right font-mono">${s.pe ? s.pe.toFixed(2) : '-'}</td>
                     <td class="p-3 text-right font-mono">${s.pb ? s.pb.toFixed(2) : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.roe ? s.roe.toFixed(2) + '%' : '-'}</td>
                     <td class="p-3 text-right font-mono">${s.dividendYield ? s.dividendYield.toFixed(2) + '%' : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.roe ? s.roe.toFixed(2) + '%' : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.de ? s.de.toFixed(2) : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.gpm ? s.gpm.toFixed(2) + '%' : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.npm ? s.npm.toFixed(2) + '%' : '-'}</td>
                     <td class="p-3 text-center">
                         <button onclick="removeStock('${s.ticker}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">ลบ</button>
                     </td>
@@ -247,12 +295,10 @@
             `).join('');
         }
 
-        // บันทึกลง localStorage
         function saveAndRefresh() {
             localStorage.setItem('tablet_watchlists', JSON.stringify(watchlists));
         }
 
-        // Export Watchlists เป็นไฟล์ JSON
         function exportWatchlists() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(watchlists, null, 2));
             const dlAnchor = document.createElement('a');
@@ -263,7 +309,6 @@
             dlAnchor.remove();
         }
 
-        // Import Watchlists จากไฟล์ JSON
         function importWatchlists(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -286,7 +331,6 @@
             reader.readAsText(file);
         }
 
-        // โหลดข้อมูลเริ่มต้นเมื่อเปิดเว็บ
         loadData();
     </script>
 </body>

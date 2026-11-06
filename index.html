@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Watchlist Tablet Screener</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 flex h-screen overflow-hidden">
+
+    <!-- Sidebar สำหรับเลือก Watchlist -->
+    <aside class="w-72 bg-slate-900 border-r border-slate-800 flex flex-col justify-between">
+        <div class="p-4 border-b border-slate-800">
+            <h1 class="text-xl font-bold text-emerald-400 mb-1">Tablet Screener</h1>
+            <p class="text-xs text-slate-400" id="last-update">กำลังโหลดข้อมูล...</p>
+        </div>
+
+        <!-- รายการ Watchlists -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-2" id="watchlist-nav">
+            <!-- เรนเดอร์ด้วย JavaScript -->
+        </div>
+
+        <!-- สร้าง Watchlist ใหม่ -->
+        <div class="p-4 border-t border-slate-800 space-y-2">
+            <div class="flex gap-2">
+                <input type="text" id="new-wl-name" placeholder="ชื่อ Watchlist ใหม่..." class="flex-1 bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
+                <button onclick="createWatchlist()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded text-sm font-medium transition cursor-pointer">+</button>
+            </div>
+            <div class="flex gap-2 pt-2">
+                <button onclick="exportWatchlists()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 transition cursor-pointer">Export JSON</button>
+                <label class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 text-center transition cursor-pointer">
+                    Import JSON <input type="file" id="import-file" class="hidden" onchange="importWatchlists(event)">
+                </label>
+            </div>
+        </div>
+    </aside>
+
+    <!-- พื้นที่หลัก (Main Content) -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- Header แสดงชื่อ Watchlist ปัจจุบัน และช่อง Search & Add -->
+        <header class="bg-slate-900 border-b border-slate-800 p-4 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <h2 id="current-wl-title" class="text-xl font-semibold">เลือก Watchlist</h2>
+                <button onclick="renameCurrentWatchlist()" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2 py-1 rounded border border-slate-700">เปลี่ยนชื่อ</button>
+                <button onclick="deleteCurrentWatchlist()" class="text-xs text-rose-400 hover:text-rose-300 bg-slate-800 px-2 py-1 rounded border border-slate-700">ลบ</button>
+            </div>
+
+            <!-- ช่องค้นหาเพื่อเพิ่มหุ้นเข้า Watchlist ปัจจุบัน -->
+            <div class="relative w-80">
+                <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()" class="w-full bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
+                <div id="search-results-dropdown" class="absolute left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
+            </div>
+        </header>
+
+        <!-- ผลลัพธ์หุ้นใน Watchlist (Table Result) -->
+        <div class="flex-1 overflow-auto p-4">
+            <div class="bg-slate-900 rounded-lg border border-slate-800 overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800 text-slate-300 text-sm border-b border-slate-700">
+                            <th class="p-3">
+                                <div class="flex items-center gap-2">
+                                    <span>Ticker / Name</span>
+                                    <!-- ปุ่ม Sort A-Z / Z-A สีเขียวเด่นชัด -->
+                                    <div class="flex gap-1">
+                                        <button onclick="sortStocks('asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-1.5 py-0.5 rounded transition cursor-pointer" title="Sort A -> Z">A↓</button>
+                                        <button onclick="sortStocks('desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-1.5 py-0.5 rounded transition cursor-pointer" title="Sort Z -> A">Z↑</button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="p-3 text-right">Price</th>
+                            <th class="p-3 text-right">P/E</th>
+                            <th class="p-3 text-right">P/B</th>
+                            <th class="p-3 text-right">ROE (%)</th>
+                            <th class="p-3 text-right">Div Yield (%)</th>
+                            <th class="p-3 text-center">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stock-table-body" class="divide-y divide-slate-800 text-sm">
+                        <!-- ข้อมูลหุ้นจะถูกเรนเดอร์ตรงนี้ -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let globalData = { updated_at: "", stocks: [] };
+        let watchlists = JSON.parse(localStorage.getItem('tablet_watchlists')) || { "Watchlist 1": [] };
+        let currentWL = Object.keys(watchlists)[0] || "Watchlist 1";
+        let currentSortOrder = null; // 'asc' หรือ 'desc'
+
+        // โหลดข้อมูลกลางจาก stocks_data.json
+        async function loadData() {
+            try {
+                const res = await fetch('stocks_data.json');
+                globalData = await res.json();
+                document.getElementById('last-update').innerText = `อัปเดตล่าสุด: ${globalData.updated_at}`;
+                renderWatchlistNav();
+                renderTable();
+            } catch (err) {
+                console.error("ไม่สามารถโหลดข้อมูลหุ้นได้:", err);
+                document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ (ลองกดรัน Action ใน GitHub)";
+            }
+        }
+
+        // เรนเดอร์เมนู Sidebar Watchlists
+        function renderWatchlistNav() {
+            const nav = document.getElementById('watchlist-nav');
+            nav.innerHTML = '';
+            Object.keys(watchlists).forEach(name => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center ${name === currentWL ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-slate-800'}`;
+                btn.innerHTML = `<span>${name}</span> <span class="text-xs opacity-75">(${watchlists[name].length})</span>`;
+                btn.onclick = () => { currentWL = name; currentSortOrder = null; renderWatchlistNav(); renderTable(); };
+                nav.appendChild(btn);
+            });
+            document.getElementById('current-wl-title').innerText = currentWL;
+        }
+
+        // สร้าง Watchlist ใหม่
+        function createWatchlist() {
+            const input = document.getElementById('new-wl-name');
+            const name = input.value.trim();
+            if (name && !watchlists[name]) {
+                watchlists[name] = [];
+                saveAndRefresh();
+                input.value = '';
+                currentWL = name;
+                renderWatchlistNav();
+                renderTable();
+            }
+        }
+
+        // เปลี่ยนชื่อ Watchlist ปัจจุบัน
+        function renameCurrentWatchlist() {
+            const newName = prompt("เปลี่ยนชื่อ Watchlist เป็น:", currentWL);
+            if (newName && newName.trim() && !watchlists[newName.trim()]) {
+                watchlists[newName.trim()] = watchlists[currentWL];
+                delete watchlists[currentWL];
+                currentWL = newName.trim();
+                saveAndRefresh();
+                renderWatchlistNav();
+                renderTable();
+            }
+        }
+
+        // ลบ Watchlist ปัจจุบัน
+        function deleteCurrentWatchlist() {
+            if (Object.keys(watchlists).length <= 1) {
+                alert("ต้องมี Watchlist อย่างน้อย 1 รายการ");
+                return;
+            }
+            if (confirm(`คุณต้องการลบ ${currentWL} ใช่หรือไม่?`)) {
+                delete watchlists[currentWL];
+                currentWL = Object.keys(watchlists)[0];
+                saveAndRefresh();
+                renderWatchlistNav();
+                renderTable();
+            }
+        }
+
+        // ค้นหาหุ้นจาก Universe เพื่อเพิ่มเข้า Watchlist
+        function searchUniverse() {
+            const keyword = document.getElementById('search-stock-input').value.toLowerCase();
+            const dropdown = document.getElementById('search-results-dropdown');
+            if (!keyword) { dropdown.classList.add('hidden'); return; }
+
+            const matched = globalData.stocks.filter(s => s.ticker.toLowerCase().includes(keyword) || s.name.toLowerCase().includes(keyword));
+            if (matched.length === 0) { dropdown.classList.add('hidden'); return; }
+
+            dropdown.innerHTML = matched.map(s => `
+                <div onclick="addStockToCurrentWL('${s.ticker}')" class="p-2 hover:bg-slate-700 cursor-pointer text-xs flex justify-between border-b border-slate-700">
+                    <span class="font-bold">${s.ticker}</span>
+                    <span class="text-slate-400 truncate max-w-[180px]">${s.name}</span>
+                </div>
+            `).join('');
+            dropdown.classList.remove('hidden');
+        }
+
+        // เพิ่มหุ้นเข้า Watchlist ปัจจุบัน
+        function addStockToCurrentWL(ticker) {
+            if (!watchlists[currentWL].includes(ticker)) {
+                watchlists[currentWL].push(ticker);
+                saveAndRefresh();
+                renderWatchlistNav();
+                renderTable();
+            }
+            document.getElementById('search-stock-input').value = '';
+            document.getElementById('search-results-dropdown').classList.add('hidden');
+        }
+
+        // ลบหุ้นออกจาก Watchlist ปัจจุบัน
+        function removeStock(ticker) {
+            watchlists[currentWL] = watchlists[currentWL].filter(t => t !== ticker);
+            saveAndRefresh();
+            renderWatchlistNav();
+            renderTable();
+        }
+
+        // ฟังก์ชัน Sort ชื่อหุ้น A->Z และ Z->A
+        function sortStocks(order) {
+            currentSortOrder = order;
+            renderTable();
+        }
+
+        // เรนเดอร์ตารางหุ้น
+        function renderTable() {
+            const tbody = document.getElementById('stock-table-body');
+            const tickers = watchlists[currentWL] || [];
+            
+            let stocksInWL = globalData.stocks.filter(s => tickers.includes(s.ticker));
+
+            // ทำการ Sort ถ้ามีการกดปุ่ม
+            if (currentSortOrder) {
+                stocksInWL.sort((a, b) => {
+                    if (currentSortOrder === 'asc') return a.ticker.localeCompare(b.ticker);
+                    return b.ticker.localeCompare(a.ticker);
+                });
+            }
+
+            if (stocksInWL.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = stocksInWL.map(s => `
+                <tr class="hover:bg-slate-800/50 transition">
+                    <td class="p-3">
+                        <div class="font-bold text-emerald-400">${s.ticker}</div>
+                        <div class="text-xs text-slate-400">${s.name}</div>
+                    </td>
+                    <td class="p-3 text-right font-mono">${s.price.toLocaleString()}</td>
+                    <td class="p-3 text-right font-mono">${s.pe ? s.pe.toFixed(2) : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.pb ? s.pb.toFixed(2) : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.roe ? s.roe.toFixed(2) + '%' : '-'}</td>
+                    <td class="p-3 text-right font-mono">${s.dividendYield ? s.dividendYield.toFixed(2) + '%' : '-'}</td>
+                    <td class="p-3 text-center">
+                        <button onclick="removeStock('${s.ticker}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">ลบ</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // บันทึกลง localStorage
+        function saveAndRefresh() {
+            localStorage.setItem('tablet_watchlists', JSON.stringify(watchlists));
+        }
+
+        // Export Watchlists เป็นไฟล์ JSON
+        function exportWatchlists() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(watchlists, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "my_tablet_watchlists.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        // Import Watchlists จากไฟล์ JSON
+        function importWatchlists(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (typeof imported === 'object' && imported !== null) {
+                        watchlists = imported;
+                        currentWL = Object.keys(watchlists)[0] || "Watchlist 1";
+                        saveAndRefresh();
+                        renderWatchlistNav();
+                        renderTable();
+                        alert("นำเข้า Watchlists สำเร็จ!");
+                    }
+                } catch (err) {
+                    alert("ไฟล์ JSON ไม่ถูกต้อง");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // โหลดข้อมูลเริ่มต้นเมื่อเปิดเว็บ
+        loadData();
+    </script>
+</body>
+</html>

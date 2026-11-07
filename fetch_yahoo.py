@@ -20,6 +20,11 @@ tickers = [
     "TASCO.BK", "TCAP.BK", "TFG.BK", "THAI.BK", "THCOM.BK", "TIDLOR.BK", "TISCO.BK", "TLI.BK", "TOA.BK", "TU.BK",
     "VGI.BK", "WHAUP.BK",
 
+    # หุ้นไทยที่ใช้ใน My Watchlist (เพิ่มจากรายการที่เลือก)
+    "AXTRART.BK", "CPAXT.BK", "DRT.BK", "DCC.BK", "IMPACT.BK", "KYE.BK", "STPI.BK", "TVO.BK", "LTMH.BK", "ADVICE.BK",
+    "SYNEX.BK", "SIS.BK", "ASP.BK", "TFMAMA.BK", "JMART.BK", "VIH.BK", "BAFS.BK", "PSH.BK", "JUBILE.BK", "AIT.BK",
+    "PDG.BK",
+
     # หุ้นสหรัฐฯ (US Tech & Blue Chips) - รายการเดิม
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "NFLX", "AMD", "INTC",
     "QCOM", "AVGO", "TXN", "MU", "AMAT", "LRCX", "PYPL", "SHOP", "ASML", "TSM",
@@ -42,6 +47,9 @@ tickers = [
     "VCX", "TEM", "MSTR", "VFS",
 
     # หุ้นจีน / ฮ่องกงที่คุณสนใจ
+    # (เพิ่มใหม่) หุ้นจีน/ฮ่องกง และหุ้นจีนที่จดทะเบียนในสหรัฐ
+    "688981.SS", "2809.HK", "PDD", "1211.HK", "688825.SS", "600941.SS", "9999.HK", "002352.SZ", "0694.HK", "BILI",
+    "0941.HK", "1177.HK", "600276.SS", "3988.HK", "601318.SS",
     "0700.HK", "9988.HK", "1810.HK", "300750.SZ", "2318.HK", "9888.HK", "0981.HK",
     "3690.HK", "002027.SZ", "002594.SZ", "600519.SS", "0388.HK", "1024.HK", "2015.HK", "9618.HK"
 ]

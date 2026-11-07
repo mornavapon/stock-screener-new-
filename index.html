@@ -70,7 +70,7 @@
     <!-- พื้นที่หลัก -->
     <main class="flex-1 min-w-0 h-full flex flex-col">
 
-        <header class="bg-slate-900 border-b border-slate-800 p-4 flex flex-wrap justify-between items-center gap-4 shrink-0">
+        <header class="bg-slate-900 border-b border-slate-800 px-4 py-2 flex flex-wrap justify-between items-center gap-x-4 gap-y-2 shrink-0">
             <div class="flex items-center gap-3 min-w-0">
                 <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400 truncate">เลือก Watchlist</h2>
                 <button onclick="renameCurrentWatchlist()" class="shrink-0 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
@@ -79,7 +79,7 @@
 
             <div class="relative w-full max-w-xs sm:w-80">
                 <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()"
-                       class="w-full bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
+                       class="w-full bg-slate-800 text-sm px-3 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
                 <div id="search-results-dropdown" class="absolute left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
             </div>
         </header>
@@ -95,6 +95,28 @@
         </div>
     </main>
 
+</div>
+
+<!-- หน้าต่างเลือกเมื่อแตะชื่อหุ้น: งบ (Yahoo) / กราฟ (TradingView) / ถาม Claude -->
+<div id="stock-menu" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 p-4"
+     onclick="if (event.target === this) closeStockMenu()">
+    <div class="w-full max-w-md bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-5">
+        <div class="flex items-start justify-between gap-3 mb-4">
+            <div class="min-w-0">
+                <div id="stock-menu-ticker" class="text-2xl font-bold text-emerald-400"></div>
+                <div id="stock-menu-name" class="text-sm text-slate-400 truncate"></div>
+            </div>
+            <button onclick="closeStockMenu()" class="shrink-0 text-slate-400 hover:text-white text-2xl leading-none px-2 py-1 cursor-pointer" title="ปิด">✕</button>
+        </div>
+        <div class="space-y-3">
+            <a id="link-yahoo" target="_blank" rel="noopener noreferrer"
+               class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-4 py-3.5 text-base font-medium text-slate-100 text-center">📊 ดูงบจาก Yahoo Finance</a>
+            <a id="link-tv" target="_blank" rel="noopener noreferrer"
+               class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-4 py-3.5 text-base font-medium text-slate-100 text-center">📈 ดูกราฟจาก TradingView</a>
+            <a id="link-claude" target="_blank" rel="noopener noreferrer"
+               class="block bg-emerald-700 hover:bg-emerald-600 border border-emerald-500 rounded-lg px-4 py-3.5 text-base font-medium text-white text-center">🤖 ถามข้อมูลหุ้นนี้กับ Claude</a>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -164,12 +186,12 @@
             const arrow = active ? (currentSort.order === 'asc' ? '▲' : '▼') : '';
             const color = active ? 'text-emerald-400' : 'text-slate-200 hover:text-emerald-300';
             return `
-                <th class="p-3 text-${c.align} cursor-pointer select-none transition ${color}"
+                <th class="px-3 py-2 text-${c.align} cursor-pointer select-none transition ${color}"
                     onclick="sortBy('${c.key}')" title="กดเพื่อเรียงตาม ${c.label}">
                     <span class="whitespace-nowrap">${c.label}<span class="inline-block w-3 ml-1 text-[10px] text-emerald-400">${arrow}</span></span>
                 </th>`;
         }).join('');
-        row.innerHTML = ths + `<th class="p-3 text-center text-slate-200">จัดการ</th>`;
+        row.innerHTML = ths + `<th class="px-3 py-2 text-center text-slate-200">จัดการ</th>`;
     }
 
     // กดครั้งแรก = ทิศทางที่มักใช้ (เช่น P/E น้อยไปมาก) กดซ้ำ = สลับทิศทาง
@@ -342,10 +364,57 @@
     }
 
     function removeStock(ticker) {
+        if (!confirm(`ต้องการลบ ${ticker} ออกจาก "${currentWL}" ใช่หรือไม่?`)) return;
         watchlists[currentWL] = (watchlists[currentWL] || []).filter(t => t !== ticker);
         saveWatchlists();
         refreshAll();
     }
+
+    // ---------- หน้าต่างเมนูของหุ้นแต่ละตัว ----------
+    // รหัสสำหรับ TradingView (ต้องระบุตลาดสำหรับหุ้นนอกสหรัฐ)
+    function tradingViewSymbol(t) {
+        const u = t.toUpperCase();
+        if (u.endsWith('.BK')) return 'SET:' + u.slice(0, -3);
+        if (u.endsWith('.HK')) return 'HKEX:' + String(parseInt(u.slice(0, -3), 10));
+        if (u.endsWith('.SZ')) return 'SZSE:' + u.slice(0, -3);
+        if (u.endsWith('.SS')) return 'SSE:' + u.slice(0, -3);
+        if (u.endsWith('.PA')) return 'EURONEXT:' + u.slice(0, -3);
+        return u.replace('-', '.');          // เช่น BRK-B → BRK.B
+    }
+
+    // ข้อความที่ส่งไปถาม Claude (แนบตัวเลขที่เห็นในแอปให้ด้วย)
+    function claudePrompt(s) {
+        const f = (v, suf = '') => (v ? v.toFixed(2) + suf : 'ไม่มีข้อมูล');
+        return `ช่วยวิเคราะห์หุ้น ${s.ticker} (${s.name}) ให้หน่อย โดยค้นข้อมูลล่าสุดจากอินเทอร์เน็ตประกอบด้วย\n\n` +
+            `ตัวเลขปัจจุบันจากแอปของฉัน: ราคา ${s.price || 'ไม่มีข้อมูล'} ${s.currency || ''}, P/E ${f(s.pe)}, P/BV ${f(s.pb)}, ` +
+            `ROE ${f(s.roe, '%')}, D/E ${f(s.de)}, อัตรากำไรขั้นต้น ${f(s.gpm, '%')}, อัตรากำไรสุทธิ ${f(s.npm, '%')}, ` +
+            `อัตราเงินปันผล ${f(s.dividendYield, '%')}\n\n` +
+            `อยากรู้: 1) ธุรกิจหลักและรายได้มาจากไหน 2) จุดแข็งและความเสี่ยง 3) งบและแนวโน้มล่าสุด ` +
+            `4) ตอนนี้มูลค่าแพงหรือถูกเมื่อเทียบกับคู่แข่ง\nตอบเป็นภาษาไทย กระชับ อ่านง่าย`;
+    }
+
+    function openStockMenu(ticker) {
+        const s = globalData.stocks.find(x => x.ticker === ticker);
+        if (!s) return;
+        document.getElementById('stock-menu-ticker').innerText = s.ticker;
+        document.getElementById('stock-menu-name').innerText = s.name || '';
+        document.getElementById('link-yahoo').href =
+            `https://finance.yahoo.com/quote/${encodeURIComponent(s.ticker)}/key-statistics/`;
+        document.getElementById('link-tv').href =
+            `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tradingViewSymbol(s.ticker))}`;
+        document.getElementById('link-claude').href =
+            `https://claude.ai/new?q=${encodeURIComponent(claudePrompt(s))}`;
+        const m = document.getElementById('stock-menu');
+        m.classList.remove('hidden');
+        m.classList.add('flex');
+    }
+
+    function closeStockMenu() {
+        const m = document.getElementById('stock-menu');
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeStockMenu(); });
 
     // ---------- แสดงผลตาราง ----------
     function formatMarketCap(v) {
@@ -385,20 +454,20 @@
 
         tbody.innerHTML = rows.map(s => `
             <tr class="hover:bg-slate-800/50 transition">
-                <td class="p-3">
-                    <div class="font-bold text-emerald-400">${esc(s.ticker)}</div>
-                    <div class="text-xs text-slate-400 truncate max-w-[180px]">${esc(s.name)}</div>
+                <td class="px-3 py-1.5 cursor-pointer" onclick="openStockMenu('${esc(s.ticker)}')" title="แตะเพื่อดูงบ / กราฟ / ถาม Claude">
+                    <div class="font-bold text-emerald-400 leading-tight">${esc(s.ticker)}</div>
+                    <div class="text-xs text-slate-400 truncate max-w-[180px] leading-tight">${esc(s.name)}</div>
                 </td>
-                <td class="p-3 text-right font-mono">${s.price ? s.price.toLocaleString() : '-'}</td>
-                <td class="p-3 text-right font-mono">${formatMarketCap(s.marketCap)}</td>
-                <td class="p-3 text-right font-mono">${num(s.pe)}</td>
-                <td class="p-3 text-right font-mono">${num(s.pb)}</td>
-                <td class="p-3 text-right font-mono">${pct(s.dividendYield)}</td>
-                <td class="p-3 text-right font-mono">${pct(s.roe)}</td>
-                <td class="p-3 text-right font-mono">${num(s.de)}</td>
-                <td class="p-3 text-right font-mono">${pct(s.gpm)}</td>
-                <td class="p-3 text-right font-mono">${pct(s.npm)}</td>
-                <td class="p-3 text-center">
+                <td class="px-3 py-1.5 text-right font-mono">${s.price ? s.price.toLocaleString() : '-'}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${formatMarketCap(s.marketCap)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${num(s.pe)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${num(s.pb)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${pct(s.dividendYield)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${pct(s.roe)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${num(s.de)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${pct(s.gpm)}</td>
+                <td class="px-3 py-1.5 text-right font-mono">${pct(s.npm)}</td>
+                <td class="px-3 py-1.5 text-center">
                     <button onclick="removeStock('${esc(s.ticker)}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">ลบ</button>
                 </td>
             </tr>

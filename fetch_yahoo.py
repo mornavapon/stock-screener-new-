@@ -11,6 +11,15 @@ tickers = [
     "QH.BK", "SPALI.BK", "AP.BK", "AMATA.BK", "WHA.BK", "IVL.BK", "SCC.BK", "SCGP.BK", "TOP.BK", "BCP.BK",
     "PTTGC.BK", "EA.BK", "GPSC.BK", "BGRIM.BK", "TRUE.BK", "INTUCH.BK", "HMPRO.BK", "GLOBAL.BK", "BJC.BK",
 
+    # SET100 ครึ่งปีหลัง 2569 (มีผล 1 ก.ค. - 31 ธ.ค. 2569) - ตัวที่เพิ่มเข้ามาให้ครบ 100 ตัว
+    "AAV.BK", "AEONTS.BK", "AURA.BK", "AWC.BK", "BA.BK", "BAM.BK", "BANPU.BK", "BCH.BK", "BCPG.BK", "BH.BK",
+    "BLA.BK", "BTG.BK", "CBG.BK", "CCET.BK", "CENTEL.BK", "CHG.BK", "CK.BK", "CPF.BK", "DOHOME.BK", "EGCO.BK",
+    "ERW.BK", "GFPT.BK", "GUNKUL.BK", "HANA.BK", "ICHI.BK", "IRPC.BK", "JMT.BK", "JTS.BK", "KCE.BK", "KKP.BK",
+    "KTC.BK", "M.BK", "MEGA.BK", "MOSHI.BK", "MRDIYT.BK", "MTC.BK", "OR.BK", "OSP.BK", "PLANB.BK", "PR9.BK",
+    "PRM.BK", "PTG.BK", "RATCH.BK", "RCL.BK", "SAWAD.BK", "SIRI.BK", "SPRC.BK", "STA.BK", "STECON.BK", "STGT.BK",
+    "TASCO.BK", "TCAP.BK", "TFG.BK", "THAI.BK", "THCOM.BK", "TIDLOR.BK", "TISCO.BK", "TLI.BK", "TOA.BK", "TU.BK",
+    "VGI.BK", "WHAUP.BK",
+
     # หุ้นสหรัฐฯ (US Tech & Blue Chips) - รายการเดิม
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "NFLX", "AMD", "INTC",
     "QCOM", "AVGO", "TXN", "MU", "AMAT", "LRCX", "PYPL", "SHOP", "ASML", "TSM",

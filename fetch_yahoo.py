@@ -35,12 +35,14 @@ for ticker in tickers:
         pe = info.get('trailingPE', 0)
         pb = info.get('priceToBook', 0)
         roe = info.get('returnOnEquity', 0)
-        dividend_yield = info.get('dividendYield', 0)
-        if dividend_yield:
-            dividend_yield = dividend_yield * 100
+        # yfinance รุ่นใหม่ส่ง dividendYield มาเป็น "เปอร์เซ็นต์" อยู่แล้ว (เช่น 0.31 = 0.31%)
+        # จึงไม่คูณ 100 อีก; ถ้ามี dividendRate กับราคา ให้คำนวณเองเพื่อความแม่นยำ
+        dividend_rate = info.get('dividendRate') or info.get('trailingAnnualDividendRate')
+        if dividend_rate and price:
+            dividend_yield = dividend_rate / price * 100
         else:
-            dividend_yield = 0
-            
+            dividend_yield = info.get('dividendYield', 0) or 0
+
         de = info.get('debtToEquity', 0)
         gpm = info.get('grossMargins', 0)
         npm = info.get('profitMargins', 0)

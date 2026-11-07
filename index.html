@@ -7,351 +7,364 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html, body { height: 100%; margin: 0; }
         body { font-family: 'Sarabun', sans-serif; }
+
+        /* กรอบแอปตรึงเต็มพื้นที่ "มองเห็นจริง" ของหน้าจอ
+           (แก้ปัญหา 100vh บน Chrome มือถือ/แท็บเล็ต ที่สูงเกินจอ ทำให้ปุ่มมุมล่างซ้ายหาย) */
+        #app { position: fixed; inset: 0; display: flex; overflow: hidden; }
+
+        /* ตารางอยู่ใน scroll container ตัวเดียว (ไม่มี padding ด้านบน)
+           หัวตารางจึงตรึงติดขอบบนพอดี ไม่มีแถวหุ้นโผล่ลอดช่องว่างด้านบน */
+        #table-scroll { overflow: auto; -webkit-overflow-scrolling: touch; }
+        #stock-table { border-collapse: separate; border-spacing: 0; min-width: 900px; width: 100%; }
+        #stock-table thead th {
+            position: sticky; top: 0; z-index: 20;
+            background: #0f172a;               /* slate-900 ทึบ ไม่โปร่งใส */
+            border-bottom: 1px solid #334155;  /* เส้นใต้หัวตาราง */
+        }
+        #stock-table tbody td { border-bottom: 1px solid #1e293b; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 flex h-screen overflow-hidden">
+<body class="bg-slate-950 text-slate-100">
 
-    <!-- Sidebar สำหรับเลือก Watchlist (รองรับสร้างไม่จำกัด และ Export/Import) -->
-    <aside class="w-72 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
-        <div class="p-4 border-b border-slate-800">
+<div id="app">
+
+    <!-- Sidebar -->
+    <aside class="w-72 h-full min-h-0 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0">
+        <div class="p-4 border-b border-slate-800 shrink-0">
             <h1 class="text-xl font-bold text-emerald-400 mb-1">Tablet Screener</h1>
             <p class="text-xs text-slate-400" id="last-update">กำลังโหลดข้อมูล...</p>
         </div>
 
-        <!-- รายการ Watchlists (มี Scrollbar กรณีมีเยอะ) -->
-        <div class="flex-1 overflow-y-auto p-4 space-y-2" id="watchlist-nav"></div>
+        <!-- รายการ Watchlists (เลื่อนได้เมื่อมีเยอะ) -->
+        <div class="flex-1 min-h-0 overflow-y-auto p-4 space-y-2" id="watchlist-nav"></div>
 
-        <!-- สร้าง Watchlist ใหม่ และ Export/Import -->
-        <div class="p-4 border-t border-slate-800 space-y-2 bg-slate-900">
+        <!-- สร้าง Watchlist ใหม่ + Export/Import (ตรึงอยู่ล่างสุดของ Sidebar เสมอ) -->
+        <div class="shrink-0 p-4 border-t border-slate-800 space-y-2 bg-slate-900">
             <div class="flex gap-2">
-                <input type="text" id="new-wl-name" placeholder="ชื่อ Watchlist ใหม่..." class="flex-1 bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
-                <button onclick="createWatchlist()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded text-sm font-medium transition cursor-pointer text-white font-bold">+</button>
+                <input type="text" id="new-wl-name" placeholder="ชื่อ Watchlist ใหม่..."
+                       onkeydown="if(event.key==='Enter') createWatchlist()"
+                       class="flex-1 min-w-0 bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
+                <button onclick="createWatchlist()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded text-sm transition cursor-pointer text-white font-bold">+</button>
             </div>
             <div class="flex gap-2 pt-1">
                 <button onclick="exportWatchlists()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 transition cursor-pointer text-center">Export JSON</button>
                 <label class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-2 rounded border border-slate-700 text-center transition cursor-pointer text-slate-200">
-                    Import JSON <input type="file" id="import-file" class="hidden" accept=".json" onchange="importWatchlists(event)">
+                    Import JSON <input type="file" id="import-file" class="hidden" accept=".json,application/json" onchange="importWatchlists(event)">
                 </label>
             </div>
         </div>
     </aside>
 
-    <!-- พื้นที่หลัก (Main Content) -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        
-        <!-- Header -->
+    <!-- พื้นที่หลัก -->
+    <main class="flex-1 min-w-0 h-full flex flex-col">
+
         <header class="bg-slate-900 border-b border-slate-800 p-4 flex flex-wrap justify-between items-center gap-4 shrink-0">
-            <div class="flex items-center gap-3">
-                <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400">เลือก Watchlist</h2>
-                <button onclick="renameCurrentWatchlist()" class="text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
-                <button onclick="deleteCurrentWatchlist()" class="text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
+            <div class="flex items-center gap-3 min-w-0">
+                <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400 truncate">เลือก Watchlist</h2>
+                <button onclick="renameCurrentWatchlist()" class="shrink-0 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
+                <button onclick="deleteCurrentWatchlist()" class="shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
             </div>
 
-            <!-- ช่องค้นหาเพื่อเพิ่มหุ้น -->
-            <div class="relative w-80">
-                <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()" class="w-full bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
+            <div class="relative w-full max-w-xs sm:w-80">
+                <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()"
+                       class="w-full bg-slate-800 text-sm px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
                 <div id="search-results-dropdown" class="absolute left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
             </div>
         </header>
 
-        <!-- ผลลัพธ์หุ้นใน Watchlist (Fixed Header ตรึงนิ่งไม่เลื่อนตาม) -->
-        <div class="flex-1 overflow-y-auto p-4">
-            <div class="bg-slate-900 rounded-lg border border-slate-800 shadow-xl">
-                <table class="w-full text-left border-collapse relative">
-                    <thead class="sticky top-0 bg-slate-900 z-30 text-slate-200 text-xs shadow-md border-b border-slate-700">
-                        <tr>
-                            <th class="p-3 bg-slate-900">
-                                <div class="flex items-center gap-1">
-                                    <span>TICKER / NAME</span>
-                                    <div class="flex gap-1 ml-1">
-                                        <button onclick="sortStocks('ticker', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer" title="A-Z">A↓</button>
-                                        <button onclick="sortStocks('ticker', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer" title="Z-A">Z↑</button>
-                                    </div>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>PRICE</span>
-                                    <button onclick="sortStocks('price', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>MARKET CAP</span>
-                                    <button onclick="sortStocks('marketCap', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>P/E</span>
-                                    <button onclick="sortStocks('pe', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↑</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>P/BV</span>
-                                    <button onclick="sortStocks('pb', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↑</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>DIV YIELD (%)</span>
-                                    <button onclick="sortStocks('dividendYield', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>ROE (%)</span>
-                                    <button onclick="sortStocks('roe', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>D/E</span>
-                                    <button onclick="sortStocks('de', 'asc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↑</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>GPM (%)</span>
-                                    <button onclick="sortStocks('gpm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-right bg-slate-900">
-                                <div class="flex items-center justify-end gap-1">
-                                    <span>NPM (%)</span>
-                                    <button onclick="sortStocks('npm', 'desc')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">↓</button>
-                                </div>
-                            </th>
-                            <th class="p-3 text-center bg-slate-900">จัดการ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="stock-table-body" class="divide-y divide-slate-800 text-sm"></tbody>
-                </table>
-            </div>
+        <!-- ตาราง: scroll container ตัวเดียว หัวตารางตรึงบนสุด -->
+        <div id="table-scroll" class="flex-1 min-h-0">
+            <table id="stock-table" class="text-left">
+                <thead class="text-slate-200 text-xs">
+                    <tr id="table-head-row"></tr>
+                </thead>
+                <tbody id="stock-table-body" class="text-sm"></tbody>
+            </table>
         </div>
     </main>
 
-    <script>
-        let globalData = { updated_at: "", stocks: [] };
-        
-        // โหลดข้อมูล Watchlists จาก localStorage (รองรับหลาย Watchlist ไม่จำกัด)
-        let watchlists = JSON.parse(localStorage.getItem('tablet_watchlists'));
-        if (!watchlists || typeof watchlists !== 'object' || Object.keys(watchlists).length === 0) {
-            watchlists = { "Watchlist 1": [], "Watchlist 2": [] };
-        }
-        
-        let currentWL = Object.keys(watchlists)[0];
-        let currentSort = { key: null, order: 'asc' };
+</div>
 
-        async function loadData() {
-            try {
-                const res = await fetch('stocks_data.json');
-                globalData = await res.json();
-                document.getElementById('last-update').innerText = `อัปเดตล่าสุด: ${globalData.updated_at}`;
-                renderWatchlistNav();
-                renderTable();
-            } catch (err) {
-                console.error("ไม่สามารถโหลดข้อมูลหุ้นได้:", err);
-                document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ";
+<script>
+    // ---------- คอลัมน์ (เรียงตามที่ต้องการ) ----------
+    // best = ทิศทางเรียงครั้งแรกที่กด ('desc' = มากไปน้อย, 'asc' = น้อยไปมาก)
+    const COLUMNS = [
+        { key: 'ticker',        label: 'TICKER / NAME',  align: 'left',  best: 'asc'  },
+        { key: 'price',         label: 'PRICE',          align: 'right', best: 'desc' },
+        { key: 'marketCap',     label: 'MARKET CAP',     align: 'right', best: 'desc' },
+        { key: 'pe',            label: 'P/E',            align: 'right', best: 'asc'  },
+        { key: 'pb',            label: 'P/BV',           align: 'right', best: 'asc'  },
+        { key: 'dividendYield', label: 'DIV YIELD (%)',  align: 'right', best: 'desc' },
+        { key: 'roe',           label: 'ROE (%)',        align: 'right', best: 'desc' },
+        { key: 'de',            label: 'D/E',            align: 'right', best: 'asc'  },
+        { key: 'gpm',           label: 'GPM (%)',        align: 'right', best: 'desc' },
+        { key: 'npm',           label: 'NPM (%)',        align: 'right', best: 'desc' },
+    ];
+
+    let globalData = { updated_at: "", stocks: [] };
+
+    // ---------- Watchlists (เก็บในเครื่อง สร้างได้ไม่จำกัด) ----------
+    function loadWatchlists() {
+        try {
+            const w = JSON.parse(localStorage.getItem('tablet_watchlists'));
+            if (w && typeof w === 'object' && !Array.isArray(w) && Object.keys(w).length > 0) {
+                Object.keys(w).forEach(k => { if (!Array.isArray(w[k])) w[k] = []; });
+                return w;
             }
-        }
+        } catch (e) {}
+        return { "Watchlist 1": [] };
+    }
+    let watchlists = loadWatchlists();
+    let currentWL = Object.keys(watchlists)[0];
+    let currentSort = { key: null, order: 'asc' };
 
-        function renderWatchlistNav() {
-            const nav = document.getElementById('watchlist-nav');
-            nav.innerHTML = '';
-            Object.keys(watchlists).forEach(name => {
-                const btn = document.createElement('button');
-                btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center ${name === currentWL ? 'bg-emerald-600 text-white font-bold' : 'text-slate-300 hover:bg-slate-800'}`;
-                btn.innerHTML = `<span>${name}</span> <span class="text-xs opacity-75">(${(watchlists[name] || []).length})</span>`;
-                btn.onclick = () => { currentWL = name; renderWatchlistNav(); renderTable(); };
-                nav.appendChild(btn);
-            });
-            document.getElementById('current-wl-title').innerText = currentWL;
-        }
+    function esc(str) {
+        return String(str ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
 
-        function createWatchlist() {
-            const input = document.getElementById('new-wl-name');
-            const name = input.value.trim();
-            if (!name) return;
-            if (watchlists[name]) {
-                alert("มีชื่อ Watchlist นี้อยู่แล้ว");
-                return;
-            }
-            watchlists[name] = [];
-            saveAndRefresh();
-            input.value = '';
-            currentWL = name;
-            renderWatchlistNav();
-            renderTable();
-        }
+    function saveWatchlists() {
+        localStorage.setItem('tablet_watchlists', JSON.stringify(watchlists));
+    }
 
-        function renameCurrentWatchlist() {
-            const newName = prompt("เปลี่ยนชื่อ Watchlist เป็น:", currentWL);
-            if (!newName || !newName.trim()) return;
-            const trimmed = newName.trim();
-            if (trimmed === currentWL) return;
-            if (watchlists[trimmed]) {
-                alert("มีชื่อ Watchlist นี้อยู่แล้ว");
-                return;
-            }
-            watchlists[trimmed] = watchlists[currentWL];
+    function refreshAll() {
+        renderWatchlistNav();
+        renderTable();
+    }
+
+    // ---------- โหลดข้อมูลหุ้น ----------
+    async function loadData() {
+        try {
+            const res = await fetch('stocks_data.json?t=' + Date.now());
+            globalData = await res.json();
+            document.getElementById('last-update').innerText = `อัปเดตล่าสุด: ${globalData.updated_at}`;
+        } catch (err) {
+            console.error("ไม่สามารถโหลดข้อมูลหุ้นได้:", err);
+            document.getElementById('last-update').innerText = "โหลดข้อมูลไม่สำเร็จ";
+        }
+        refreshAll();
+    }
+
+    // ---------- หัวตาราง + ปุ่ม Sort สีเขียวทุกคอลัมน์ ----------
+    function renderHead() {
+        const row = document.getElementById('table-head-row');
+        const ths = COLUMNS.map(c => {
+            const active = currentSort.key === c.key;
+            const arrow = active ? (currentSort.order === 'asc' ? '↑' : '↓') : (c.best === 'asc' ? '↑' : '↓');
+            const btnCls = active
+                ? 'bg-emerald-400 text-slate-950 ring-2 ring-emerald-200'
+                : 'bg-emerald-600 hover:bg-emerald-500 text-white';
+            const justify = c.align === 'right' ? 'justify-end' : 'justify-start';
+            return `
+                <th class="p-3 text-${c.align}">
+                    <div class="flex items-center ${justify} gap-1.5">
+                        <span class="whitespace-nowrap">${c.label}</span>
+                        <button onclick="sortBy('${c.key}')" title="เรียงตาม ${c.label}"
+                                class="${btnCls} px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer min-w-[24px]">${arrow}</button>
+                    </div>
+                </th>`;
+        }).join('');
+        row.innerHTML = ths + `<th class="p-3 text-center">จัดการ</th>`;
+    }
+
+    // กดครั้งแรก = ทิศทางที่มักใช้ (เช่น P/E น้อยไปมาก) กดซ้ำ = สลับทิศทาง
+    function sortBy(key) {
+        const col = COLUMNS.find(c => c.key === key);
+        if (currentSort.key === key) {
+            currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort = { key, order: col ? col.best : 'desc' };
+        }
+        renderTable();
+    }
+
+    // ---------- Sidebar ----------
+    function renderWatchlistNav() {
+        if (!watchlists[currentWL]) currentWL = Object.keys(watchlists)[0];
+        const nav = document.getElementById('watchlist-nav');
+        nav.innerHTML = '';
+        Object.keys(watchlists).forEach(name => {
+            const btn = document.createElement('button');
+            btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center gap-2 ${name === currentWL ? 'bg-emerald-600 text-white font-bold' : 'text-slate-300 hover:bg-slate-800'}`;
+            btn.innerHTML = `<span class="truncate">${esc(name)}</span> <span class="text-xs opacity-75 shrink-0">(${(watchlists[name] || []).length})</span>`;
+            btn.onclick = () => { currentWL = name; refreshAll(); };
+            nav.appendChild(btn);
+        });
+        document.getElementById('current-wl-title').innerText = currentWL;
+    }
+
+    function createWatchlist() {
+        const input = document.getElementById('new-wl-name');
+        const name = input.value.trim();
+        if (!name) return;
+        if (watchlists[name]) { alert("มีชื่อ Watchlist นี้อยู่แล้ว"); return; }
+        watchlists[name] = [];
+        currentWL = name;
+        input.value = '';
+        saveWatchlists();
+        refreshAll();
+    }
+
+    function renameCurrentWatchlist() {
+        const newName = prompt("เปลี่ยนชื่อ Watchlist เป็น:", currentWL);
+        if (!newName || !newName.trim()) return;
+        const trimmed = newName.trim();
+        if (trimmed === currentWL) return;
+        if (watchlists[trimmed]) { alert("มีชื่อ Watchlist นี้อยู่แล้ว"); return; }
+        // คงลำดับของ Watchlist เดิมไว้
+        const renamed = {};
+        Object.keys(watchlists).forEach(k => { renamed[k === currentWL ? trimmed : k] = watchlists[k]; });
+        watchlists = renamed;
+        currentWL = trimmed;
+        saveWatchlists();
+        refreshAll();
+    }
+
+    function deleteCurrentWatchlist() {
+        if (Object.keys(watchlists).length <= 1) { alert("ต้องมี Watchlist อย่างน้อย 1 รายการ"); return; }
+        if (confirm(`คุณต้องการลบ "${currentWL}" ใช่หรือไม่?`)) {
             delete watchlists[currentWL];
-            currentWL = trimmed;
-            saveAndRefresh();
-            renderWatchlistNav();
-            renderTable();
+            currentWL = Object.keys(watchlists)[0];
+            saveWatchlists();
+            refreshAll();
+        }
+    }
+
+    // ---------- ค้นหา/เพิ่ม/ลบหุ้น ----------
+    function searchUniverse() {
+        const keyword = document.getElementById('search-stock-input').value.trim().toLowerCase();
+        const dropdown = document.getElementById('search-results-dropdown');
+        if (!keyword) { dropdown.classList.add('hidden'); return; }
+
+        const matched = globalData.stocks
+            .filter(s => s.ticker.toLowerCase().includes(keyword) || (s.name || '').toLowerCase().includes(keyword))
+            .slice(0, 30);
+        if (matched.length === 0) { dropdown.classList.add('hidden'); return; }
+
+        dropdown.innerHTML = matched.map(s => `
+            <div onclick="addStockToCurrentWL('${esc(s.ticker)}')" class="p-2 hover:bg-slate-700 cursor-pointer text-xs flex justify-between gap-2 border-b border-slate-700">
+                <span class="font-bold text-emerald-400">${esc(s.ticker)}</span>
+                <span class="text-slate-300 truncate max-w-[180px]">${esc(s.name)}</span>
+            </div>
+        `).join('');
+        dropdown.classList.remove('hidden');
+    }
+
+    function addStockToCurrentWL(ticker) {
+        if (!watchlists[currentWL]) watchlists[currentWL] = [];
+        if (!watchlists[currentWL].includes(ticker)) {
+            watchlists[currentWL].push(ticker);
+            saveWatchlists();
+            refreshAll();
+        }
+        document.getElementById('search-stock-input').value = '';
+        document.getElementById('search-results-dropdown').classList.add('hidden');
+    }
+
+    function removeStock(ticker) {
+        watchlists[currentWL] = (watchlists[currentWL] || []).filter(t => t !== ticker);
+        saveWatchlists();
+        refreshAll();
+    }
+
+    // ---------- แสดงผลตาราง ----------
+    function formatMarketCap(v) {
+        if (!v) return '-';
+        if (v >= 1e12) return (v / 1e12).toFixed(2) + 'T';
+        if (v >= 1e9)  return (v / 1e9).toFixed(2) + 'B';
+        if (v >= 1e6)  return (v / 1e6).toFixed(2) + 'M';
+        return v.toLocaleString();
+    }
+    const num  = v => (v ? v.toFixed(2) : '-');
+    const pct  = v => (v ? v.toFixed(2) + '%' : '-');
+
+    function renderTable() {
+        renderHead();
+        const tbody = document.getElementById('stock-table-body');
+        const tickers = watchlists[currentWL] || [];
+        let rows = globalData.stocks.filter(s => tickers.includes(s.ticker));
+
+        if (currentSort.key) {
+            const { key, order } = currentSort;
+            const dir = order === 'asc' ? 1 : -1;
+            rows.sort((a, b) => {
+                if (key === 'ticker') return dir * a.ticker.localeCompare(b.ticker);
+                const va = a[key], vb = b[key];
+                const missA = !va, missB = !vb;           // ค่า 0/ไม่มีข้อมูล ให้ไปอยู่ท้ายเสมอ
+                if (missA && missB) return 0;
+                if (missA) return 1;
+                if (missB) return -1;
+                return dir * (va - vb);
+            });
         }
 
-        function deleteCurrentWatchlist() {
-            if (Object.keys(watchlists).length <= 1) {
-                alert("ต้องมี Watchlist อย่างน้อย 1 รายการ");
-                return;
-            }
-            if (confirm(`คุณต้องการลบ ${currentWL} ใช่หรือไม่?`)) {
-                delete watchlists[currentWL];
+        if (rows.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="${COLUMNS.length + 1}" class="p-8 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = rows.map(s => `
+            <tr class="hover:bg-slate-800/50 transition">
+                <td class="p-3">
+                    <div class="font-bold text-emerald-400">${esc(s.ticker)}</div>
+                    <div class="text-xs text-slate-400 truncate max-w-[180px]">${esc(s.name)}</div>
+                </td>
+                <td class="p-3 text-right font-mono">${s.price ? s.price.toLocaleString() : '-'}</td>
+                <td class="p-3 text-right font-mono">${formatMarketCap(s.marketCap)}</td>
+                <td class="p-3 text-right font-mono">${num(s.pe)}</td>
+                <td class="p-3 text-right font-mono">${num(s.pb)}</td>
+                <td class="p-3 text-right font-mono">${pct(s.dividendYield)}</td>
+                <td class="p-3 text-right font-mono">${pct(s.roe)}</td>
+                <td class="p-3 text-right font-mono">${num(s.de)}</td>
+                <td class="p-3 text-right font-mono">${pct(s.gpm)}</td>
+                <td class="p-3 text-right font-mono">${pct(s.npm)}</td>
+                <td class="p-3 text-center">
+                    <button onclick="removeStock('${esc(s.ticker)}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">ลบ</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // ---------- Export / Import ----------
+    function exportWatchlists() {
+        const blob = new Blob([JSON.stringify(watchlists, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'my_tablet_watchlists.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function importWatchlists(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            try {
+                const imported = JSON.parse(e.target.result);
+                const valid = imported && typeof imported === 'object' && !Array.isArray(imported)
+                    && Object.keys(imported).length > 0
+                    && Object.values(imported).every(v => Array.isArray(v));
+                if (!valid) { alert("รูปแบบไฟล์ JSON ไม่ถูกต้อง"); return; }
+                if (!confirm("การนำเข้าจะแทนที่ Watchlists ปัจจุบันทั้งหมด ต้องการดำเนินการต่อหรือไม่?")) return;
+                watchlists = imported;
                 currentWL = Object.keys(watchlists)[0];
-                saveAndRefresh();
-                renderWatchlistNav();
-                renderTable();
+                saveWatchlists();
+                refreshAll();
+                alert("นำเข้า Watchlists สำเร็จ!");
+            } catch (err) {
+                alert("ไม่สามารถอ่านไฟล์ JSON ได้");
             }
-        }
+        };
+        reader.readAsText(file);
+        event.target.value = '';   // ให้เลือกไฟล์เดิมซ้ำได้
+    }
 
-        function searchUniverse() {
-            const keyword = document.getElementById('search-stock-input').value.toLowerCase();
-            const dropdown = document.getElementById('search-results-dropdown');
-            if (!keyword) { dropdown.classList.add('hidden'); return; }
-
-            const matched = globalData.stocks.filter(s => s.ticker.toLowerCase().includes(keyword) || s.name.toLowerCase().includes(keyword));
-            if (matched.length === 0) { dropdown.classList.add('hidden'); return; }
-
-            dropdown.innerHTML = matched.map(s => `
-                <div onclick="addStockToCurrentWL('${s.ticker}')" class="p-2 hover:bg-slate-700 cursor-pointer text-xs flex justify-between border-b border-slate-700">
-                    <span class="font-bold text-emerald-400">${s.ticker}</span>
-                    <span class="text-slate-300 truncate max-w-[180px]">${s.name}</span>
-                </div>
-            `).join('');
-            dropdown.classList.remove('hidden');
-        }
-
-        function addStockToCurrentWL(ticker) {
-            if (!watchlists[currentWL]) watchlists[currentWL] = [];
-            if (!watchlists[currentWL].includes(ticker)) {
-                watchlists[currentWL].push(ticker);
-                saveAndRefresh();
-                renderWatchlistNav();
-                renderTable();
-            }
-            document.getElementById('search-stock-input').value = '';
-            document.getElementById('search-results-dropdown').classList.add('hidden');
-        }
-
-        function removeStock(ticker) {
-            watchlists[currentWL] = watchlists[currentWL].filter(t => t !== ticker);
-            saveAndRefresh();
-            renderWatchlistNav();
-            renderTable();
-        }
-
-        function sortStocks(key, order) {
-            currentSort = { key, order };
-            renderTable();
-        }
-
-        function formatMarketCap(marketCap) {
-            if (!marketCap) return '-';
-            if (marketCap >= 1e12) return (marketCap / 1e12).toFixed(2) + 'T';
-            if (marketCap >= 1e9) return (marketCap / 1e9).toFixed(2) + 'B';
-            if (marketCap >= 1e6) return (marketCap / 1e6).toFixed(2) + 'M';
-            return marketCap.toLocaleString();
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('stock-table-body');
-            const tickers = watchlists[currentWL] || [];
-            let stocksInWL = globalData.stocks.filter(s => tickers.includes(s.ticker));
-
-            if (currentSort.key) {
-                stocksInWL.sort((a, b) => {
-                    let valA = a[currentSort.key];
-                    let valB = b[currentSort.key];
-                    if (valA === undefined || valA === null) valA = 0;
-                    if (valB === undefined || valB === null) valB = 0;
-                    
-                    if (typeof valA === 'string') {
-                        return currentSort.order === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
-                    }
-                    return currentSort.order === 'asc' ? valA - valB : valB - valA;
-                });
-            }
-
-            if (stocksInWL.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="11" class="p-8 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
-                return;
-            }
-
-            tbody.innerHTML = stocksInWL.map(s => `
-                <tr class="hover:bg-slate-800/50 transition">
-                    <td class="p-3">
-                        <div class="font-bold text-emerald-400">${s.ticker}</div>
-                        <div class="text-xs text-slate-400 truncate max-w-[150px]">${s.name}</div>
-                    </td>
-                    <td class="p-3 text-right font-mono">${s.price ? s.price.toLocaleString() : '-'}</td>
-                    <td class="p-3 text-right font-mono">${formatMarketCap(s.marketCap)}</td>
-                    <td class="p-3 text-right font-mono">${s.pe ? s.pe.toFixed(2) : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.pb ? s.pb.toFixed(2) : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.dividendYield ? s.dividendYield.toFixed(2) + '%' : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.roe ? s.roe.toFixed(2) + '%' : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.de ? s.de.toFixed(2) : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.gpm ? s.gpm.toFixed(2) + '%' : '-'}</td>
-                    <td class="p-3 text-right font-mono">${s.npm ? s.npm.toFixed(2) + '%' : '-'}</td>
-                    <td class="p-3 text-center">
-                        <button onclick="removeStock('${s.ticker}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">ลบ</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function saveAndRefresh() {
-            localStorage.setItem('tablet_watchlists', JSON.stringify(watchlists));
-        }
-
-        function exportWatchlists() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(watchlists, null, 2));
-            const dlAnchor = document.createElement('a');
-            dlAnchor.setAttribute("href", dataStr);
-            dlAnchor.setAttribute("download", "my_tablet_watchlists.json");
-            document.body.appendChild(dlAnchor);
-            dlAnchor.click();
-            dlAnchor.remove();
-        }
-
-        function importWatchlists(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const imported = JSON.parse(e.target.result);
-                    if (typeof imported === 'object' && imported !== null && !Array.isArray(imported)) {
-                        watchlists = imported;
-                        currentWL = Object.keys(watchlists)[0] || "Watchlist 1";
-                        saveAndRefresh();
-                        renderWatchlistNav();
-                        renderTable();
-                        alert("นำเข้า Watchlists สำเร็จ!");
-                    } else {
-                        alert("รูปแบบไฟล์ JSON ไม่ถูกต้อง");
-                    }
-                } catch (err) {
-                    alert("ไม่สามารถอ่านไฟล์ JSON ได้");
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        loadData();
-    </script>
+    loadData();
+</script>
 </body>
 </html>

@@ -15,7 +15,7 @@
         #app { position: fixed; inset: 0; display: flex; overflow: hidden; }
 
         /* ตารางอยู่ใน scroll container ตัวเดียว (ไม่มี padding ด้านบน)
-           หัวตารางจึงตรึงติดขอบบนพอดี ไม่มีแถวหุ้นโผล่ลอดช่องว่างด้านบน */
+           หัวตารางจึงตรึงชิดขอบบนพอดี ไม่มีแถวหุ้นโผล่ลอดช่องว่างด้านบน */
         #table-scroll { overflow: auto; -webkit-overflow-scrolling: touch; }
         #stock-table { border-collapse: separate; border-spacing: 0; min-width: 900px; width: 100%; }
         #stock-table thead th {
@@ -24,6 +24,10 @@
             border-bottom: 1px solid #334155;  /* เส้นใต้หัวตาราง */
         }
         #stock-table tbody td { border-bottom: 1px solid #1e293b; }
+
+        /* ที่จับสำหรับลากเรียงลำดับ Watchlist (ปิดการเลื่อนหน้าจอเฉพาะตรงที่จับ เพื่อให้ลากด้วยนิ้วได้) */
+        .wl-handle { touch-action: none; -webkit-user-select: none; user-select: none; }
+        .wl-dragging { box-shadow: 0 0 0 2px #34d399, 0 8px 20px rgba(0,0,0,.5); opacity: .9; position: relative; z-index: 10; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100">
@@ -37,8 +41,14 @@
             <p class="text-xs text-slate-400" id="last-update">กำลังโหลดข้อมูล...</p>
         </div>
 
+        <!-- แถบหัวรายการ Watchlist + ปุ่มเรียง A→Z -->
+        <div class="shrink-0 px-4 pt-3 pb-1 flex items-center justify-between gap-2 text-xs text-slate-400">
+            <span>ลากที่ ☰ เพื่อเรียงลำดับ</span>
+            <button onclick="sortWatchlistsAZ()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">เรียง A→Z</button>
+        </div>
+
         <!-- รายการ Watchlists (เลื่อนได้เมื่อมีเยอะ) -->
-        <div class="flex-1 min-h-0 overflow-y-auto p-4 space-y-2" id="watchlist-nav"></div>
+        <div class="flex-1 min-h-0 overflow-y-auto px-3 py-2 space-y-1" id="watchlist-nav"></div>
 
         <!-- สร้าง Watchlist ใหม่ + Export/Import (ตรึงอยู่ล่างสุดของ Sidebar เสมอ) -->
         <div class="shrink-0 p-4 border-t border-slate-800 space-y-2 bg-slate-900">
@@ -64,7 +74,7 @@
             <div class="flex items-center gap-3 min-w-0">
                 <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400 truncate">เลือก Watchlist</h2>
                 <button onclick="renameCurrentWatchlist()" class="shrink-0 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
-                <button onclick="deleteCurrentWatchlist()" class="shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
+                <button onclick="deleteWatchlist(currentWL)" class="shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
             </div>
 
             <div class="relative w-full max-w-xs sm:w-80">
@@ -146,26 +156,20 @@
         refreshAll();
     }
 
-    // ---------- หัวตาราง + ปุ่ม Sort สีเขียวทุกคอลัมน์ ----------
+    // ---------- หัวตาราง: กดที่ชื่อหัวข้อเพื่อ sort ได้เลย ----------
     function renderHead() {
         const row = document.getElementById('table-head-row');
         const ths = COLUMNS.map(c => {
             const active = currentSort.key === c.key;
-            const arrow = active ? (currentSort.order === 'asc' ? '↑' : '↓') : (c.best === 'asc' ? '↑' : '↓');
-            const btnCls = active
-                ? 'bg-emerald-400 text-slate-950 ring-2 ring-emerald-200'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white';
-            const justify = c.align === 'right' ? 'justify-end' : 'justify-start';
+            const arrow = active ? (currentSort.order === 'asc' ? '▲' : '▼') : '';
+            const color = active ? 'text-emerald-400' : 'text-slate-200 hover:text-emerald-300';
             return `
-                <th class="p-3 text-${c.align}">
-                    <div class="flex items-center ${justify} gap-1.5">
-                        <span class="whitespace-nowrap">${c.label}</span>
-                        <button onclick="sortBy('${c.key}')" title="เรียงตาม ${c.label}"
-                                class="${btnCls} px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer min-w-[24px]">${arrow}</button>
-                    </div>
+                <th class="p-3 text-${c.align} cursor-pointer select-none transition ${color}"
+                    onclick="sortBy('${c.key}')" title="กดเพื่อเรียงตาม ${c.label}">
+                    <span class="whitespace-nowrap">${c.label}<span class="inline-block w-3 ml-1 text-[10px] text-emerald-400">${arrow}</span></span>
                 </th>`;
         }).join('');
-        row.innerHTML = ths + `<th class="p-3 text-center">จัดการ</th>`;
+        row.innerHTML = ths + `<th class="p-3 text-center text-slate-200">จัดการ</th>`;
     }
 
     // กดครั้งแรก = ทิศทางที่มักใช้ (เช่น P/E น้อยไปมาก) กดซ้ำ = สลับทิศทาง
@@ -179,19 +183,92 @@
         renderTable();
     }
 
-    // ---------- Sidebar ----------
+    // ---------- Sidebar: รายการ Watchlist (ลบได้ + ลากเรียงลำดับได้) ----------
     function renderWatchlistNav() {
         if (!watchlists[currentWL]) currentWL = Object.keys(watchlists)[0];
         const nav = document.getElementById('watchlist-nav');
         nav.innerHTML = '';
         Object.keys(watchlists).forEach(name => {
-            const btn = document.createElement('button');
-            btn.className = `w-full text-left px-3 py-2.5 rounded text-sm font-medium transition cursor-pointer flex justify-between items-center gap-2 ${name === currentWL ? 'bg-emerald-600 text-white font-bold' : 'text-slate-300 hover:bg-slate-800'}`;
-            btn.innerHTML = `<span class="truncate">${esc(name)}</span> <span class="text-xs opacity-75 shrink-0">(${(watchlists[name] || []).length})</span>`;
-            btn.onclick = () => { currentWL = name; refreshAll(); };
-            nav.appendChild(btn);
+            const active = name === currentWL;
+            const row = document.createElement('div');
+            row.dataset.name = name;
+            row.className = `flex items-center rounded transition ${active ? 'bg-emerald-600 text-white font-bold' : 'text-slate-300 hover:bg-slate-800'}`;
+            row.innerHTML = `
+                <span class="wl-handle px-2.5 py-3 cursor-grab text-base leading-none opacity-70" title="ลากเพื่อเรียงลำดับ">☰</span>
+                <button class="wl-name flex-1 min-w-0 text-left py-2.5 text-sm font-medium cursor-pointer flex justify-between items-center gap-2">
+                    <span class="truncate">${esc(name)}</span>
+                    <span class="text-xs opacity-75 shrink-0">(${(watchlists[name] || []).length})</span>
+                </button>
+                <button class="wl-del px-3 py-2.5 text-base leading-none opacity-60 hover:opacity-100 cursor-pointer" title="ลบ Watchlist นี้">✕</button>`;
+            row.querySelector('.wl-name').onclick = () => { currentWL = name; refreshAll(); };
+            row.querySelector('.wl-del').onclick = (e) => { e.stopPropagation(); deleteWatchlist(name); };
+            attachDrag(row.querySelector('.wl-handle'), row);
+            nav.appendChild(row);
         });
         document.getElementById('current-wl-title').innerText = currentWL;
+    }
+
+    // ลากเพื่อเรียงลำดับ (ใช้ได้ทั้งนิ้วบนแท็บเล็ตและเมาส์)
+    function attachDrag(handle, row) {
+        handle.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            const nav = document.getElementById('watchlist-nav');
+            handle.setPointerCapture(e.pointerId);
+            row.classList.add('wl-dragging');
+
+            // ระหว่างลาก "ไม่ย้ายแถวใน DOM" (ไม่งั้นเบราว์เซอร์จะปล่อยการจับนิ้ว)
+            // แต่ให้แถวเลื่อนตามนิ้ว + มีเส้นเขียวบอกตำแหน่งที่จะวาง แล้วค่อยสลับลำดับตอนปล่อยนิ้ว
+            const startY = e.clientY;
+            const startScroll = nav.scrollTop;
+            let dropIndex = 0;
+            const others = () => [...nav.children].filter(c => c !== row);
+
+            const onMove = (ev) => {
+                const y = ev.clientY;
+                const nr = nav.getBoundingClientRect();
+                if (y < nr.top + 36) nav.scrollTop -= 14;           // ใกล้ขอบบน → เลื่อนขึ้น
+                else if (y > nr.bottom - 36) nav.scrollTop += 14;   // ใกล้ขอบล่าง → เลื่อนลง
+
+                row.style.transform = `translateY(${y - startY + (nav.scrollTop - startScroll)}px)`;
+
+                const list = others();
+                dropIndex = list.filter(s => {
+                    const r = s.getBoundingClientRect();
+                    return y > r.top + r.height / 2;
+                }).length;
+                list.forEach(s => { s.style.boxShadow = ''; });
+                if (list.length) {
+                    if (dropIndex < list.length) list[dropIndex].style.boxShadow = 'inset 0 3px 0 #34d399';
+                    else list[list.length - 1].style.boxShadow = 'inset 0 -3px 0 #34d399';
+                }
+            };
+
+            const onEnd = () => {
+                handle.removeEventListener('pointermove', onMove);
+                handle.removeEventListener('pointerup', onEnd);
+                handle.removeEventListener('pointercancel', onEnd);
+                const order = others().map(c => c.dataset.name);
+                order.splice(dropIndex, 0, row.dataset.name);
+                const reordered = {};
+                order.forEach(n => { reordered[n] = watchlists[n]; });
+                watchlists = reordered;
+                saveWatchlists();
+                renderWatchlistNav();
+            };
+
+            handle.addEventListener('pointermove', onMove);
+            handle.addEventListener('pointerup', onEnd);
+            handle.addEventListener('pointercancel', onEnd);
+        });
+    }
+
+    function sortWatchlistsAZ() {
+        const names = Object.keys(watchlists).sort((a, b) => a.localeCompare(b, 'th', { numeric: true, sensitivity: 'base' }));
+        const sorted = {};
+        names.forEach(n => { sorted[n] = watchlists[n]; });
+        watchlists = sorted;
+        saveWatchlists();
+        renderWatchlistNav();
     }
 
     function createWatchlist() {
@@ -221,14 +298,16 @@
         refreshAll();
     }
 
-    function deleteCurrentWatchlist() {
-        if (Object.keys(watchlists).length <= 1) { alert("ต้องมี Watchlist อย่างน้อย 1 รายการ"); return; }
-        if (confirm(`คุณต้องการลบ "${currentWL}" ใช่หรือไม่?`)) {
-            delete watchlists[currentWL];
-            currentWL = Object.keys(watchlists)[0];
-            saveWatchlists();
-            refreshAll();
-        }
+    // ลบ Watchlist ใดก็ได้ (ถ้าลบจนหมด จะสร้าง Watchlist ว่างให้ 1 อัน)
+    function deleteWatchlist(name) {
+        if (!watchlists[name]) return;
+        const count = watchlists[name].length;
+        if (!confirm(`ต้องการลบ "${name}" ใช่หรือไม่?${count ? `\n(มีหุ้นอยู่ ${count} ตัว)` : ''}`)) return;
+        delete watchlists[name];
+        if (Object.keys(watchlists).length === 0) watchlists = { "Watchlist 1": [] };
+        if (!watchlists[currentWL]) currentWL = Object.keys(watchlists)[0];
+        saveWatchlists();
+        refreshAll();
     }
 
     // ---------- ค้นหา/เพิ่ม/ลบหุ้น ----------

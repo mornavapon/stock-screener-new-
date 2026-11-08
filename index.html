@@ -77,10 +77,14 @@
                 <button onclick="deleteWatchlist(currentWL)" class="shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
             </div>
 
-            <div class="relative w-full max-w-xs sm:w-80">
+            <div class="flex items-center gap-2 w-full max-w-sm sm:w-auto">
+            <button onclick="openHelp()" title="วิธีเพิ่มหุ้นใหม่ / คู่มือ" aria-label="วิธีเพิ่มหุ้นใหม่"
+                    class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 text-xl leading-none cursor-pointer">📖</button>
+            <div class="relative flex-1 min-w-0 sm:flex-none sm:w-80">
                 <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()"
                        class="w-full bg-slate-800 text-sm px-3 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
                 <div id="search-results-dropdown" class="absolute left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
+            </div>
             </div>
         </header>
 
@@ -115,6 +119,77 @@
                class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-4 py-3.5 text-base font-medium text-slate-100 text-center">📈 ดูกราฟจาก TradingView</a>
             <a id="link-claude" target="_blank" rel="noopener noreferrer"
                class="block bg-emerald-700 hover:bg-emerald-600 border border-emerald-500 rounded-lg px-4 py-3.5 text-base font-medium text-white text-center">🤖 ถามข้อมูลหุ้นนี้กับ Claude</a>
+        </div>
+    </div>
+</div>
+
+<!-- หน้าต่างคู่มือ: วิธีเพิ่มหุ้นใหม่ที่ยังไม่มีในระบบ -->
+<div id="help-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/70 p-4"
+     onclick="if (event.target === this) closeHelp()">
+    <div class="w-full max-w-2xl max-h-[88vh] flex flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl">
+        <div class="flex items-center justify-between gap-3 px-5 py-3 border-b border-slate-700 shrink-0">
+            <h3 class="text-xl font-bold text-emerald-400">📖 วิธีเพิ่มรายชื่อหุ้นใหม่ที่ยังไม่มีในระบบ</h3>
+            <button onclick="closeHelp()" class="text-slate-400 hover:text-white text-2xl leading-none px-2 py-1 cursor-pointer" title="ปิด">✕</button>
+        </div>
+
+        <div class="overflow-y-auto px-5 py-4 space-y-5 text-base leading-relaxed text-slate-200">
+
+            <section>
+                <h4 class="text-lg font-bold text-white mb-2">1. เพิ่มรหัสหุ้นในไฟล์ fetch_yahoo.py บน GitHub</h4>
+                <ul class="list-disc pl-6 space-y-1">
+                    <li>เปิดไฟล์ <b>fetch_yahoo.py</b> ใน GitHub Repository แล้วกดปุ่มแก้ไข (รูปดินสอ)</li>
+                    <li>เพิ่มรหัสหุ้นตัวใหม่ลงในรายการ <code class="bg-slate-800 px-1.5 rounded">tickers = [...]</code> ตามรูปแบบของ Yahoo Finance</li>
+                </ul>
+                <div class="mt-3 overflow-x-auto">
+                    <table class="w-full text-left text-base border border-slate-700">
+                        <thead class="bg-slate-800 text-slate-300">
+                            <tr><th class="px-3 py-2">ตลาด</th><th class="px-3 py-2">วิธีเขียนรหัส</th><th class="px-3 py-2">ตัวอย่าง</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700">
+                            <tr><td class="px-3 py-2">หุ้นไทย</td><td class="px-3 py-2">ต่อท้ายด้วย .BK</td><td class="px-3 py-2 font-mono text-emerald-300">"TU.BK", "GPSC.BK"</td></tr>
+                            <tr><td class="px-3 py-2">หุ้นสหรัฐฯ</td><td class="px-3 py-2">ใส่ชื่อย่อตรงๆ (ถ้ามีจุด ให้เปลี่ยนเป็นขีดกลาง)</td><td class="px-3 py-2 font-mono text-emerald-300">"PLTR", "CRWD", "BRK-B"</td></tr>
+                            <tr><td class="px-3 py-2">หุ้นฮ่องกง</td><td class="px-3 py-2">รหัส 4 หลัก ตามด้วย .HK</td><td class="px-3 py-2 font-mono text-emerald-300">"1810.HK", "0700.HK"</td></tr>
+                            <tr><td class="px-3 py-2">หุ้นจีน A-Shares</td><td class="px-3 py-2">ตามด้วย .SS (ตลาดเซี่ยงไฮ้) หรือ .SZ (ตลาดเสิ่นเจิ้น)</td><td class="px-3 py-2 font-mono text-emerald-300">"300750.SZ", "600519.SS"</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-2 text-slate-400 text-sm">เมื่อแก้เสร็จ เลื่อนลงล่างสุดของหน้าแล้วกด <b>Commit changes</b></p>
+            </section>
+
+            <section>
+                <h4 class="text-lg font-bold text-white mb-2">2. สั่งรัน Action เพื่อดึงข้อมูลใหม่เข้า JSON</h4>
+                <ul class="list-disc pl-6 space-y-1">
+                    <li>ไปที่แท็บ <b>Actions</b> บน GitHub</li>
+                    <li>คลิกที่ <b>Update Stock Data</b> ทางซ้ายมือ</li>
+                    <li>กดปุ่ม <b>Run workflow</b> (หรือปล่อยให้ระบบรันอัตโนมัติตามเวลาที่ตั้งไว้)</li>
+                </ul>
+            </section>
+
+            <section class="bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-3">
+                เมื่อ Action รันเสร็จเรียบร้อย หุ้นตัวใหม่จะเข้าไปอยู่ใน <b>stocks_data.json</b> ทันที
+                จากนั้นเปิดแอปนี้ใหม่ (หรือรีเฟรชหน้า) แล้วพิมพ์ค้นหาชื่อหุ้นตัวนั้นที่ช่องค้นหาด้านบน เพื่อเพิ่มเข้า Watchlist ได้เลย
+            </section>
+
+            <section>
+                <h4 class="text-lg font-bold text-white mb-2">💡 เกร็ดเล็กน้อย</h4>
+                <ul class="list-disc pl-6 space-y-1">
+                    <li>ถ้าพิมพ์ค้นหาแล้วไม่เจอ แสดงว่ารหัสยังไม่อยู่ในไฟล์ หรือเขียนผิดรูปแบบ หรือ Action ยังรันไม่เสร็จ</li>
+                    <li>ถ้าหุ้นขึ้นเป็นขีด "-" แสดงว่า Yahoo Finance ไม่มีข้อมูลตัวนั้น (ดูได้จากล็อกใน Actions)</li>
+                    <li>Watchlist เก็บอยู่ในเครื่องนี้ ควรกด <b>Export JSON</b> สำรองไว้เป็นระยะ</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4 class="text-lg font-bold text-white mb-2">ลิงก์ GitHub</h4>
+                <div class="grid gap-2 sm:grid-cols-3">
+                    <a href="https://github.com/mornavapon/stock-screener-new-/edit/main/fetch_yahoo.py" target="_blank" rel="noopener noreferrer"
+                       class="block text-center bg-emerald-700 hover:bg-emerald-600 border border-emerald-500 rounded-lg px-3 py-3 font-medium text-white">✏️ แก้ไข fetch_yahoo.py</a>
+                    <a href="https://github.com/mornavapon/stock-screener-new-/actions/workflows/update_data.yml" target="_blank" rel="noopener noreferrer"
+                       class="block text-center bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-3 font-medium text-slate-100">▶️ Actions (Run workflow)</a>
+                    <a href="https://github.com/mornavapon/stock-screener-new-" target="_blank" rel="noopener noreferrer"
+                       class="block text-center bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-3 font-medium text-slate-100">🐙 หน้า Repository</a>
+                </div>
+            </section>
         </div>
     </div>
 </div>
@@ -414,7 +489,19 @@
         m.classList.add('hidden');
         m.classList.remove('flex');
     }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeStockMenu(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeStockMenu(); closeHelp(); } });
+
+    // ---------- หน้าต่างคู่มือ ----------
+    function openHelp() {
+        const m = document.getElementById('help-modal');
+        m.classList.remove('hidden');
+        m.classList.add('flex');
+    }
+    function closeHelp() {
+        const m = document.getElementById('help-modal');
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+    }
 
     // ---------- แสดงผลตาราง ----------
     function formatMarketCap(v) {

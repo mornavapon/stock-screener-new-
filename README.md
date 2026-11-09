@@ -2,8 +2,6 @@
 
 แอป stock screener ส่วนตัวที่ใช้บนแท็บเล็ต สร้าง Watchlist ได้ไม่จำกัด เปรียบเทียบหุ้นด้วย P/E, P/BV, Market Cap, Div Yield, ROE, D/E, GPM, NPM
 
-![หน้าตาเว็บแอป Stock Screener](./images/preview.png)
-
 🔗 **เปิดแอป:** https://mornavapon.github.io/stock-screener-new-/
 
 ## แอปทำงานอย่างไร

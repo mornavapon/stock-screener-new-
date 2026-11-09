@@ -17,13 +17,29 @@
         /* ตารางอยู่ใน scroll container ตัวเดียว (ไม่มี padding ด้านบน)
            หัวตารางจึงตรึงชิดขอบบนพอดี ไม่มีแถวหุ้นโผล่ลอดช่องว่างด้านบน */
         #table-scroll { overflow: auto; -webkit-overflow-scrolling: touch; }
-        #stock-table { border-collapse: separate; border-spacing: 0; min-width: 900px; width: 100%; }
+        /* กว้างเต็มจอเมื่อคอลัมน์น้อย / ถ้าคอลัมน์เยอะเกินจอ ตารางจะกว้างตามเนื้อหาแล้วเลื่อนซ้าย-ขวาได้ */
+        #stock-table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: max-content; }
+        #stock-table th, #stock-table td { white-space: nowrap; }
         #stock-table thead th {
             position: sticky; top: 0; z-index: 20;
             background: #0f172a;               /* slate-900 ทึบ ไม่โปร่งใส */
             border-bottom: 1px solid #334155;  /* เส้นใต้หัวตาราง */
         }
         #stock-table tbody td { border-bottom: 1px solid #1e293b; }
+        #stock-table tbody tr:hover td { background: #0f172a; }
+
+        /* คอลัมน์ชื่อหุ้น: ตรึงชิดซ้าย (ไม่เลื่อนตามเวลาเลื่อนซ้าย-ขวา) และกว้างคงที่ 220px */
+        #stock-table th.col-ticker, #stock-table td.col-ticker {
+            position: sticky; left: 0;
+            width: 220px; min-width: 220px; max-width: 220px;
+            border-right: 1px solid #1e293b;
+        }
+        #stock-table thead th.col-ticker { z-index: 30; border-right-color: #334155; }   /* มุมซ้ายบนอยู่เหนือทุกอย่าง */
+        #stock-table tbody td.col-ticker { z-index: 10; background: #020617; }            /* slate-950 ทึบ กันตัวเลขลอดผ่านตอนเลื่อน */
+        .name-box { width: 196px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* ลูกศรบอกทิศ sort วางในช่องไฟขวาของหัวคอลัมน์ ไม่กินความกว้างเพิ่ม */
+        .sort-arrow { position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font-size: 9px; line-height: 1; }
 
         /* ที่จับสำหรับลากเรียงลำดับ Watchlist (ปิดการเลื่อนหน้าจอเฉพาะตรงที่จับ เพื่อให้ลากด้วยนิ้วได้) */
         .wl-handle { touch-action: none; -webkit-user-select: none; user-select: none; }
@@ -77,7 +93,17 @@
                 <button onclick="deleteWatchlist(currentWL)" class="shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
             </div>
 
-            <div class="flex items-center gap-2 w-full max-w-sm sm:w-auto">
+            <div class="flex items-center gap-2 w-full max-w-sm sm:max-w-none sm:w-auto">
+            <button onclick="openColumnsModal()" title="เลือกคอลัมน์ที่จะแสดง" aria-label="เลือกคอลัมน์ที่จะแสดง"
+                    class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 text-slate-100 cursor-pointer flex items-center">
+                <!-- ไอคอน equalizer (แถบเลื่อน 3 แท่ง) -->
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M5 3v18M12 3v18M19 3v18"/>
+                    <circle cx="5" cy="9" r="2.4" fill="currentColor"/>
+                    <circle cx="12" cy="15" r="2.4" fill="currentColor"/>
+                    <circle cx="19" cy="8" r="2.4" fill="currentColor"/>
+                </svg>
+            </button>
             <button onclick="openHelp()" title="วิธีเพิ่มหุ้นใหม่ / คู่มือ" aria-label="วิธีเพิ่มหุ้นใหม่"
                     class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 text-xl leading-none cursor-pointer">📖</button>
             <div class="relative flex-1 min-w-0 sm:flex-none sm:w-80">
@@ -119,6 +145,24 @@
                class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-4 py-3.5 text-base font-medium text-slate-100 text-center">📈 ดูกราฟจาก TradingView</a>
             <a id="link-claude" target="_blank" rel="noopener noreferrer"
                class="block bg-emerald-700 hover:bg-emerald-600 border border-emerald-500 rounded-lg px-4 py-3.5 text-base font-medium text-white text-center">🤖 ถามข้อมูลหุ้นนี้กับ Claude</a>
+        </div>
+    </div>
+</div>
+
+<!-- หน้าต่างเลือกคอลัมน์ที่จะแสดง (ติ๊กเปิด/ปิด) -->
+<div id="columns-modal" class="fixed inset-0 z-[105] hidden items-center justify-center bg-black/70 p-4"
+     onclick="if (event.target === this) closeColumnsModal()">
+    <div class="w-full max-w-md max-h-[90vh] flex flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl">
+        <div class="flex items-center justify-between gap-3 px-5 py-3 border-b border-slate-700 shrink-0">
+            <h3 class="text-xl font-bold text-emerald-400">เลือกคอลัมน์ที่จะแสดง</h3>
+            <button onclick="closeColumnsModal()" class="text-slate-400 hover:text-white text-2xl leading-none px-2 py-1 cursor-pointer" title="ปิด">✕</button>
+        </div>
+        <div id="columns-hint" class="hidden mx-5 mt-3 text-sm text-amber-300 bg-amber-900/30 border border-amber-700/50 rounded px-3 py-2"></div>
+        <div id="columns-list" class="overflow-y-auto px-3 py-2"></div>
+        <div class="flex gap-2 px-5 py-3 border-t border-slate-700 shrink-0">
+            <button onclick="resetColumns()" class="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-2.5 text-base cursor-pointer">ค่าเริ่มต้น</button>
+            <button onclick="showAllColumns()" class="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-2.5 text-base cursor-pointer">แสดงทั้งหมด</button>
+            <button onclick="closeColumnsModal()" class="flex-1 bg-emerald-700 hover:bg-emerald-600 border border-emerald-500 rounded-lg px-3 py-2.5 text-base font-medium text-white cursor-pointer">เสร็จ</button>
         </div>
     </div>
 </div>
@@ -195,20 +239,57 @@
 </div>
 
 <script>
-    // ---------- คอลัมน์ (เรียงตามที่ต้องการ) ----------
-    // best = ทิศทางเรียงครั้งแรกที่กด ('desc' = มากไปน้อย, 'asc' = น้อยไปมาก)
+    // ---------- คอลัมน์ทั้งหมด (เรียงตามลำดับที่แสดงในตาราง) ----------
+    // key    = ชื่อฟิลด์ใน stocks_data.json
+    // best   = ทิศทางเรียงครั้งแรกที่กด ('desc' = มากไปน้อย, 'asc' = น้อยไปมาก)
+    // on     = แสดงเป็นค่าเริ่มต้นหรือไม่ (ผู้ใช้เปิด/ปิดได้ที่ปุ่ม equalizer)
+    // locked = ปิดไม่ได้ (คอลัมน์ชื่อหุ้น)
+    // fmt    = ฟังก์ชันจัดรูปค่าในช่อง
+    const num = v => (v ? v.toFixed(2) : '-');
+    const pct = v => (v ? v.toFixed(2) + '%' : '-');
+    const px  = v => (v ? v.toLocaleString() : '-');
+    function formatMarketCap(v) {
+        if (!v) return '-';
+        if (v >= 1e12) return (v / 1e12).toFixed(2) + 'T';
+        if (v >= 1e9)  return (v / 1e9).toFixed(2) + 'B';
+        if (v >= 1e6)  return (v / 1e6).toFixed(2) + 'M';
+        return v.toLocaleString();
+    }
     const COLUMNS = [
-        { key: 'ticker',        label: 'TICKER / NAME',  align: 'left',  best: 'asc'  },
-        { key: 'price',         label: 'PRICE',          align: 'right', best: 'desc' },
-        { key: 'marketCap',     label: 'MARKET CAP',     align: 'right', best: 'desc' },
-        { key: 'pe',            label: 'P/E',            align: 'right', best: 'asc'  },
-        { key: 'pb',            label: 'P/BV',           align: 'right', best: 'asc'  },
-        { key: 'dividendYield', label: 'DIV YIELD (%)',  align: 'right', best: 'desc' },
-        { key: 'roe',           label: 'ROE (%)',        align: 'right', best: 'desc' },
-        { key: 'de',            label: 'D/E',            align: 'right', best: 'asc'  },
-        { key: 'gpm',           label: 'GPM (%)',        align: 'right', best: 'desc' },
-        { key: 'npm',           label: 'NPM (%)',        align: 'right', best: 'desc' },
+        { key: 'ticker',          label: 'TICKER / NAME', desc: 'รหัสและชื่อหุ้น (ตรึงไว้เสมอ)',          align: 'left',  best: 'asc',  locked: true },
+        { key: 'price',           label: 'PRICE',         desc: 'ราคาล่าสุด',                              align: 'right', best: 'desc', on: true,  fmt: px },
+        { key: 'fiftyTwoWeekLow', label: '52W LOW',       desc: 'ราคาต่ำสุดใน 52 สัปดาห์',                 align: 'right', best: 'asc',  on: false, fmt: px,  isNew: true },
+        { key: 'fiftyTwoWeekHigh',label: '52W HIGH',      desc: 'ราคาสูงสุดใน 52 สัปดาห์',                 align: 'right', best: 'desc', on: false, fmt: px,  isNew: true },
+        { key: 'marketCap',       label: 'MKT CAP',       desc: 'มูลค่าตลาด (Market Cap)',                 align: 'right', best: 'desc', on: true,  fmt: formatMarketCap },
+        { key: 'pe',              label: 'P/E',           desc: 'P/E ย้อนหลัง (Trailing)',                 align: 'right', best: 'asc',  on: true,  fmt: num },
+        { key: 'forwardPE',       label: 'FWD P/E',       desc: 'P/E คาดการณ์ล่วงหน้า (Forward)',          align: 'right', best: 'asc',  on: false, fmt: num, isNew: true },
+        { key: 'pegRatio',        label: 'PEG',           desc: 'P/E ต่ออัตราเติบโตของกำไร (PEG)',         align: 'right', best: 'asc',  on: false, fmt: num, isNew: true },
+        { key: 'pb',              label: 'P/BV',          desc: 'ราคาต่อมูลค่าทางบัญชี',                   align: 'right', best: 'asc',  on: true,  fmt: num },
+        { key: 'dividendYield',   label: 'DIV YIELD',     desc: 'อัตราเงินปันผล (%)',                      align: 'right', best: 'desc', on: true,  fmt: pct },
+        { key: 'roe',             label: 'ROE',           desc: 'ผลตอบแทนต่อส่วนผู้ถือหุ้น (%)',           align: 'right', best: 'desc', on: true,  fmt: pct },
+        { key: 'de',              label: 'D/E',           desc: 'หนี้สินต่อส่วนผู้ถือหุ้น',                align: 'right', best: 'asc',  on: true,  fmt: num },
+        { key: 'gpm',             label: 'GPM',           desc: 'อัตรากำไรขั้นต้น (%)',                    align: 'right', best: 'desc', on: true,  fmt: pct },
+        { key: 'npm',             label: 'NPM',           desc: 'อัตรากำไรสุทธิ (%)',                      align: 'right', best: 'desc', on: true,  fmt: pct },
     ];
+
+    // ---------- คอลัมน์ที่ผู้ใช้เลือกแสดง (จำไว้ในเครื่อง) ----------
+    function loadColumnPrefs() {
+        try {
+            const saved = JSON.parse(localStorage.getItem('tablet_columns'));
+            if (Array.isArray(saved)) {
+                return new Set(saved.filter(k => COLUMNS.some(c => c.key === k && !c.locked)));
+            }
+        } catch (e) {}
+        return new Set(COLUMNS.filter(c => c.on).map(c => c.key));
+    }
+    let visibleKeys = loadColumnPrefs();
+
+    function saveColumnPrefs() {
+        try { localStorage.setItem('tablet_columns', JSON.stringify([...visibleKeys])); } catch (e) {}
+    }
+    function visibleColumns() {
+        return COLUMNS.filter(c => c.locked || visibleKeys.has(c.key));
+    }
 
     let globalData = { updated_at: "", stocks: [] };
 
@@ -256,15 +337,18 @@
     // ---------- หัวตาราง: กดที่ชื่อหัวข้อเพื่อ sort ได้เลย ----------
     function renderHead() {
         const row = document.getElementById('table-head-row');
-        const ths = COLUMNS.map(c => {
+        const ths = visibleColumns().map(c => {
             const active = currentSort.key === c.key;
             const arrow = active ? (currentSort.order === 'asc' ? '▲' : '▼') : '';
             const color = active ? 'text-emerald-400' : 'text-slate-200 hover:text-emerald-300';
+            const tickerCls = c.locked ? ' col-ticker' : '';
+            // คอลัมน์ตัวเลข: ลูกศรอยู่ในช่องไฟขวา (ไม่กินที่) / คอลัมน์ชื่อหุ้น: ลูกศรต่อท้ายชื่อ
+            const arrowHtml = c.align === 'left'
+                ? `<span class="ml-1 text-[10px] text-emerald-400">${arrow}</span>`
+                : `<span class="sort-arrow text-emerald-400">${arrow}</span>`;
             return `
-                <th class="px-3 py-2 text-${c.align} cursor-pointer select-none transition ${color}"
-                    onclick="sortBy('${c.key}')" title="กดเพื่อเรียงตาม ${c.label}">
-                    <span class="whitespace-nowrap">${c.label}<span class="inline-block w-3 ml-1 text-[10px] text-emerald-400">${arrow}</span></span>
-                </th>`;
+                <th class="px-3 py-2 text-${c.align}${tickerCls} cursor-pointer select-none transition ${color}"
+                    onclick="sortBy('${c.key}')" title="กดเพื่อเรียงตาม ${c.label}">${c.label}${arrowHtml}</th>`;
         }).join('');
         row.innerHTML = ths + `<th class="px-3 py-2 text-center text-slate-200">จัดการ</th>`;
     }
@@ -489,7 +573,7 @@
         m.classList.add('hidden');
         m.classList.remove('flex');
     }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeStockMenu(); closeHelp(); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeStockMenu(); closeHelp(); closeColumnsModal(); } });
 
     // ---------- หน้าต่างคู่มือ ----------
     function openHelp() {
@@ -504,16 +588,6 @@
     }
 
     // ---------- แสดงผลตาราง ----------
-    function formatMarketCap(v) {
-        if (!v) return '-';
-        if (v >= 1e12) return (v / 1e12).toFixed(2) + 'T';
-        if (v >= 1e9)  return (v / 1e9).toFixed(2) + 'B';
-        if (v >= 1e6)  return (v / 1e6).toFixed(2) + 'M';
-        return v.toLocaleString();
-    }
-    const num  = v => (v ? v.toFixed(2) : '-');
-    const pct  = v => (v ? v.toFixed(2) + '%' : '-');
-
     function renderTable() {
         renderHead();
         const tbody = document.getElementById('stock-table-body');
@@ -534,31 +608,94 @@
             });
         }
 
+        const cols = visibleColumns();
+
         if (rows.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="${COLUMNS.length + 1}" class="p-8 text-center text-slate-500">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="${cols.length + 1}" class="p-8 text-center text-slate-500" style="white-space:normal">ยังไม่มีหุ้นใน Watchlist นี้ (ใช้ช่องค้นหาด้านบนเพื่อเพิ่มหุ้น)</td></tr>`;
             return;
         }
 
+        const cell = (c, s) => {
+            if (c.locked) {
+                return `<td class="px-3 py-1.5 col-ticker cursor-pointer" onclick="openStockMenu('${esc(s.ticker)}')" title="แตะเพื่อดูงบ / กราฟ / ถาม Claude">
+                            <div class="name-box font-bold text-emerald-400 leading-tight">${esc(s.ticker)}</div>
+                            <div class="name-box text-xs text-slate-400 leading-tight">${esc(s.name)}</div>
+                        </td>`;
+            }
+            return `<td class="px-3 py-1.5 text-right font-mono">${c.fmt(s[c.key])}</td>`;
+        };
+
         tbody.innerHTML = rows.map(s => `
-            <tr class="hover:bg-slate-800/50 transition">
-                <td class="px-3 py-1.5 cursor-pointer" onclick="openStockMenu('${esc(s.ticker)}')" title="แตะเพื่อดูงบ / กราฟ / ถาม Claude">
-                    <div class="font-bold text-emerald-400 leading-tight">${esc(s.ticker)}</div>
-                    <div class="text-xs text-slate-400 truncate max-w-[180px] leading-tight">${esc(s.name)}</div>
-                </td>
-                <td class="px-3 py-1.5 text-right font-mono">${s.price ? s.price.toLocaleString() : '-'}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${formatMarketCap(s.marketCap)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${num(s.pe)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${num(s.pb)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${pct(s.dividendYield)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${pct(s.roe)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${num(s.de)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${pct(s.gpm)}</td>
-                <td class="px-3 py-1.5 text-right font-mono">${pct(s.npm)}</td>
+            <tr class="transition">
+                ${cols.map(c => cell(c, s)).join('')}
                 <td class="px-3 py-1.5 text-center">
                     <button onclick="removeStock('${esc(s.ticker)}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">ลบ</button>
                 </td>
             </tr>
         `).join('');
+    }
+
+    // ---------- หน้าต่างเลือกคอลัมน์ ----------
+    function renderColumnsList() {
+        const list = document.getElementById('columns-list');
+        list.innerHTML = COLUMNS.map(c => {
+            const checked = c.locked || visibleKeys.has(c.key);
+            const badge = c.isNew ? `<span class="ml-2 text-[11px] font-bold text-emerald-300 bg-emerald-900/50 border border-emerald-700 rounded px-1.5 py-0.5 align-middle">ใหม่</span>` : '';
+            return `
+                <label class="flex items-center gap-3 px-3 py-2.5 rounded-lg ${c.locked ? 'opacity-60' : 'hover:bg-slate-800 cursor-pointer'}">
+                    <input type="checkbox" ${checked ? 'checked' : ''} ${c.locked ? 'disabled' : ''}
+                           onchange="toggleColumn('${c.key}', this.checked)"
+                           class="w-6 h-6 shrink-0 accent-emerald-500">
+                    <span class="min-w-0">
+                        <span class="block text-base font-medium text-slate-100">${c.label}${badge}</span>
+                        <span class="block text-sm text-slate-400">${c.desc}</span>
+                    </span>
+                </label>`;
+        }).join('');
+
+        // ถ้าไฟล์ข้อมูลยังไม่มีค่าใหม่ (ยังไม่ได้รัน Action หลังอัปเดต fetch_yahoo.py) ให้บอกผู้ใช้
+        const hint = document.getElementById('columns-hint');
+        const hasNew = globalData.stocks.some(s => s.forwardPE !== undefined || s.fiftyTwoWeekHigh !== undefined);
+        if (!hasNew && globalData.stocks.length) {
+            hint.innerText = 'คอลัมน์ที่ติดป้าย "ใหม่" จะมีข้อมูลหลังจากรัน Action "Update Stock Data" ด้วย fetch_yahoo.py เวอร์ชันล่าสุดหนึ่งครั้ง';
+            hint.classList.remove('hidden');
+        } else {
+            hint.classList.add('hidden');
+        }
+    }
+
+    function applyColumns() {
+        // ถ้าคอลัมน์ที่กำลัง sort อยู่ถูกซ่อน ให้ยกเลิกการ sort (กันงงว่าเรียงตามอะไร)
+        if (currentSort.key && !visibleColumns().some(c => c.key === currentSort.key)) {
+            currentSort = { key: null, order: 'asc' };
+        }
+        saveColumnPrefs();
+        renderTable();
+    }
+    function toggleColumn(key, on) {
+        if (on) visibleKeys.add(key); else visibleKeys.delete(key);
+        applyColumns();
+    }
+    function resetColumns() {
+        visibleKeys = new Set(COLUMNS.filter(c => c.on).map(c => c.key));
+        renderColumnsList();
+        applyColumns();
+    }
+    function showAllColumns() {
+        visibleKeys = new Set(COLUMNS.filter(c => !c.locked).map(c => c.key));
+        renderColumnsList();
+        applyColumns();
+    }
+    function openColumnsModal() {
+        renderColumnsList();
+        const m = document.getElementById('columns-modal');
+        m.classList.remove('hidden');
+        m.classList.add('flex');
+    }
+    function closeColumnsModal() {
+        const m = document.getElementById('columns-modal');
+        m.classList.add('hidden');
+        m.classList.remove('flex');
     }
 
     // ---------- Export / Import ----------

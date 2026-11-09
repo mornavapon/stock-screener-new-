@@ -152,13 +152,13 @@
 <!-- หน้าต่างเลือกคอลัมน์ที่จะแสดง (ติ๊กเปิด/ปิด) -->
 <div id="columns-modal" class="fixed inset-0 z-[105] hidden items-center justify-center bg-black/70 p-4"
      onclick="if (event.target === this) closeColumnsModal()">
-    <div class="w-full max-w-md max-h-[90vh] flex flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl">
+    <div class="w-full max-w-md max-h-full flex flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl">
         <div class="flex items-center justify-between gap-3 px-5 py-3 border-b border-slate-700 shrink-0">
             <h3 class="text-xl font-bold text-emerald-400">เลือกคอลัมน์ที่จะแสดง</h3>
             <button onclick="closeColumnsModal()" class="text-slate-400 hover:text-white text-2xl leading-none px-2 py-1 cursor-pointer" title="ปิด">✕</button>
         </div>
         <div id="columns-hint" class="hidden mx-5 mt-3 text-sm text-amber-300 bg-amber-900/30 border border-amber-700/50 rounded px-3 py-2"></div>
-        <div id="columns-list" class="overflow-y-auto px-3 py-2"></div>
+        <div id="columns-list" class="flex-1 min-h-0 overflow-y-auto px-3 py-2"></div>
         <div class="flex gap-2 px-5 py-3 border-t border-slate-700 shrink-0">
             <button onclick="resetColumns()" class="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-2.5 text-base cursor-pointer">ค่าเริ่มต้น</button>
             <button onclick="showAllColumns()" class="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-2.5 text-base cursor-pointer">แสดงทั้งหมด</button>
@@ -170,13 +170,13 @@
 <!-- หน้าต่างคู่มือ: วิธีเพิ่มหุ้นใหม่ที่ยังไม่มีในระบบ -->
 <div id="help-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/70 p-4"
      onclick="if (event.target === this) closeHelp()">
-    <div class="w-full max-w-2xl max-h-[88vh] flex flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl">
+    <div class="w-full max-w-2xl max-h-full flex flex-col bg-slate-900 border border-slate-700 rounded-xl shadow-2xl">
         <div class="flex items-center justify-between gap-3 px-5 py-3 border-b border-slate-700 shrink-0">
             <h3 class="text-xl font-bold text-emerald-400">📖 วิธีเพิ่มรายชื่อหุ้นใหม่ที่ยังไม่มีในระบบ</h3>
             <button onclick="closeHelp()" class="text-slate-400 hover:text-white text-2xl leading-none px-2 py-1 cursor-pointer" title="ปิด">✕</button>
         </div>
 
-        <div class="overflow-y-auto px-5 py-4 space-y-5 text-base leading-relaxed text-slate-200">
+        <div class="flex-1 min-h-0 overflow-y-auto px-5 py-4 space-y-5 text-base leading-relaxed text-slate-200">
 
             <section>
                 <h4 class="text-lg font-bold text-white mb-2">1. เพิ่มรหัสหุ้นในไฟล์ fetch_yahoo.py บน GitHub</h4>

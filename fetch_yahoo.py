@@ -68,6 +68,18 @@ tickers = _unique
 
 print(f"กำลังดึงข้อมูลหุ้นทั้งหมด {len(tickers)} ตัว...")
 
+def safe_num(v):
+    """แปลงค่าจาก Yahoo ให้เป็นตัวเลขที่ปลอดภัย (ถ้าเป็น None / 'Infinity' / NaN จะได้ 0)
+    กันไม่ให้ไฟล์ JSON มีค่าที่เว็บแอปอ่านไม่ได้"""
+    try:
+        x = float(v)
+    except (TypeError, ValueError):
+        return 0
+    if x != x or x in (float('inf'), float('-inf')):
+        return 0
+    return x
+
+
 data_list = []
 
 for ticker in tickers:
@@ -75,37 +87,46 @@ for ticker in tickers:
         stock = yf.Ticker(ticker)
         info = stock.info
 
-        name = info.get('longName', info.get('shortName', ticker))
-        price = info.get('currentPrice', info.get('regularMarketPrice', 0))
-        market_cap = info.get('marketCap', 0)
-        pe = info.get('trailingPE', 0)
-        pb = info.get('priceToBook', 0)
-        roe = info.get('returnOnEquity', 0)
+        name = info.get('longName') or info.get('shortName') or ticker
+        price = safe_num(info.get('currentPrice') or info.get('regularMarketPrice'))
+        market_cap = safe_num(info.get('marketCap'))
+        pe = safe_num(info.get('trailingPE'))
+        forward_pe = safe_num(info.get('forwardPE'))
+        # PEG: Yahoo บางตัวใช้ชื่อ pegRatio บางตัวใช้ trailingPegRatio (บางตัวไม่มีข้อมูลเลย จะได้ 0)
+        peg = safe_num(info.get('pegRatio')) or safe_num(info.get('trailingPegRatio'))
+        pb = safe_num(info.get('priceToBook'))
+        roe = safe_num(info.get('returnOnEquity'))
+        high_52w = safe_num(info.get('fiftyTwoWeekHigh'))
+        low_52w = safe_num(info.get('fiftyTwoWeekLow'))
         # yfinance รุ่นใหม่ส่ง dividendYield มาเป็น "เปอร์เซ็นต์" อยู่แล้ว (เช่น 0.31 = 0.31%)
         # จึงไม่คูณ 100 อีก; ถ้ามี dividendRate กับราคา ให้คำนวณเองเพื่อความแม่นยำ
-        dividend_rate = info.get('dividendRate') or info.get('trailingAnnualDividendRate')
+        dividend_rate = safe_num(info.get('dividendRate')) or safe_num(info.get('trailingAnnualDividendRate'))
         if dividend_rate and price:
             dividend_yield = dividend_rate / price * 100
         else:
-            dividend_yield = info.get('dividendYield', 0) or 0
+            dividend_yield = safe_num(info.get('dividendYield'))
 
-        de = info.get('debtToEquity', 0)
-        gpm = info.get('grossMargins', 0)
-        npm = info.get('profitMargins', 0)
+        de = safe_num(info.get('debtToEquity'))
+        gpm = safe_num(info.get('grossMargins'))
+        npm = safe_num(info.get('profitMargins'))
 
         data_list.append({
             "ticker": ticker,
             "name": name,
-            "price": price if price else 0,
-            "marketCap": market_cap if market_cap else 0,
-            "pe": pe if pe else 0,
-            "pb": pb if pb else 0,
+            "price": price,
+            "marketCap": market_cap,
+            "pe": pe,
+            "forwardPE": forward_pe,
+            "pegRatio": peg,
+            "pb": pb,
             "roe": roe * 100 if roe else 0,
             "dividendYield": dividend_yield,
             "de": de / 100 if de else 0, # Yahoo ส่งมาเป็น % บางทีต้องหาร 100 หรือใช้ตามค่าจริง
             "gpm": gpm * 100 if gpm else 0,
             "npm": npm * 100 if npm else 0,
-            "currency": info.get('currency', 'USD')
+            "fiftyTwoWeekHigh": high_52w,
+            "fiftyTwoWeekLow": low_52w,
+            "currency": info.get('currency') or 'USD'
         })
         print(f"สำเร็จ: {ticker}")
     except Exception as e:

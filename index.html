@@ -41,6 +41,28 @@
         /* ลูกศรบอกทิศ sort วางในช่องไฟขวาของหัวคอลัมน์ ไม่กินความกว้างเพิ่ม */
         .sort-arrow { position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font-size: 9px; line-height: 1; }
 
+        /* ปัดตารางซ้าย-ขวาแล้วไม่ไปชนท่าทาง "ปัดกลับ" ของเบราว์เซอร์มือถือ */
+        #table-scroll { overscroll-behavior: contain; }
+
+        /* ===== มือถือ (จอกว้างน้อยกว่า 768px): แยกเป็น 2 หน้าจอ =====
+           หน้า "lists"  = รายการ Watchlist (sidebar เต็มจอ)
+           หน้า "table"  = ตารางหุ้นของ Watchlist ที่เลือก (ชื่อหุ้นเหลือแต่รหัสย่อ ปัดซ้าย-ขวาดูข้อมูล)
+           จอแท็บเล็ต/คอม (768px ขึ้นไป) ไม่ได้รับผลกระทบใดๆ */
+        @media (max-width: 767px) {
+            #app aside { width: 100% !important; border-right: 0; }
+            #app[data-view="table"] aside { display: none; }
+            #app[data-view="lists"] main  { display: none; }
+
+            #stock-table th.col-ticker, #stock-table td.col-ticker { width: 124px; min-width: 124px; max-width: 124px; }
+            .name-box { width: 100px; }
+            .name-box.stock-name { display: none; }   /* ซ่อนชื่อบริษัท เหลือแต่รหัสย่อ */
+
+            /* แถวหุ้นบรรทัดเดียว: เพิ่มช่องไฟบนล่างให้แตะง่าย (ขนาดฟอนต์เท่าเดิม) */
+            #stock-table tbody td { padding-top: 12px; padding-bottom: 12px; }
+            /* คอลัมน์ "จัดการ" (ปุ่มลบ) ซ่อนบนมือถือ — ไปลบได้จากเมนูที่แตะชื่อหุ้น */
+            #stock-table .col-manage { display: none; }
+        }
+
         /* ที่จับสำหรับลากเรียงลำดับ Watchlist (ปิดการเลื่อนหน้าจอเฉพาะตรงที่จับ เพื่อให้ลากด้วยนิ้วได้) */
         .wl-handle { touch-action: none; -webkit-user-select: none; user-select: none; }
         .wl-dragging { box-shadow: 0 0 0 2px #34d399, 0 8px 20px rgba(0,0,0,.5); opacity: .9; position: relative; z-index: 10; }
@@ -48,7 +70,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100">
 
-<div id="app">
+<div id="app" data-view="lists">
 
     <!-- Sidebar -->
     <aside class="w-72 h-full min-h-0 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0">
@@ -86,31 +108,46 @@
     <!-- พื้นที่หลัก -->
     <main class="flex-1 min-w-0 h-full flex flex-col">
 
-        <header class="bg-slate-900 border-b border-slate-800 px-4 py-2 flex flex-wrap justify-between items-center gap-x-4 gap-y-2 shrink-0">
-            <div class="flex items-center gap-3 min-w-0">
-                <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400 truncate">เลือก Watchlist</h2>
-                <button onclick="renameCurrentWatchlist()" class="shrink-0 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
-                <button onclick="deleteWatchlist(currentWL)" class="shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
+        <!-- แถบบน
+             แท็บเล็ต/คอม : [ชื่อ Watchlist + เปลี่ยนชื่อ + ลบ] ........ [equalizer][📖][ช่องค้นหา]
+             มือถือ       : แถว 1 [‹ กลับ][ชื่อ Watchlist][✎][equalizer][📖]
+                             แถว 2 [ช่องค้นหาเต็มความกว้าง] -->
+        <header class="bg-slate-900 border-b border-slate-800 px-3 md:px-4 py-2 flex flex-wrap items-center gap-x-2 gap-y-2 shrink-0">
+            <div class="flex items-center gap-2 md:gap-3 min-w-0 flex-1 md:flex-none">
+                <!-- ปุ่มกลับไปหน้ารายการ Watchlist (แสดงเฉพาะมือถือ) -->
+                <button onclick="showLists()" aria-label="กลับไปรายการ Watchlist" title="กลับไปรายการ Watchlist"
+                        class="md:hidden shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100 cursor-pointer flex items-center">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+                </button>
+                <h2 id="current-wl-title" class="text-xl font-semibold text-emerald-400 truncate min-w-0">เลือก Watchlist</h2>
+                <!-- เปลี่ยนชื่อ: มือถือเป็นไอคอนดินสอ / แท็บเล็ตเป็นปุ่มข้อความ -->
+                <button onclick="renameCurrentWatchlist()" aria-label="เปลี่ยนชื่อ Watchlist" title="เปลี่ยนชื่อ Watchlist"
+                        class="md:hidden shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-2.5 py-1.5 text-slate-200 cursor-pointer flex items-center">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>
+                </button>
+                <button onclick="renameCurrentWatchlist()" class="hidden md:inline-block shrink-0 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">เปลี่ยนชื่อ</button>
+                <button onclick="deleteWatchlist(currentWL)" class="hidden md:inline-block shrink-0 text-xs text-rose-400 hover:text-rose-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition">ลบ</button>
             </div>
 
-            <div class="flex items-center gap-2 w-full max-w-sm sm:max-w-none sm:w-auto">
-            <button onclick="openColumnsModal()" title="เลือกคอลัมน์ที่จะแสดง" aria-label="เลือกคอลัมน์ที่จะแสดง"
-                    class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 text-slate-100 cursor-pointer flex items-center">
-                <!-- ไอคอน equalizer (แถบเลื่อน 3 แท่ง) -->
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                    <path d="M5 3v18M12 3v18M19 3v18"/>
-                    <circle cx="5" cy="9" r="2.4" fill="currentColor"/>
-                    <circle cx="12" cy="15" r="2.4" fill="currentColor"/>
-                    <circle cx="19" cy="8" r="2.4" fill="currentColor"/>
-                </svg>
-            </button>
-            <button onclick="openHelp()" title="วิธีเพิ่มหุ้นใหม่ / คู่มือ" aria-label="วิธีเพิ่มหุ้นใหม่"
-                    class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 text-xl leading-none cursor-pointer">📖</button>
-            <div class="relative flex-1 min-w-0 sm:flex-none sm:w-80">
+            <div class="flex items-center gap-2 shrink-0 md:ml-auto">
+                <button onclick="openColumnsModal()" title="เลือกคอลัมน์ที่จะแสดง" aria-label="เลือกคอลัมน์ที่จะแสดง"
+                        class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 max-md:py-1.5 text-slate-100 cursor-pointer flex items-center">
+                    <!-- ไอคอน equalizer (แถบเลื่อน 3 แท่ง) -->
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M5 3v18M12 3v18M19 3v18"/>
+                        <circle cx="5" cy="9" r="2.4" fill="currentColor"/>
+                        <circle cx="12" cy="15" r="2.4" fill="currentColor"/>
+                        <circle cx="19" cy="8" r="2.4" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button onclick="openHelp()" title="วิธีเพิ่มหุ้นใหม่ / คู่มือ" aria-label="วิธีเพิ่มหุ้นใหม่"
+                        class="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded px-3 py-1 text-xl leading-none cursor-pointer">📖</button>
+            </div>
+
+            <div class="relative w-full md:w-80">
                 <input type="text" id="search-stock-input" placeholder="พิมพ์ชื่อหรือรหัสหุ้นเพื่อเพิ่ม..." oninput="searchUniverse()"
                        class="w-full bg-slate-800 text-sm px-3 py-1.5 rounded border border-slate-700 focus:outline-none focus:border-emerald-500">
                 <div id="search-results-dropdown" class="absolute left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
-            </div>
             </div>
         </header>
 
@@ -145,6 +182,9 @@
                class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-4 py-3.5 text-base font-medium text-slate-100 text-center">📈 ดูกราฟจาก TradingView</a>
             <a id="link-claude" target="_blank" rel="noopener noreferrer"
                class="block bg-emerald-700 hover:bg-emerald-600 border border-emerald-500 rounded-lg px-4 py-3.5 text-base font-medium text-white text-center">🤖 ถามข้อมูลหุ้นนี้กับ Claude</a>
+            <!-- ลบหุ้นออกจาก Watchlist (แสดงเฉพาะมือถือ เพราะคอลัมน์ "จัดการ" ถูกซ่อนไว้) -->
+            <button id="menu-remove" onclick="removeFromMenu()"
+                    class="md:hidden block w-full bg-rose-950/50 hover:bg-rose-900/60 border border-rose-800 rounded-lg px-4 py-3.5 text-base font-medium text-rose-300 text-center cursor-pointer">🗑️ ลบออกจาก Watchlist นี้</button>
         </div>
     </div>
 </div>
@@ -346,11 +386,13 @@
             const arrowHtml = c.align === 'left'
                 ? `<span class="ml-1 text-[10px] text-emerald-400">${arrow}</span>`
                 : `<span class="sort-arrow text-emerald-400">${arrow}</span>`;
+            // คอลัมน์ชื่อหุ้น: มือถือแสดงแค่ "TICKER" (ส่วน " / NAME" แสดงเฉพาะจอใหญ่)
+            const labelHtml = c.locked ? 'TICKER<span class="hidden md:inline"> / NAME</span>' : c.label;
             return `
                 <th class="px-3 py-2 text-${c.align}${tickerCls} cursor-pointer select-none transition ${color}"
-                    onclick="sortBy('${c.key}')" title="กดเพื่อเรียงตาม ${c.label}">${c.label}${arrowHtml}</th>`;
+                    onclick="sortBy('${c.key}')" title="กดเพื่อเรียงตาม ${c.label}">${labelHtml}${arrowHtml}</th>`;
         }).join('');
-        row.innerHTML = ths + `<th class="px-3 py-2 text-center text-slate-200">จัดการ</th>`;
+        row.innerHTML = ths + `<th class="col-manage px-3 py-2 text-center text-slate-200">จัดการ</th>`;
     }
 
     // กดครั้งแรก = ทิศทางที่มักใช้ (เช่น P/E น้อยไปมาก) กดซ้ำ = สลับทิศทาง
@@ -381,7 +423,7 @@
                     <span class="text-xs opacity-75 shrink-0">(${(watchlists[name] || []).length})</span>
                 </button>
                 <button class="wl-del px-3 py-2.5 text-base leading-none opacity-60 hover:opacity-100 cursor-pointer" title="ลบ Watchlist นี้">✕</button>`;
-            row.querySelector('.wl-name').onclick = () => { currentWL = name; refreshAll(); };
+            row.querySelector('.wl-name').onclick = () => { currentWL = name; refreshAll(); showTable(); };
             row.querySelector('.wl-del').onclick = (e) => { e.stopPropagation(); deleteWatchlist(name); };
             attachDrag(row.querySelector('.wl-handle'), row);
             nav.appendChild(row);
@@ -484,11 +526,14 @@
         if (!watchlists[name]) return;
         const count = watchlists[name].length;
         if (!confirm(`ต้องการลบ "${name}" ใช่หรือไม่?${count ? `\n(มีหุ้นอยู่ ${count} ตัว)` : ''}`)) return;
+        const wasCurrent = (name === currentWL);
         delete watchlists[name];
         if (Object.keys(watchlists).length === 0) watchlists = { "Watchlist 1": [] };
         if (!watchlists[currentWL]) currentWL = Object.keys(watchlists)[0];
         saveWatchlists();
         refreshAll();
+        // มือถือ: ลบ Watchlist ที่กำลังเปิดอยู่ → กลับไปหน้ารายการ
+        if (wasCurrent && mobileMQ.matches && document.getElementById('app').dataset.view === 'table') showLists();
     }
 
     // ---------- ค้นหา/เพิ่ม/ลบหุ้น ----------
@@ -552,9 +597,17 @@
             `4) ตอนนี้มูลค่าแพงหรือถูกเมื่อเทียบกับคู่แข่ง\nตอบเป็นภาษาไทย กระชับ อ่านง่าย`;
     }
 
+    let menuTicker = null;
+    function removeFromMenu() {
+        const t = menuTicker;
+        closeStockMenu();
+        if (t) removeStock(t);          // removeStock ถามยืนยันก่อนลบอยู่แล้ว
+    }
+
     function openStockMenu(ticker) {
         const s = globalData.stocks.find(x => x.ticker === ticker);
         if (!s) return;
+        menuTicker = s.ticker;
         document.getElementById('stock-menu-ticker').innerText = s.ticker;
         document.getElementById('stock-menu-name').innerText = s.name || '';
         document.getElementById('link-yahoo').href =
@@ -619,7 +672,7 @@
             if (c.locked) {
                 return `<td class="px-3 py-1.5 col-ticker cursor-pointer" onclick="openStockMenu('${esc(s.ticker)}')" title="แตะเพื่อดูงบ / กราฟ / ถาม Claude">
                             <div class="name-box font-bold text-emerald-400 leading-tight">${esc(s.ticker)}</div>
-                            <div class="name-box text-xs text-slate-400 leading-tight">${esc(s.name)}</div>
+                            <div class="name-box stock-name text-xs text-slate-400 leading-tight">${esc(s.name)}</div>
                         </td>`;
             }
             return `<td class="px-3 py-1.5 text-right font-mono">${c.fmt(s[c.key])}</td>`;
@@ -628,7 +681,7 @@
         tbody.innerHTML = rows.map(s => `
             <tr class="transition">
                 ${cols.map(c => cell(c, s)).join('')}
-                <td class="px-3 py-1.5 text-center">
+                <td class="col-manage px-3 py-1.5 text-center">
                     <button onclick="removeStock('${esc(s.ticker)}')" class="text-rose-400 hover:text-rose-300 text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 transition cursor-pointer">ลบ</button>
                 </td>
             </tr>
@@ -735,6 +788,25 @@
         reader.readAsText(file);
         event.target.value = '';   // ให้เลือกไฟล์เดิมซ้ำได้
     }
+
+    // ---------- มือถือ: สลับ 2 หน้าจอ (รายการ Watchlist ↔ ตารางหุ้น) ----------
+    // รองรับปุ่ม "ย้อนกลับ" ของมือถือ: เข้าตารางแล้วกดย้อนกลับ = กลับหน้ารายการ (ไม่หลุดออกจากแอป)
+    const mobileMQ = window.matchMedia('(max-width: 767px)');
+    function setView(v) { document.getElementById('app').dataset.view = v; }
+    function showTable() {
+        if (!mobileMQ.matches) return;               // แท็บเล็ต/คอม: แสดงสองฝั่งพร้อมกัน ไม่ต้องสลับ
+        setView('table');
+        try { history.pushState({ view: 'table' }, ''); } catch (e) {}
+    }
+    function showLists() {
+        if (history.state && history.state.view === 'table') history.back();   // ให้ popstate เป็นคนสลับหน้า
+        else setView('lists');
+    }
+    window.addEventListener('popstate', (e) => {
+        setView(e.state && e.state.view === 'table' ? 'table' : 'lists');
+    });
+    try { history.replaceState({ view: 'lists' }, ''); } catch (e) {}
+    setView('lists');                                // เปิดแอปครั้งแรกบนมือถือ = เริ่มที่หน้ารายการ Watchlist
 
     loadData();
 </script>

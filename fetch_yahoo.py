@@ -23,7 +23,7 @@ tickers = [
     # หุ้นไทยที่ใช้ใน My Watchlist (เพิ่มจากรายการที่เลือก)
     "AXTRART.BK", "CPAXT.BK", "DRT.BK", "DCC.BK", "IMPACT.BK", "KYE.BK", "STPI.BK", "TVO.BK", "LTMH.BK", "ADVICE.BK",
     "SYNEX.BK", "SIS.BK", "ASP.BK", "TFMAMA.BK", "JMART.BK", "VIH.BK", "BAFS.BK", "PSH.BK", "JUBILE.BK", "AIT.BK",
-    "PDG.BK",
+    "PDG.BK", "spvi.bk", "it.bk", "cpw.bk",
 
     # หุ้นสหรัฐฯ (US Tech & Blue Chips) - รายการเดิม
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "NFLX", "AMD", "INTC",

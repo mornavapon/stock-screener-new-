@@ -36,7 +36,7 @@ tickers = [
     "CSCO", "TGT", "WMT", "PLTR", "PG",
     "PEP", "COIN", "JNJ", "MMM",
     "UNH", "MCD", "AMGN", "FDX", "HD", "BRK-B", "CAT", "COST", "BLK", "BRK-A",
-    "UBI.PA", "U", "RBLX", "SE", "TTWO",
+    "UBI.PA", "U", "RBLX", "SE", "TTWO", "ANT",
     # กลุ่มอาวุธ / ป้องกันประเทศ
     "XAR", "PPA", "ITA", "RTX", "GD", "LHX", "LMT", "NOC",
     # กลุ่มอวกาศ

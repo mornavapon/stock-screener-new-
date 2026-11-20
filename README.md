@@ -7,6 +7,9 @@
 
 🔗 **เปิดแอป:** https://mornavapon.github.io/stock-screener-new-/
 
+ลิ้งค์ไปยังเอไอที่สร้าง
+https://claude.ai/chat/153dd613-bc57-4202-aae6-00ae0b475ba9
+
 ## แอปทำงานอย่างไร
 
 1. `fetch_yahoo.py` ดึงข้อมูลหุ้นทุกตัวใน universe จาก Yahoo Finance

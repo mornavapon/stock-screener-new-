@@ -1,0 +1,1595 @@
+{
+ "updated_at": "2026-11-21 04:26:02",
+ "stocks": {
+  "PTT.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AOT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "DELTA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GULF.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ADVANC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PTTEP.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BDMS.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CPALL.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "SCB.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BBL.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "KBANK.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "KTB.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TTB.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CPN.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CRC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "COM7.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "MINT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BEM.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BTS.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "LH.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "QH.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SPALI.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "AP.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "AMATA.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "WHA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "IVL.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SCC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SCGP.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TOP.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BCP.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PTTGC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "EA.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GPSC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BGRIM.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TRUE.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "INTUCH.BK": {
+   "pe_low": null,
+   "near_high": null,
+   "near_low": null,
+   "above_ema": null
+  },
+  "HMPRO.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GLOBAL.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BJC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "AAV.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AEONTS.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AURA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AWC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BA.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BAM.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "BANPU.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BCH.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BCPG.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BH.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BLA.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BTG.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CBG.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CCET.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "CENTEL.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CHG.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CK.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CPF.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "DOHOME.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "EGCO.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ERW.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "GFPT.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GUNKUL.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "HANA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ICHI.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "IRPC.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "JMT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "JTS.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "KCE.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "KKP.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "KTC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "M.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MEGA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "MOSHI.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MRDIYT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MTC.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "OR.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "OSP.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "PLANB.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "PR9.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "PRM.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PTG.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "RATCH.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "RCL.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "SAWAD.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SIRI.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SPRC.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "STA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "STECON.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "STGT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TASCO.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TCAP.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TFG.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "THAI.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "THCOM.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": null
+  },
+  "TIDLOR.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TISCO.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TLI.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TOA.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TU.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "VGI.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "WHAUP.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "AXTRART.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "CPAXT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "DRT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "DCC.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "IMPACT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "KYE.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "STPI.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TVO.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "LTMH.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ADVICE.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SYNEX.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SIS.BK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ASP.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TFMAMA.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "JMART.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "VIH.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BAFS.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PSH.BK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "JUBILE.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AIT.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "PDG.BK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "AAPL": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "MSFT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "GOOGL": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "AMZN": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "NVDA": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "META": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TSLA": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "NFLX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "AMD": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "INTC": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "QCOM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AVGO": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TXN": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MU": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AMAT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "LRCX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PYPL": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SHOP": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "ASML": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TSM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "JPM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BAC": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "WFC": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "C": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "V": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "MA": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "AXP": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "DIS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "KO": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ARM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GOOG": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "SPCX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": null
+  },
+  "LITE": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "COHR": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "HPE": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "T": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MRNA": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "OXY": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "VZ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "TMUS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "CSCO": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "TGT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "WMT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "PLTR": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PG": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "PEP": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "COIN": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "JNJ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "MMM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "UNH": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MCD": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "AMGN": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "FDX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "HD": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BRK-B": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CAT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "COST": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BLK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "BRK-A": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "UBI.PA": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "U": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "RBLX": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SE": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "TTWO": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "XAR": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "PPA": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "ITA": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "RTX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GD": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "LHX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "LMT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "NOC": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "RKLB": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "VSAT": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "PL": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SPCE": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "LUNR": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "ASTS": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "F": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MANU": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "NKE": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "UBER": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "MRVL": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "ORCL": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "SNOW": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "CRM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "GM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SBUX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "XOM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "CVX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "PM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "HIMS": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "IBM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "VRSN": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "ADBE": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "WDC": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "CRWD": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "STX": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "SNDK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "YUM": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "NDAQ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "HOOD": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "BULL": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "CME": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "RDDT": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "BNO": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "VCX": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": null
+  },
+  "TEM": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "MSTR": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "VFS": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "688981.SS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "2809.HK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "PDD": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "1211.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "688825.SS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": null
+  },
+  "600941.SS": {
+   "pe_low": false,
+   "near_high": true,
+   "near_low": false,
+   "above_ema": true
+  },
+  "9999.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "002352.SZ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "0694.HK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "BILI": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": true,
+   "above_ema": false
+  },
+  "0941.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "1177.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "600276.SS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "3988.HK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "601318.SS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "0700.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "9988.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "1810.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "300750.SZ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "2318.HK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "9888.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "0981.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "3750.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "3690.HK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "002027.SZ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "002594.SZ": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "600519.SS": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": true
+  },
+  "0388.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "1024.HK": {
+   "pe_low": true,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "2015.HK": {
+   "pe_low": null,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  },
+  "9618.HK": {
+   "pe_low": false,
+   "near_high": false,
+   "near_low": false,
+   "above_ema": false
+  }
+ }
+}

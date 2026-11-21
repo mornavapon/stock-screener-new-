@@ -8,8 +8,8 @@ check_alerts.py — แจ้งเตือนหุ้นผ่าน ntfy (�
   4) Golden Cross : ราคาเคยอยู่ใต้ EMA200 แล้วข้ามขึ้นไปอยู่เหนือ
   5) Dead Cross   : ราคาเคยอยู่เหนือ EMA200 แล้วหลุดลงมาอยู่ใต้ (หรือเท่ากับ)
 
-หลักการ: เตือน "ตอนที่เงื่อนไขเพิ่งเกิดขึ้น" เท่านั้น (เปลี่ยนจากไม่ใช่ -> ใช่)
-ไม่เตือนซ้ำทุกวันตราบใดที่ยังเข้าเงื่อนไขอยู่ โดยจำสถานะเมื่อวานไว้ใน alerts_state.json
+หลักการ: เตือน "ตอนที่เงื่อนไขเพิ่งเกิดขึ้น" (เปลี่ยนจากไม่ใช่ -> ใช่) โดยจำสถานะเมื่อวานไว้ใน alerts_state.json
+ยกเว้น 52W สูงสุด/ต่ำสุด ที่เตือนซ้ำทุกวันตราบใดที่ยังแตะอยู่ (ปรับที่ REPEAT_52W)
 
 ตัวแปรสภาพแวดล้อม:
   NTFY_TOPIC   (บังคับ)  ชื่อช่อง ntfy  — ตั้งใน GitHub Secret ชื่อ NTFY_TOPIC_SCREENER
@@ -26,6 +26,7 @@ import requests
 # ====== ตั้งค่า (แก้ตัวเลขตรงนี้ได้) ======
 PE_MAX = 10.0          # เตือนเมื่อ P/E ต่ำกว่าหรือเท่ากับค่านี้ (และมากกว่า 0)
 NEAR_PCT = 1.0         # "แตะ" จุดสูงสุด/ต่ำสุด 52W = ห่างไม่เกินกี่ % (ราคาปิดแทบไม่เท่ากับจุดสูงสุดระหว่างวันพอดี)
+REPEAT_52W = True      # True = แตะสูงสุด/ต่ำสุด 52W แล้วเตือนซ้ำทุกวันที่ยังแตะอยู่ (กรณีขึ้น/ลงแรงต่อเนื่อง) / False = เตือนเฉพาะวันแรก
 MAX_NOTIFS = 12        # ส่งแยกต่อหุ้นไม่เกินกี่ฉบับต่อรอบ ที่เหลือรวมเป็นฉบับสรุป
 APP_URL = "https://mornavapon.github.io/stock-screener-new-/"
 NTFY_URL = "https://ntfy.sh/"
@@ -183,6 +184,8 @@ def main():
         for k in ("pe_low", "near_high", "near_low"):
             if cur[k] is True and prev.get(k) is False:        # เพิ่งเปลี่ยนจาก "ไม่ใช่" เป็น "ใช่"
                 ev.append(k)
+            elif REPEAT_52W and k in ("near_high", "near_low") and cur[k] is True and prev.get(k) is True:
+                ev.append(k)                                    # ยังแตะอยู่ต่อเนื่อง -> เตือนซ้ำ
         if cur["above_ema"] is True and prev.get("above_ema") is False:
             ev.append("golden")
         if cur["above_ema"] is False and prev.get("above_ema") is True:

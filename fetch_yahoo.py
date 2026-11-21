@@ -23,7 +23,7 @@ tickers = [
     # หุ้นไทยที่ใช้ใน My Watchlist (เพิ่มจากรายการที่เลือก)
     "AXTRART.BK", "CPAXT.BK", "DRT.BK", "DCC.BK", "IMPACT.BK", "KYE.BK", "STPI.BK", "TVO.BK", "LTMH.BK", "ADVICE.BK",
     "SYNEX.BK", "SIS.BK", "ASP.BK", "TFMAMA.BK", "JMART.BK", "VIH.BK", "BAFS.BK", "PSH.BK", "JUBILE.BK", "AIT.BK",
-    "PDG.BK", "spvi.bk", "it.bk", "cpw.bk",
+    "PDG.BK",
 
     # หุ้นสหรัฐฯ (US Tech & Blue Chips) - รายการเดิม
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "NFLX", "AMD", "INTC",
@@ -36,7 +36,7 @@ tickers = [
     "CSCO", "TGT", "WMT", "PLTR", "PG",
     "PEP", "COIN", "JNJ", "MMM",
     "UNH", "MCD", "AMGN", "FDX", "HD", "BRK-B", "CAT", "COST", "BLK", "BRK-A",
-    "UBI.PA", "U", "RBLX", "SE", "TTWO", "ANT",
+    "UBI.PA", "U", "RBLX", "SE", "TTWO",
     # กลุ่มอาวุธ / ป้องกันประเทศ
     "XAR", "PPA", "ITA", "RTX", "GD", "LHX", "LMT", "NOC",
     # กลุ่มอวกาศ
@@ -80,6 +80,21 @@ def safe_num(v):
     return x
 
 
+def calc_ema200(stock):
+    """คำนวณ EMA 200 วัน จากราคาปิดรายวัน (ย้อนหลัง 2 ปี)
+    ถ้าข้อมูลน้อยกว่า 200 แท่ง (หุ้นเพิ่งเข้าตลาด) หรือดึงไม่สำเร็จ จะคืน 0 (แอปแสดงเป็น "-")
+    ใช้ราคาปิดที่ปรับ split แล้ว แต่ไม่ปรับปันผล (เหมือนที่โปรแกรมกราฟทั่วไปใช้)"""
+    try:
+        hist = stock.history(period="2y", interval="1d", auto_adjust=False)
+        close = hist["Close"].dropna()
+        if len(close) < 200:
+            return 0
+        return round(safe_num(close.ewm(span=200, adjust=False).mean().iloc[-1]), 4)
+    except Exception as e:
+        print(f"  คำนวณ EMA200 ไม่สำเร็จ {stock.ticker}: {e}")
+        return 0
+
+
 data_list = []
 
 for ticker in tickers:
@@ -110,6 +125,8 @@ for ticker in tickers:
         gpm = safe_num(info.get('grossMargins'))
         npm = safe_num(info.get('profitMargins'))
 
+        ema200 = calc_ema200(stock)
+
         data_list.append({
             "ticker": ticker,
             "name": name,
@@ -126,6 +143,7 @@ for ticker in tickers:
             "npm": npm * 100 if npm else 0,
             "fiftyTwoWeekHigh": high_52w,
             "fiftyTwoWeekLow": low_52w,
+            "ema200": ema200,
             "currency": info.get('currency') or 'USD'
         })
         print(f"สำเร็จ: {ticker}")

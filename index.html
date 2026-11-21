@@ -197,6 +197,7 @@
             <h3 class="text-xl font-bold text-emerald-400">เลือกคอลัมน์ที่จะแสดง</h3>
             <button onclick="closeColumnsModal()" class="text-slate-400 hover:text-white text-2xl leading-none px-2 py-1 cursor-pointer" title="ปิด">✕</button>
         </div>
+        <div class="mx-5 mt-3 text-sm text-slate-300">ติ๊กเพื่อแสดง/ซ่อน · กด ▲ ▼ เพื่อเลื่อนลำดับ (บนสุด = ซ้ายสุดในตาราง)</div>
         <div id="columns-hint" class="hidden mx-5 mt-3 text-sm text-amber-300 bg-amber-900/30 border border-amber-700/50 rounded px-3 py-2"></div>
         <div id="columns-list" class="flex-1 min-h-0 overflow-y-auto px-3 py-2"></div>
         <div class="flex gap-2 px-5 py-3 border-t border-slate-700 shrink-0">
@@ -295,11 +296,28 @@
         if (v >= 1e6)  return (v / 1e6).toFixed(2) + 'M';
         return v.toLocaleString();
     }
+    // % ห่างจากค่าอ้างอิง = (ราคา - ค่าอ้างอิง) / ค่าอ้างอิง x 100  (ไม่มีข้อมูล = null)
+    const distPct = (p, ref) => (p > 0 && ref > 0) ? (p - ref) / ref * 100 : null;
+    const fmtDist = d => (d >= 0 ? '+' : '\u2212') + Math.abs(d).toFixed(1) + '%';
+    const px2 = v => v.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    // ช่องที่แสดง "ราคาอ้างอิง + % ห่าง" (เช่น 245.3  -3.2%)
+    function refCell(val, d, colorCls) {
+        if (!val) return '-';
+        const tag = d === null ? '' : `<span class="ml-2 ${colorCls}">${fmtDist(d)}</span>`;
+        return px2(val) + tag;
+    }
     const COLUMNS = [
         { key: 'ticker',          label: 'TICKER / NAME', desc: 'รหัสและชื่อหุ้น (ตรึงไว้เสมอ)',          align: 'left',  best: 'asc',  locked: true },
         { key: 'price',           label: 'PRICE',         desc: 'ราคาล่าสุด',                              align: 'right', best: 'desc', on: true,  fmt: px },
-        { key: 'fiftyTwoWeekLow', label: '52W LOW',       desc: 'ราคาต่ำสุดใน 52 สัปดาห์',                 align: 'right', best: 'asc',  on: false, fmt: px,  isNew: true },
-        { key: 'fiftyTwoWeekHigh',label: '52W HIGH',      desc: 'ราคาสูงสุดใน 52 สัปดาห์',                 align: 'right', best: 'desc', on: false, fmt: px,  isNew: true },
+        { key: 'fiftyTwoWeekLow', label: '52W LOW',       desc: 'ราคาต่ำสุด 52 สัปดาห์ + % ที่ราคาปัจจุบันสูงกว่า (กดครั้งแรก = ใกล้จุดต่ำสุดก่อน)', align: 'right', best: 'desc', on: false, isNew: true,
+          sortVal: s => { const d = distPct(s.price, s.fiftyTwoWeekLow); return d === null ? null : -d; },
+          render: s => refCell(s.fiftyTwoWeekLow, distPct(s.price, s.fiftyTwoWeekLow), 'text-slate-300') },
+        { key: 'fiftyTwoWeekHigh',label: '52W HIGH',      desc: 'ราคาสูงสุด 52 สัปดาห์ + % ที่ราคาปัจจุบันต่ำกว่า (กดครั้งแรก = ใกล้จุดสูงสุดก่อน)', align: 'right', best: 'desc', on: false, isNew: true,
+          sortVal: s => distPct(s.price, s.fiftyTwoWeekHigh),
+          render: s => refCell(s.fiftyTwoWeekHigh, distPct(s.price, s.fiftyTwoWeekHigh), 'text-slate-300') },
+        { key: 'ema200',          label: 'EMA200',        desc: 'เส้นค่าเฉลี่ยเคลื่อนที่ 200 วัน + % ที่ราคาอยู่เหนือ(+)/ใต้(−) เส้น (กดครั้งแรก = อยู่เหนือเส้นมากสุดก่อน)', align: 'right', best: 'desc', on: false, isNew: true,
+          sortVal: s => distPct(s.price, s.ema200),
+          render: s => { const d = distPct(s.price, s.ema200); return refCell(s.ema200, d, d !== null && d < 0 ? 'text-rose-400' : 'text-emerald-400'); } },
         { key: 'marketCap',       label: 'MKT CAP',       desc: 'มูลค่าตลาด (Market Cap)',                 align: 'right', best: 'desc', on: true,  fmt: formatMarketCap },
         { key: 'pe',              label: 'P/E',           desc: 'P/E ย้อนหลัง (Trailing)',                 align: 'right', best: 'asc',  on: true,  fmt: num },
         { key: 'forwardPE',       label: 'FWD P/E',       desc: 'P/E คาดการณ์ล่วงหน้า (Forward)',          align: 'right', best: 'asc',  on: false, fmt: num, isNew: true },
@@ -324,11 +342,29 @@
     }
     let visibleKeys = loadColumnPrefs();
 
+    // ---------- ลำดับคอลัมน์ที่ผู้ใช้จัดเอง (จำไว้ในเครื่อง; คอลัมน์ชื่อหุ้นอยู่ซ้ายสุดเสมอ) ----------
+    function loadColumnOrder() {
+        const movable = COLUMNS.filter(c => !c.locked).map(c => c.key);
+        let saved = [];
+        try {
+            const s = JSON.parse(localStorage.getItem('tablet_column_order'));
+            if (Array.isArray(s)) saved = s.filter((k, i) => movable.includes(k) && s.indexOf(k) === i);
+        } catch (e) {}
+        // คอลัมน์ใหม่ที่ยังไม่เคยจัดลำดับ จะต่อท้ายตามลำดับมาตรฐาน
+        return saved.concat(movable.filter(k => !saved.includes(k)));
+    }
+    let columnOrder = loadColumnOrder();
+    function saveColumnOrder() {
+        try { localStorage.setItem('tablet_column_order', JSON.stringify(columnOrder)); } catch (e) {}
+    }
+
     function saveColumnPrefs() {
         try { localStorage.setItem('tablet_columns', JSON.stringify([...visibleKeys])); } catch (e) {}
     }
     function visibleColumns() {
-        return COLUMNS.filter(c => c.locked || visibleKeys.has(c.key));
+        const ticker = COLUMNS.find(c => c.locked);
+        const rest = columnOrder.map(k => COLUMNS.find(c => c.key === k)).filter(c => c && visibleKeys.has(c.key));
+        return [ticker, ...rest];
     }
 
     let globalData = { updated_at: "", stocks: [] };
@@ -640,6 +676,14 @@
         m.classList.remove('flex');
     }
 
+    // ค่าที่ใช้เรียง: คอลัมน์พิเศษ (52W/EMA200) ใช้ % ห่าง ส่วนคอลัมน์อื่นใช้ค่าตรงๆ (0 = ไม่มีข้อมูล)
+    function sortValue(key, s) {
+        const c = COLUMNS.find(x => x.key === key);
+        if (c && c.sortVal) { const v = c.sortVal(s); return (v === null || v === undefined || Number.isNaN(v)) ? null : v; }
+        const v = s[key];
+        return v ? v : null;
+    }
+
     // ---------- แสดงผลตาราง ----------
     function renderTable() {
         renderHead();
@@ -652,8 +696,8 @@
             const dir = order === 'asc' ? 1 : -1;
             rows.sort((a, b) => {
                 if (key === 'ticker') return dir * a.ticker.localeCompare(b.ticker);
-                const va = a[key], vb = b[key];
-                const missA = !va, missB = !vb;           // ค่า 0/ไม่มีข้อมูล ให้ไปอยู่ท้ายเสมอ
+                const va = sortValue(key, a), vb = sortValue(key, b);
+                const missA = va === null, missB = vb === null;   // ไม่มีข้อมูล ให้ไปอยู่ท้ายเสมอ
                 if (missA && missB) return 0;
                 if (missA) return 1;
                 if (missB) return -1;
@@ -675,7 +719,8 @@
                             <div class="name-box stock-name text-xs text-slate-400 leading-tight">${esc(s.name)}</div>
                         </td>`;
             }
-            return `<td class="px-3 py-1.5 text-right font-mono">${c.fmt(s[c.key])}</td>`;
+            const inner = c.render ? c.render(s) : c.fmt(s[c.key]);
+            return `<td class="px-3 py-1.5 text-right font-mono">${inner}</td>`;
         };
 
         tbody.innerHTML = rows.map(s => `
@@ -689,26 +734,42 @@
     }
 
     // ---------- หน้าต่างเลือกคอลัมน์ ----------
+    let lastMovedKey = null;
     function renderColumnsList() {
         const list = document.getElementById('columns-list');
-        list.innerHTML = COLUMNS.map(c => {
+        const keepScroll = list.scrollTop;
+        const ticker = COLUMNS.find(c => c.locked);
+        const items = [ticker, ...columnOrder.map(k => COLUMNS.find(c => c.key === k)).filter(Boolean)];
+        const arrowBtn = (key, dir, label, disabled) => `
+            <button onclick="moveColumn('${key}', ${dir})" ${disabled ? 'disabled' : ''} aria-label="${label}"
+                    class="w-11 h-11 shrink-0 flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-lg
+                           ${disabled ? 'opacity-25' : 'hover:bg-slate-700 cursor-pointer'}">${dir < 0 ? '▲' : '▼'}</button>`;
+        list.innerHTML = items.map((c, i) => {
             const checked = c.locked || visibleKeys.has(c.key);
             const badge = c.isNew ? `<span class="ml-2 text-[11px] font-bold text-emerald-300 bg-emerald-900/50 border border-emerald-700 rounded px-1.5 py-0.5 align-middle">ใหม่</span>` : '';
+            const moved = c.key === lastMovedKey ? 'bg-emerald-900/30 ring-1 ring-emerald-600' : '';
+            const arrows = c.locked
+                ? `<span class="w-[92px] shrink-0 text-xs text-slate-500 text-center">ซ้ายสุดเสมอ</span>`
+                : arrowBtn(c.key, -1, 'เลื่อนขึ้น', i <= 1) + arrowBtn(c.key, 1, 'เลื่อนลง', i === items.length - 1);
             return `
-                <label class="flex items-center gap-3 px-3 py-2.5 rounded-lg ${c.locked ? 'opacity-60' : 'hover:bg-slate-800 cursor-pointer'}">
-                    <input type="checkbox" ${checked ? 'checked' : ''} ${c.locked ? 'disabled' : ''}
-                           onchange="toggleColumn('${c.key}', this.checked)"
-                           class="w-6 h-6 shrink-0 accent-emerald-500">
-                    <span class="min-w-0">
-                        <span class="block text-base font-medium text-slate-100">${c.label}${badge}</span>
-                        <span class="block text-sm text-slate-400">${c.desc}</span>
-                    </span>
-                </label>`;
+                <div data-col="${c.key}" class="flex items-center gap-2 rounded-lg ${moved}">
+                    <label class="flex-1 min-w-0 flex items-center gap-3 px-3 py-2.5 rounded-lg ${c.locked ? 'opacity-60' : 'hover:bg-slate-800 cursor-pointer'}">
+                        <input type="checkbox" ${checked ? 'checked' : ''} ${c.locked ? 'disabled' : ''}
+                               onchange="toggleColumn('${c.key}', this.checked)"
+                               class="w-6 h-6 shrink-0 accent-emerald-500">
+                        <span class="min-w-0">
+                            <span class="block text-base font-medium text-slate-100">${c.label}${badge}</span>
+                            <span class="block text-sm text-slate-400">${c.desc}</span>
+                        </span>
+                    </label>
+                    ${arrows}
+                </div>`;
         }).join('');
+        list.scrollTop = keepScroll;
 
         // ถ้าไฟล์ข้อมูลยังไม่มีค่าใหม่ (ยังไม่ได้รัน Action หลังอัปเดต fetch_yahoo.py) ให้บอกผู้ใช้
         const hint = document.getElementById('columns-hint');
-        const hasNew = globalData.stocks.some(s => s.forwardPE !== undefined || s.fiftyTwoWeekHigh !== undefined);
+        const hasNew = globalData.stocks.some(s => s.ema200 !== undefined);
         if (!hasNew && globalData.stocks.length) {
             hint.innerText = 'คอลัมน์ที่ติดป้าย "ใหม่" จะมีข้อมูลหลังจากรัน Action "Update Stock Data" ด้วย fetch_yahoo.py เวอร์ชันล่าสุดหนึ่งครั้ง';
             hint.classList.remove('hidden');
@@ -729,7 +790,22 @@
         if (on) visibleKeys.add(key); else visibleKeys.delete(key);
         applyColumns();
     }
+    // เลื่อนคอลัมน์ขึ้น/ลง (dir = -1 ขึ้น, +1 ลง) แล้วจำลำดับไว้
+    function moveColumn(key, dir) {
+        const i = columnOrder.indexOf(key), j = i + dir;
+        if (i < 0 || j < 0 || j >= columnOrder.length) return;
+        [columnOrder[i], columnOrder[j]] = [columnOrder[j], columnOrder[i]];
+        lastMovedKey = key;
+        saveColumnOrder();
+        renderColumnsList();
+        const row = document.querySelector(`#columns-list [data-col="${key}"]`);
+        if (row) row.scrollIntoView({ block: 'nearest' });
+        renderTable();
+    }
     function resetColumns() {
+        columnOrder = COLUMNS.filter(c => !c.locked).map(c => c.key);
+        saveColumnOrder();
+        lastMovedKey = null;
         visibleKeys = new Set(COLUMNS.filter(c => c.on).map(c => c.key));
         renderColumnsList();
         applyColumns();
@@ -740,6 +816,7 @@
         applyColumns();
     }
     function openColumnsModal() {
+        lastMovedKey = null;
         renderColumnsList();
         const m = document.getElementById('columns-modal');
         m.classList.remove('hidden');

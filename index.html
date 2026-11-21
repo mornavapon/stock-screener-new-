@@ -265,6 +265,40 @@
             </section>
 
             <section>
+                <h4 class="text-lg font-bold text-white mb-2">🔄 การใช้งานร่วมกันหลายอุปกรณ์</h4>
+                <div class="grid gap-3 sm:grid-cols-2">
+                    <div class="bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-3">
+                        <div class="font-bold text-emerald-300 mb-1">ใช้ร่วมกันทุกเครื่อง</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>ตัวเลขหุ้น (ราคา, P/E, EMA200 ฯลฯ)</li>
+                            <li>รายชื่อหุ้นใน fetch_yahoo.py</li>
+                            <li>การแจ้งเตือน ntfy (Subscribe ช่องเดียวกัน)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-3">
+                        <div class="font-bold text-amber-300 mb-1">แยกกันในแต่ละเครื่อง</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Watchlist และหุ้นในแต่ละ Watchlist</li>
+                            <li>คอลัมน์ที่เลือกแสดง และลำดับคอลัมน์</li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="list-disc pl-6 space-y-1 mt-3">
+                    <li>เปิดแอปบนเครื่อง A กับ B ตัวเลขหุ้นจะเหมือนกัน แต่หน้าตาอาจต่างกัน เพราะแต่ละเครื่องมี Watchlist และคอลัมน์ของตัวเอง</li>
+                    <li><b>fetch_yahoo.py</b> คือ "คลังหุ้น" ใช้เก็บรายชื่อและดึงข้อมูลเท่านั้น หุ้นในไฟล์นี้ไม่ได้ขึ้นในตารางเอง ต้องเพิ่มเข้า Watchlist บนแต่ละเครื่อง</li>
+                    <li>เพิ่มเข้า Watchlist ได้เฉพาะหุ้นที่อยู่ในคลังนี้ จึงควรใส่รายชื่อสำรองไว้ล่วงหน้าพอสมควร (แต่ยิ่งมีหุ้นมาก Action จะดึงข้อมูลนานขึ้น)</li>
+                    <li>แก้ไข fetch_yahoo.py ส่งผลกับทุกเครื่อง ส่วนการเพิ่มหุ้นหรือสร้าง Watchlist ใหม่ในเครื่องหนึ่ง <b>ไม่ส่งผล</b> กับเครื่องอื่น</li>
+                </ul>
+                <p class="mt-3 font-medium text-white">อยากให้อีกเครื่องมี Watchlist เหมือนกัน</p>
+                <ol class="list-decimal pl-6 space-y-1">
+                    <li>เครื่องต้นทาง: กด <b>Export JSON</b> จะได้ไฟล์ my_tablet_watchlists.json</li>
+                    <li>ส่งไฟล์ไปอีกเครื่อง (เช่น LINE, อีเมล, Google Drive)</li>
+                    <li>เครื่องปลายทาง: กด <b>Import JSON</b> แล้วเลือกไฟล์</li>
+                </ol>
+                <p class="mt-2 text-slate-400 text-sm">Import จะ <b>แทนที่</b> Watchlist ทั้งหมดในเครื่องปลายทาง และไม่พาคอลัมน์ที่เลือกไปด้วย ควร Export สำรองไว้เป็นระยะ เพราะถ้าล้างข้อมูลเบราว์เซอร์ Watchlist ในเครื่องนั้นจะหาย</p>
+            </section>
+
+            <section>
                 <h4 class="text-lg font-bold text-white mb-2">ลิงก์ GitHub</h4>
                 <div class="grid gap-2 sm:grid-cols-3">
                     <a href="https://github.com/mornavapon/stock-screener-new-/edit/main/fetch_yahoo.py" target="_blank" rel="noopener noreferrer"

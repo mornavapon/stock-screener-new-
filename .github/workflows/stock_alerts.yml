@@ -1,0 +1,55 @@
+name: Stock Alerts
+
+# รันอัตโนมัติทุกครั้งที่ "Update Stock Data" ทำงานสำเร็จ (ข้อมูลสดใหม่แน่นอน)
+# หรือกดรันเองได้ที่แท็บ Actions (ติ๊ก test = ส่งข้อความทดสอบ ไม่เปลี่ยนสถานะ)
+on:
+  workflow_run:
+    workflows: ["Update Stock Data"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "ส่งข้อความทดสอบ (ไม่บันทึกสถานะ)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stock-alerts
+  cancel-in-progress: false
+
+jobs:
+  alerts:
+    # ถ้ามาจาก workflow_run ต้องรันเฉพาะตอนที่ Update Stock Data สำเร็จ
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check conditions and send ntfy
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC_SCREENER }}
+          ALERT_TEST: ${{ github.event.inputs.test }}
+        run: python check_alerts.py
+
+      - name: Save alert state
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add alerts_state.json
+          git commit -m "Update alert state [skip ci]" || exit 0
+          git pull --rebase
+          git push

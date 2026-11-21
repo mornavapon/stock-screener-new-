@@ -1,1595 +1,1860 @@
 {
- "updated_at": "2026-11-21 04:26:02",
+ "updated_at": "2026-11-21 06:53:58",
  "stocks": {
   "PTT.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 37.4
   },
   "AOT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 60.5
   },
   "DELTA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 173.5
   },
   "GULF.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 61.25
   },
   "ADVANC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 336.0
   },
   "PTTEP.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 144.0
   },
   "BDMS.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 20.65
   },
   "CPALL.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 49.4
   },
   "SCB.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 152.5
   },
   "BBL.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 181.0
   },
   "KBANK.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 249.0
   },
   "KTB.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 41.9
   },
   "TTB.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 2.66
   },
   "CPN.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 64.25
   },
   "CRC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 32.9
   },
   "COM7.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 30.5
   },
   "MINT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 21.9
   },
   "BEM.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 6.6
   },
   "BTS.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1.69
   },
   "LH.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 3.52
   },
   "QH.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1.33
   },
   "SPALI.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 14.7
   },
   "AP.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 8.1
   },
   "AMATA.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 27.9
   },
   "WHA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 4.76
   },
   "IVL.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 20.85
   },
   "SCC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 232.0
   },
   "SCGP.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 25.2
   },
   "TOP.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 56.0
   },
   "BCP.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 42.2
   },
   "PTTGC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 37.7
   },
   "EA.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 2.46
   },
   "GPSC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 51.5
   },
   "BGRIM.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 22.0
   },
   "TRUE.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 12.65
   },
   "INTUCH.BK": {
    "pe_low": null,
    "near_high": null,
    "near_low": null,
-   "above_ema": null
+   "above_ema": null,
+   "price": null
   },
   "HMPRO.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.2
   },
   "GLOBAL.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.86
   },
   "BJC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 19.9
   },
   "AAV.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 0.69
   },
   "AEONTS.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 88.5
   },
   "AURA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 12.75
   },
   "AWC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 3.0
   },
   "BA.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 18.8
   },
   "BAM.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.18
   },
   "BANPU.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 13.35
   },
   "BCH.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 11.2
   },
   "BCPG.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.46
   },
   "BH.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 178.0
   },
   "BLA.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 21.05
   },
   "BTG.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 20.7
   },
   "CBG.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 54.75
   },
   "CCET.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.1
   },
   "CENTEL.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 43.8
   },
   "CHG.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 1.7
   },
   "CK.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 17.95
   },
   "CPF.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 19.4
   },
   "DOHOME.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 3.28
   },
   "EGCO.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 133.0
   },
   "ERW.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 3.56
   },
   "GFPT.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 9.46
   },
   "GUNKUL.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 4.66
   },
   "HANA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 43.6
   },
   "ICHI.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 14.7
   },
   "IRPC.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 2.16
   },
   "JMT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 9.36
   },
   "JTS.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 11.9
   },
   "KCE.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 50.5
   },
   "KKP.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 113.5
   },
   "KTC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 34.5
   },
   "M.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 19.7
   },
   "MEGA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 35.3
   },
   "MOSHI.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 34.6
   },
   "MRDIYT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 8.6
   },
   "MTC.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 29.4
   },
   "OR.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 12.3
   },
   "OSP.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 19.2
   },
   "PLANB.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 7.26
   },
   "PR9.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 18.75
   },
   "PRM.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 8.54
   },
   "PTG.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.94
   },
   "RATCH.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 36.2
   },
   "RCL.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 37.4
   },
   "SAWAD.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 21.7
   },
   "SIRI.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1.4
   },
   "SPRC.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 12.35
   },
   "STA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 17.55
   },
   "STECON.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 17.5
   },
   "STGT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 8.88
   },
   "TASCO.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 16.3
   },
   "TCAP.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 76.75
   },
   "TFG.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 9.02
   },
   "THAI.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 4.88
   },
   "THCOM.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": null
+   "above_ema": null,
+   "price": 9.95
   },
   "TIDLOR.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 16.9
   },
   "TISCO.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 126.0
   },
   "TLI.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 10.55
   },
   "TOA.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 15.0
   },
   "TU.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 12.85
   },
   "VGI.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 0.87
   },
   "WHAUP.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 7.2
   },
   "AXTRART.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 11.9
   },
   "CPAXT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 15.1
   },
   "DRT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 5.28
   },
   "DCC.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1.25
   },
   "IMPACT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 13.2
   },
   "KYE.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 276.0
   },
   "STPI.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 4.58
   },
   "TVO.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 27.6
   },
   "LTMH.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 12.0
   },
   "ADVICE.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 6.46
   },
   "SYNEX.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 8.8
   },
   "SIS.BK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 23.25
   },
   "ASP.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 2.28
   },
   "TFMAMA.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 180.0
   },
   "JMART.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 9.36
   },
   "VIH.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 8.58
   },
   "BAFS.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 8.98
   },
   "PSH.BK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 3.58
   },
   "JUBILE.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 7.4
   },
   "AIT.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 4.68
   },
   "PDG.BK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 3.36
   },
   "AAPL": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 342.56
   },
   "MSFT": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 484.52
   },
   "GOOGL": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 265.29
   },
   "AMZN": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 246.82
   },
   "NVDA": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 125.53
   },
   "META": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 560.84
   },
   "TSLA": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 345.82
   },
   "NFLX": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 56.73
   },
   "AMD": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 424.39
   },
   "INTC": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 51.28
   },
   "QCOM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 149.94
   },
   "AVGO": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 304.41
   },
   "TXN": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 263.75
   },
   "MU": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 594.51
   },
   "AMAT": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 302.63
   },
   "LRCX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 183.27
   },
   "PYPL": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 53.29
   },
   "SHOP": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 123.72
   },
   "ASML": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1266.22
   },
   "TSM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 318.71
   },
   "JPM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 310.53
   },
   "BAC": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 47.04
   },
   "WFC": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 78.62
   },
   "C": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 110.62
   },
   "GS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 790.69
   },
   "MS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 165.67
   },
   "V": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 401.87
   },
   "MA": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 625.59
   },
   "AXP": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 301.7
   },
   "DIS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 117.98
   },
   "KO": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 96.99
   },
   "ARM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 152.2
   },
   "GOOG": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 264.0
   },
   "SPCX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": null
+   "above_ema": null,
+   "price": 127.79
   },
   "LITE": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 460.54
   },
   "COHR": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 187.22
   },
   "HPE": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 40.91
   },
   "T": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 22.31
   },
   "MRNA": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 195.0
   },
   "OXY": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 53.9
   },
   "VZ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 46.48
   },
   "TMUS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 165.6
   },
   "CSCO": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 90.64
   },
   "TGT": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 165.83
   },
   "WMT": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 127.95
   },
   "PLTR": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 143.49
   },
   "PG": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 169.37
   },
   "PEP": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 140.54
   },
   "COIN": {
    "pe_low": null,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 101.97
   },
   "JNJ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 270.47
   },
   "MMM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 177.99
   },
   "UNH": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 339.85
   },
   "MCD": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 273.24
   },
   "AMGN": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 435.64
   },
   "FDX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 303.99
   },
   "HD": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 339.04
   },
   "BRK-B": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 570.0
   },
   "CAT": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 510.45
   },
   "COST": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 1102.15
   },
   "BLK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 1101.72
   },
   "BRK-A": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 855000.0
   },
   "UBI.PA": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 3.2
   },
   "U": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 44.75
   },
   "RBLX": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 46.72
   },
   "SE": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 62.63
   },
   "TTWO": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 210.0
   },
   "XAR": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 205.58
   },
   "PPA": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 146.33
   },
   "ITA": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 66.17
   },
   "RTX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 190.17
   },
   "GD": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 341.5
   },
   "LHX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 249.89
   },
   "LMT": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 565.5
   },
   "NOC": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 534.31
   },
   "RKLB": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 45.42
   },
   "VSAT": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 56.26
   },
   "PL": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 10.53
   },
   "SPCE": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1.04
   },
   "LUNR": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 8.775
   },
   "ASTS": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 23.27
   },
   "F": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 11.17
   },
   "MANU": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 19.69
   },
   "NKE": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 32.92
   },
   "UBER": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 63.47
   },
   "MRVL": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 122.28
   },
   "ORCL": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 101.19
   },
   "SNOW": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 254.82
   },
   "CRM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 180.62
   },
   "GM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 78.71
   },
   "SBUX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 103.13
   },
   "XOM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 159.99
   },
   "CVX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 208.37
   },
   "PM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 184.09
   },
   "HIMS": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 14.6
   },
   "IBM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 224.44
   },
   "VRSN": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 306.87
   },
   "ADBE": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 217.71
   },
   "WDC": {
-   "pe_low": true,
+   "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 261.11
   },
   "CRWD": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 229.44
   },
   "STX": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 457.01
   },
   "SNDK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 79.24
   },
   "YUM": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 160.7
   },
   "NDAQ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 102.92
   },
   "HOOD": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 62.17
   },
   "BULL": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 4.15
   },
   "CME": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 307.56
   },
   "RDDT": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 85.33
   },
   "BNO": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 59.02
   },
   "VCX": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": null
+   "above_ema": null,
+   "price": 14.01
   },
   "TEM": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 54.04
   },
   "MSTR": {
    "pe_low": null,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 77.8
   },
   "VFS": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 2.55
   },
   "688981.SS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 125.46
   },
   "2809.HK": {
    "pe_low": null,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 85.3
   },
   "PDD": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 83.68
   },
   "1211.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 62.35
   },
   "688825.SS": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": null
+   "above_ema": null,
+   "price": 35.16
   },
   "600941.SS": {
    "pe_low": false,
    "near_high": true,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 108.71
   },
   "9999.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 154.0
   },
   "002352.SZ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 33.57
   },
   "0694.HK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 1.54
   },
   "BILI": {
    "pe_low": false,
    "near_high": false,
    "near_low": true,
-   "above_ema": false
+   "above_ema": false,
+   "price": 10.6
   },
   "0941.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 80.05
   },
   "1177.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 5.105
   },
   "600276.SS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 47.0
   },
   "3988.HK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 6.145
   },
   "601318.SS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 55.46
   },
   "0700.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 344.0
   },
   "9988.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 83.35
   },
   "1810.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 27.64
   },
   "300750.SZ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 227.78
   },
   "2318.HK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 49.7
   },
   "9888.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 64.05
   },
   "0981.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 49.12
   },
   "3750.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 335.0
   },
   "3690.HK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 66.5
   },
   "002027.SZ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 5.53
   },
   "002594.SZ": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 79.68
   },
   "600519.SS": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": true
+   "above_ema": true,
+   "price": 1485.75
   },
   "0388.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 357.0
   },
   "1024.HK": {
    "pe_low": true,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 20.42
   },
   "2015.HK": {
    "pe_low": null,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 43.62
   },
   "9618.HK": {
    "pe_low": false,
    "near_high": false,
    "near_low": false,
-   "above_ema": false
+   "above_ema": false,
+   "price": 97.95
   }
  }
 }

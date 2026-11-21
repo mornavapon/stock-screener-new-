@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21 02:33:09",
+  "updated_at": "2026-11-21 06:53:36",
   "stocks": [
     {
       "ticker": "PTT.BK",
@@ -63,7 +63,7 @@
       "name": "Gulf Development Public Company Limited",
       "price": 61.25,
       "marketCap": 915065012224.0,
-      "pe": 11.986301,
+      "pe": 12.033399,
       "forwardPE": 23.372421,
       "pegRatio": 2.27,
       "pb": 2.7718694,
@@ -138,8 +138,8 @@
       "ticker": "CPALL.BK",
       "name": "CP ALL Public Company Limited",
       "price": 49.4,
-      "marketCap": 440425873408.0,
-      "pe": 15.015198,
+      "marketCap": 440208392192.0,
+      "pe": 14.924472,
       "forwardPE": 13.061181,
       "pegRatio": 1.68,
       "pb": 3.1992748,
@@ -196,7 +196,7 @@
       "name": "Kasikornbank Public Company Limited",
       "price": 249.0,
       "marketCap": 589962608640.0,
-      "pe": 11.565257,
+      "pe": 11.517114,
       "forwardPE": 10.811688,
       "pegRatio": 1.37,
       "pb": 1.0049968,
@@ -291,10 +291,10 @@
       "name": "Com7 Public Company Limited",
       "price": 30.5,
       "marketCap": 71909810176.0,
-      "pe": 14.386793,
+      "pe": 14.186046,
       "forwardPE": 12.661959,
       "pegRatio": 0.81,
-      "pb": 5.6076484,
+      "pb": 6.8095555,
       "roe": 44.939997999999996,
       "dividendYield": 3.606557377049181,
       "de": 1.2470999999999999,
@@ -367,7 +367,7 @@
       "name": "Land and Houses Public Company Limited",
       "price": 3.52,
       "marketCap": 42062991360.0,
-      "pe": 16.0,
+      "pe": 15.304347,
       "forwardPE": 9.999716,
       "pegRatio": 1.19,
       "pb": 0.80457145,
@@ -443,7 +443,7 @@
       "name": "Amata Corporation Public Company Limited",
       "price": 27.9,
       "marketCap": 32085000192.0,
-      "pe": 6.241611,
+      "pe": 6.2276783,
       "forwardPE": 7.525936,
       "pegRatio": 0.31,
       "pb": 1.2022234,
@@ -500,7 +500,7 @@
       "name": "The Siam Cement Public Company Limited",
       "price": 232.0,
       "marketCap": 278400008192.0,
-      "pe": 17.210684,
+      "pe": 16.921955,
       "forwardPE": 14.482928,
       "pegRatio": 1.18,
       "pb": 0.76640505,
@@ -538,8 +538,8 @@
       "name": "Thai Oil Public Company Limited",
       "price": 56.0,
       "marketCap": 125094789120.0,
-      "pe": 2.6628625,
-      "forwardPE": 6.3144197,
+      "pe": 2.5937934,
+      "forwardPE": 6.070987,
       "pegRatio": 0.14,
       "pb": 0.5762977,
       "roe": 22.846000999999998,
@@ -577,7 +577,7 @@
       "price": 37.7,
       "marketCap": 169983623168.0,
       "pe": 10.619719,
-      "forwardPE": 9.723236,
+      "forwardPE": 9.98012,
       "pegRatio": 0,
       "pb": 0.54337645,
       "roe": 5.922000000000001,
@@ -709,7 +709,7 @@
       "name": "Siam Global House Public Company Limited",
       "price": 6.86,
       "marketCap": 38429655040.0,
-      "pe": 14.291667,
+      "pe": 14.0,
       "forwardPE": 14.085085,
       "pegRatio": 1.05,
       "pb": 1.4466469,
@@ -729,7 +729,7 @@
       "price": 19.9,
       "marketCap": 79755157504.0,
       "pe": 11.987952,
-      "forwardPE": 15.303337,
+      "forwardPE": 15.148631,
       "pegRatio": 1.41,
       "pb": 0.6713447,
       "roe": 6.328,
@@ -766,7 +766,7 @@
       "name": "AEON Thana Sinsap (Thailand) Public Company Limited",
       "price": 88.5,
       "marketCap": 21682499584.0,
-      "pe": 7.4244967,
+      "pe": 7.443229,
       "forwardPE": 6.7834444,
       "pegRatio": 0.65,
       "pb": 0.77763915,
@@ -804,10 +804,10 @@
       "name": "Asset World Corp Public Company Limited",
       "price": 3.0,
       "marketCap": 96079634432.0,
-      "pe": 14.285715,
-      "forwardPE": 38.05175,
+      "pe": 15.0,
+      "forwardPE": 37.055336,
       "pegRatio": 0,
-      "pb": 1.0030091,
+      "pb": 0.98039216,
       "roe": 6.938999999999999,
       "dividendYield": 2.666666666666667,
       "de": 0.9721599999999999,
@@ -955,7 +955,7 @@
       "ticker": "BTG.BK",
       "name": "Betagro Public Company Limited",
       "price": 20.7,
-      "marketCap": 39677759488.0,
+      "marketCap": 39455236096.0,
       "pe": 10.097562,
       "forwardPE": 7.277739,
       "pegRatio": 1.13,
@@ -975,7 +975,7 @@
       "name": "Carabao Group Public Company Limited",
       "price": 54.75,
       "marketCap": 54749999104.0,
-      "pe": 25.704224,
+      "pe": 25.114677,
       "forwardPE": 16.712606,
       "pegRatio": 2.9,
       "pb": 3.7512846,
@@ -997,7 +997,7 @@
       "pe": 27.727272,
       "forwardPE": 18.154762,
       "pegRatio": 0.91,
-      "pb": 2.5716696,
+      "pb": 2.3670936,
       "roe": 8.901,
       "dividendYield": 2.6229508196721314,
       "de": 1.12252,
@@ -1090,7 +1090,7 @@
       "price": 3.28,
       "marketCap": 11541029888.0,
       "pe": 14.909091,
-      "forwardPE": 14.00632,
+      "forwardPE": 14.041096,
       "pegRatio": 0.99,
       "pb": 0.8204102,
       "roe": 5.59,
@@ -1127,7 +1127,7 @@
       "name": "The Erawan Group Public Company Limited",
       "price": 3.56,
       "marketCap": 17397469184.0,
-      "pe": 17.8,
+      "pe": 16.952381,
       "forwardPE": 16.892853,
       "pegRatio": 0.55,
       "pb": 1.8532014,
@@ -1146,7 +1146,7 @@
       "name": "GFPT Public Company Limited",
       "price": 9.46,
       "marketCap": 11861147648.0,
-      "pe": 5.2265196,
+      "pe": 5.1135135,
       "forwardPE": 5.172819,
       "pegRatio": 2.69,
       "pb": 0.5118217,
@@ -1170,7 +1170,7 @@
       "pegRatio": 0.45,
       "pb": 2.528486,
       "roe": 15.096000000000002,
-      "dividendYield": 3.0042918454935625,
+      "dividendYield": 3.4334763948497855,
       "de": 0.8614400000000001,
       "gpm": 30.067,
       "npm": 24.018,
@@ -1374,7 +1374,7 @@
       "name": "Moshi Moshi Retail Corporation Public Company Limited",
       "price": 34.6,
       "marketCap": 11417998336.0,
-      "pe": 15.871558,
+      "pe": 15.309734,
       "forwardPE": 12.739322,
       "pegRatio": 0.93,
       "pb": 4.353844,
@@ -1488,7 +1488,7 @@
       "name": "Praram 9 Hospital Public Company Limited",
       "price": 18.75,
       "marketCap": 14743126016.0,
-      "pe": 18.203884,
+      "pe": 17.857143,
       "forwardPE": 15.773535,
       "pegRatio": 2.23,
       "pb": 2.421542,
@@ -1569,7 +1569,7 @@
       "pegRatio": 0.43,
       "pb": 0.49951252,
       "roe": 15.145999,
-      "dividendYield": 8.02139037433155,
+      "dividendYield": 6.684491978609626,
       "de": 0.24359000000000003,
       "gpm": 28.187,
       "npm": 22.349000999999998,
@@ -1584,7 +1584,7 @@
       "price": 21.7,
       "marketCap": 36054700032.0,
       "pe": 6.5558915,
-      "forwardPE": 5.947503,
+      "forwardPE": 5.9386487,
       "pegRatio": 0.56,
       "pb": 0.8888707,
       "roe": 14.366001,
@@ -1659,8 +1659,8 @@
       "name": "Stecon Group Public Company Limited",
       "price": 17.5,
       "marketCap": 26583904256.0,
-      "pe": 10.294117,
-      "forwardPE": 16.964926,
+      "pe": 10.174418,
+      "forwardPE": 17.130997,
       "pegRatio": 0.72,
       "pb": 1.266006,
       "roe": 13.567000000000002,
@@ -1754,7 +1754,7 @@
       "name": "Thai Airways International Public Company Limited",
       "price": 4.88,
       "marketCap": 138120069120.0,
-      "pe": 9.037037,
+      "pe": 8.714286,
       "forwardPE": 6.620091,
       "pegRatio": 1.24,
       "pb": 1.674674,
@@ -1849,7 +1849,7 @@
       "name": "TOA Paint (Thailand) Public Company Limited",
       "price": 15.0,
       "marketCap": 29078767616.0,
-      "pe": 9.375,
+      "pe": 9.202454,
       "forwardPE": 9.719244,
       "pegRatio": 0,
       "pb": 1.8853695,
@@ -1944,7 +1944,7 @@
       "name": "CP Axtra Public Company Limited",
       "price": 15.1,
       "marketCap": 157457694720.0,
-      "pe": 23.968254,
+      "pe": 23.593752,
       "forwardPE": 15.111788,
       "pegRatio": 2.53,
       "pb": 0.529806,
@@ -1963,7 +1963,7 @@
       "name": "Diamond Building Products Public Company Limited",
       "price": 5.28,
       "marketCap": 4287535104.0,
-      "pe": 10.3529415,
+      "pe": 10.153847,
       "forwardPE": 6.8571434,
       "pegRatio": 3.75,
       "pb": 1.817556,
@@ -2267,7 +2267,7 @@
       "name": "Jubilee Enterprise Public Company Limited",
       "price": 7.4,
       "marketCap": 1289621120.0,
-      "pe": 11.212121,
+      "pe": 10.882353,
       "forwardPE": 10.571429,
       "pegRatio": 0,
       "pb": 0.73028713,
@@ -2324,7 +2324,7 @@
       "name": "Apple Inc.",
       "price": 342.56,
       "marketCap": 4978144444416.0,
-      "pe": 38.146996,
+      "pe": 38.883087,
       "forwardPE": 32.400333,
       "pegRatio": 2.82,
       "pb": 44.41333,
@@ -2335,7 +2335,7 @@
       "npm": 27.604,
       "fiftyTwoWeekHigh": 360.83,
       "fiftyTwoWeekLow": 243.42,
-      "ema200": 309.2503,
+      "ema200": 309.5817,
       "currency": "USD"
     },
     {
@@ -2344,7 +2344,7 @@
       "price": 484.52,
       "marketCap": 3598139523072.0,
       "pe": 25.2881,
-      "forwardPE": 20.018377,
+      "forwardPE": 20.020792,
       "pegRatio": 1.47,
       "pb": 7.648182,
       "roe": 34.221000000000004,
@@ -2354,7 +2354,7 @@
       "npm": 41.169998,
       "fiftyTwoWeekHigh": 559.15,
       "fiftyTwoWeekLow": 349.2,
-      "ema200": 471.9679,
+      "ema200": 472.0928,
       "currency": "USD"
     },
     {
@@ -2373,7 +2373,7 @@
       "npm": 50.031000000000006,
       "fiftyTwoWeekHigh": 408.61,
       "fiftyTwoWeekLow": 264.22,
-      "ema200": 324.0364,
+      "ema200": 323.4519,
       "currency": "USD"
     },
     {
@@ -2392,7 +2392,7 @@
       "npm": 16.900998,
       "fiftyTwoWeekHigh": 287.2,
       "fiftyTwoWeekLow": 196.0,
-      "ema200": 247.8677,
+      "ema200": 247.8573,
       "currency": "USD"
     },
     {
@@ -2411,7 +2411,7 @@
       "npm": 62.535,
       "fiftyTwoWeekHigh": 243.37,
       "fiftyTwoWeekLow": 124.5,
-      "ema200": 201.6226,
+      "ema200": 200.8655,
       "currency": "USD"
     },
     {
@@ -2430,7 +2430,7 @@
       "npm": 31.145,
       "fiftyTwoWeekHigh": 779.82,
       "fiftyTwoWeekLow": 520.26,
-      "ema200": 640.5375,
+      "ema200": 639.7445,
       "currency": "USD"
     },
     {
@@ -2449,7 +2449,7 @@
       "npm": 3.1070001,
       "fiftyTwoWeekHigh": 498.83,
       "fiftyTwoWeekLow": 297.38,
-      "ema200": 379.5285,
+      "ema200": 379.1931,
       "currency": "USD"
     },
     {
@@ -2468,7 +2468,7 @@
       "npm": 29.691000000000003,
       "fiftyTwoWeekHigh": 109.73,
       "fiftyTwoWeekLow": 56.56,
-      "ema200": 79.0279,
+      "ema200": 78.806,
       "currency": "USD"
     },
     {
@@ -2476,7 +2476,7 @@
       "name": "Advanced Micro Devices, Inc.",
       "price": 424.39,
       "marketCap": 702393286656.0,
-      "pe": 98.23843,
+      "pe": 90.68163,
       "forwardPE": 24.060778,
       "pegRatio": 0.44,
       "pb": 10.176974,
@@ -2487,7 +2487,7 @@
       "npm": 16.769000000000002,
       "fiftyTwoWeekHigh": 658.52,
       "fiftyTwoWeekLow": 188.22,
-      "ema200": 445.8449,
+      "ema200": 445.6314,
       "currency": "USD"
     },
     {
@@ -2506,7 +2506,7 @@
       "npm": -20.089000000000002,
       "fiftyTwoWeekHigh": 142.35,
       "fiftyTwoWeekLow": 32.89,
-      "ema200": 83.3727,
+      "ema200": 83.0534,
       "currency": "USD"
     },
     {
@@ -2514,7 +2514,7 @@
       "name": "QUALCOMM Incorporated",
       "price": 149.94,
       "marketCap": 160435798016.0,
-      "pe": 11.806299,
+      "pe": 12.760851,
       "forwardPE": 12.308627,
       "pegRatio": 0.96,
       "pb": 5.2872105,
@@ -2525,7 +2525,7 @@
       "npm": 31.605,
       "fiftyTwoWeekHigh": 259.92,
       "fiftyTwoWeekLow": 121.99,
-      "ema200": 172.9649,
+      "ema200": 172.7358,
       "currency": "USD"
     },
     {
@@ -2534,7 +2534,7 @@
       "price": 304.41,
       "marketCap": 1453140738048.0,
       "pe": 38.877396,
-      "forwardPE": 15.67989,
+      "forwardPE": 15.702569,
       "pegRatio": 0.34,
       "pb": 14.577627,
       "roe": 44.245000000000005,
@@ -2544,7 +2544,7 @@
       "npm": 42.943999999999996,
       "fiftyTwoWeekHigh": 495.0,
       "fiftyTwoWeekLow": 289.77,
-      "ema200": 356.706,
+      "ema200": 356.1856,
       "currency": "USD"
     },
     {
@@ -2563,7 +2563,7 @@
       "npm": 34.252998,
       "fiftyTwoWeekHigh": 334.03,
       "fiftyTwoWeekLow": 153.41,
-      "ema200": 265.06,
+      "ema200": 265.047,
       "currency": "USD"
     },
     {
@@ -2571,7 +2571,7 @@
       "name": "Micron Technology, Inc.",
       "price": 594.51,
       "marketCap": 672642433024.0,
-      "pe": 7.998251,
+      "pe": 9.289219,
       "forwardPE": 2.846877,
       "pegRatio": 0.16,
       "pb": 4.8590927,
@@ -2582,7 +2582,7 @@
       "npm": 63.796,
       "fiftyTwoWeekHigh": 1255.0,
       "fiftyTwoWeekLow": 192.59,
-      "ema200": 767.2641,
+      "ema200": 765.5451,
       "currency": "USD"
     },
     {
@@ -2590,7 +2590,7 @@
       "name": "Applied Materials, Inc.",
       "price": 302.63,
       "marketCap": 240166404096.0,
-      "pe": 23.98019,
+      "pe": 26.852705,
       "forwardPE": 12.289364,
       "pegRatio": 0.71,
       "pb": 9.192613,
@@ -2601,7 +2601,7 @@
       "npm": 29.286,
       "fiftyTwoWeekHigh": 739.67,
       "fiftyTwoWeekLow": 215.5,
-      "ema200": 422.7423,
+      "ema200": 421.5472,
       "currency": "USD"
     },
     {
@@ -2620,7 +2620,7 @@
       "npm": 32.34,
       "fiftyTwoWeekHigh": 438.5,
       "fiftyTwoWeekLow": 135.5,
-      "ema200": 265.7119,
+      "ema200": 264.8916,
       "currency": "USD"
     },
     {
@@ -2639,7 +2639,7 @@
       "npm": 13.783000000000001,
       "fiftyTwoWeekHigh": 63.93,
       "fiftyTwoWeekLow": 38.46,
-      "ema200": 54.8502,
+      "ema200": 54.8346,
       "currency": "USD"
     },
     {
@@ -2658,7 +2658,7 @@
       "npm": 15.007000000000001,
       "fiftyTwoWeekHigh": 180.88,
       "fiftyTwoWeekLow": 94.0,
-      "ema200": 138.9915,
+      "ema200": 138.8395,
       "currency": "USD"
     },
     {
@@ -2677,7 +2677,7 @@
       "npm": 34.135,
       "fiftyTwoWeekHigh": 1999.96,
       "fiftyTwoWeekLow": 946.11,
-      "ema200": 1547.5314,
+      "ema200": 1544.7323,
       "currency": "USD"
     },
     {
@@ -2696,7 +2696,7 @@
       "npm": 51.11599999999999,
       "fiftyTwoWeekHigh": 487.47,
       "fiftyTwoWeekLow": 266.82,
-      "ema200": 393.9153,
+      "ema200": 393.167,
       "currency": "USD"
     },
     {
@@ -2715,7 +2715,7 @@
       "npm": 34.592,
       "fiftyTwoWeekHigh": 366.5,
       "fiftyTwoWeekLow": 279.1,
-      "ema200": 328.6148,
+      "ema200": 328.4348,
       "currency": "USD"
     },
     {
@@ -2723,7 +2723,7 @@
       "name": "Bank of America Corporation",
       "price": 47.04,
       "marketCap": 324585848832.0,
-      "pe": 11.22673,
+      "pe": 11.586207,
       "forwardPE": 9.080906,
       "pegRatio": 0.88,
       "pb": 1.1983187,
@@ -2734,7 +2734,7 @@
       "npm": 28.064,
       "fiftyTwoWeekHigh": 65.23,
       "fiftyTwoWeekLow": 46.12,
-      "ema200": 54.5443,
+      "ema200": 54.4696,
       "currency": "USD"
     },
     {
@@ -2753,7 +2753,7 @@
       "npm": 27.639999999999997,
       "fiftyTwoWeekHigh": 97.76,
       "fiftyTwoWeekLow": 72.78,
-      "ema200": 83.8497,
+      "ema200": 83.7977,
       "currency": "USD"
     },
     {
@@ -2761,7 +2761,7 @@
       "name": "Citigroup Inc.",
       "price": 110.62,
       "marketCap": 183098720256.0,
-      "pe": 10.781676,
+      "pe": 11.230456,
       "forwardPE": 8.4683485,
       "pegRatio": 0.48,
       "pb": 0.95683765,
@@ -2772,7 +2772,7 @@
       "npm": 23.208000000000002,
       "fiftyTwoWeekHigh": 147.96,
       "fiftyTwoWeekLow": 95.83,
-      "ema200": 124.2704,
+      "ema200": 124.1346,
       "currency": "USD"
     },
     {
@@ -2781,7 +2781,7 @@
       "price": 790.69,
       "marketCap": 228062347264.0,
       "pe": 11.368655,
-      "forwardPE": 10.649418,
+      "forwardPE": 10.634813,
       "pegRatio": 1.06,
       "pb": 2.1548972,
       "roe": 17.712,
@@ -2791,7 +2791,7 @@
       "npm": 31.208000000000002,
       "fiftyTwoWeekHigh": 1153.99,
       "fiftyTwoWeekLow": 754.0,
-      "ema200": 932.5554,
+      "ema200": 931.1438,
       "currency": "USD"
     },
     {
@@ -2810,7 +2810,7 @@
       "npm": 25.634,
       "fiftyTwoWeekHigh": 232.25,
       "fiftyTwoWeekLow": 152.8,
-      "ema200": 191.8342,
+      "ema200": 191.5739,
       "currency": "USD"
     },
     {
@@ -2829,7 +2829,7 @@
       "npm": 51.203996,
       "fiftyTwoWeekHigh": 442.23,
       "fiftyTwoWeekLow": 293.89,
-      "ema200": 363.8213,
+      "ema200": 364.1999,
       "currency": "USD"
     },
     {
@@ -2848,7 +2848,7 @@
       "npm": 46.732,
       "fiftyTwoWeekHigh": 681.99,
       "fiftyTwoWeekLow": 464.52,
-      "ema200": 566.9038,
+      "ema200": 567.4877,
       "currency": "USD"
     },
     {
@@ -2867,7 +2867,7 @@
       "npm": 16.823,
       "fiftyTwoWeekHigh": 387.49,
       "fiftyTwoWeekLow": 290.97,
-      "ema200": 325.0717,
+      "ema200": 324.8392,
       "currency": "USD"
     },
     {
@@ -2875,7 +2875,7 @@
       "name": "The Walt Disney Company",
       "price": 117.98,
       "marketCap": 201513353216.0,
-      "pe": 20.955595,
+      "pe": 21.37319,
       "forwardPE": 13.833536,
       "pegRatio": 3.91,
       "pb": 1.8341807,
@@ -2886,7 +2886,7 @@
       "npm": 9.672,
       "fiftyTwoWeekHigh": 123.37,
       "fiftyTwoWeekLow": 92.19,
-      "ema200": 106.884,
+      "ema200": 106.9944,
       "currency": "USD"
     },
     {
@@ -2905,7 +2905,7 @@
       "npm": 28.654000000000003,
       "fiftyTwoWeekHigh": 100.56,
       "fiftyTwoWeekLow": 67.27,
-      "ema200": 84.7357,
+      "ema200": 84.8576,
       "currency": "USD"
     },
     {
@@ -2913,7 +2913,7 @@
       "name": "Arm Holdings plc",
       "price": 152.2,
       "marketCap": 162853994496.0,
-      "pe": 181.19048,
+      "pe": 174.94252,
       "forwardPE": 49.305126,
       "pegRatio": 1.44,
       "pb": 17.92064,
@@ -2924,7 +2924,7 @@
       "npm": 17.130000000000003,
       "fiftyTwoWeekHigh": 452.7,
       "fiftyTwoWeekLow": 100.02,
-      "ema200": 230.2533,
+      "ema200": 229.4766,
       "currency": "USD"
     },
     {
@@ -2943,7 +2943,7 @@
       "npm": 50.031000000000006,
       "fiftyTwoWeekHigh": 404.47,
       "fiftyTwoWeekLow": 262.28,
-      "ema200": 322.0197,
+      "ema200": 321.4424,
       "currency": "USD"
     },
     {
@@ -2981,7 +2981,7 @@
       "npm": -175.77700000000002,
       "fiftyTwoWeekHigh": 1143.0,
       "fiftyTwoWeekLow": 233.72,
-      "ema200": 742.77,
+      "ema200": 739.9617,
       "currency": "USD"
     },
     {
@@ -3000,7 +3000,7 @@
       "npm": 12.1829994,
       "fiftyTwoWeekHigh": 440.0,
       "fiftyTwoWeekLow": 130.42,
-      "ema200": 266.6616,
+      "ema200": 265.8711,
       "currency": "USD"
     },
     {
@@ -3019,7 +3019,7 @@
       "npm": 6.6659999999999995,
       "fiftyTwoWeekHigh": 73.56,
       "fiftyTwoWeekLow": 19.84,
-      "ema200": 45.5462,
+      "ema200": 45.5001,
       "currency": "USD"
     },
     {
@@ -3038,7 +3038,7 @@
       "npm": 10.1940006,
       "fiftyTwoWeekHigh": 29.44,
       "fiftyTwoWeekLow": 19.89,
-      "ema200": 24.2314,
+      "ema200": 24.2123,
       "currency": "USD"
     },
     {
@@ -3057,7 +3057,7 @@
       "npm": -110.455,
       "fiftyTwoWeekHigh": 280.8,
       "fiftyTwoWeekLow": 22.28,
-      "ema200": 121.294,
+      "ema200": 122.0274,
       "currency": "USD"
     },
     {
@@ -3065,7 +3065,7 @@
       "name": "Occidental Petroleum Corporation",
       "price": 53.9,
       "marketCap": 53894328320.0,
-      "pe": 12.004456,
+      "pe": 11.977778,
       "forwardPE": 10.183743,
       "pegRatio": 0.68,
       "pb": 1.5449882,
@@ -3076,7 +3076,7 @@
       "npm": 32.953998,
       "fiftyTwoWeekHigh": 67.45,
       "fiftyTwoWeekLow": 38.8,
-      "ema200": 55.9396,
+      "ema200": 55.9193,
       "currency": "USD"
     },
     {
@@ -3095,7 +3095,7 @@
       "npm": 11.78,
       "fiftyTwoWeekHigh": 51.68,
       "fiftyTwoWeekLow": 38.68,
-      "ema200": 45.9794,
+      "ema200": 45.9844,
       "currency": "USD"
     },
     {
@@ -3114,7 +3114,7 @@
       "npm": 12.0459996,
       "fiftyTwoWeekHigh": 224.75,
       "fiftyTwoWeekLow": 143.75,
-      "ema200": 182.2592,
+      "ema200": 182.0934,
       "currency": "USD"
     },
     {
@@ -3133,7 +3133,7 @@
       "npm": 22.341,
       "fiftyTwoWeekHigh": 130.37,
       "fiftyTwoWeekLow": 72.8,
-      "ema200": 101.5815,
+      "ema200": 101.4726,
       "currency": "USD"
     },
     {
@@ -3141,7 +3141,7 @@
       "name": "Target Corporation",
       "price": 165.83,
       "marketCap": 75076984832.0,
-      "pe": 15.41171,
+      "pe": 15.556286,
       "forwardPE": 16.955582,
       "pegRatio": 2.29,
       "pb": 4.087604,
@@ -3152,14 +3152,14 @@
       "npm": 4.488,
       "fiftyTwoWeekHigh": 171.91,
       "fiftyTwoWeekLow": 84.24,
-      "ema200": 140.1128,
+      "ema200": 140.3687,
       "currency": "USD"
     },
     {
       "ticker": "WMT",
       "name": "Walmart Inc.",
       "price": 127.95,
-      "marketCap": 1015122821120.0,
+      "marketCap": 1018236174336.0,
       "pe": 46.358696,
       "forwardPE": 39.63386,
       "pegRatio": 4.28,
@@ -3171,7 +3171,7 @@
       "npm": 3.0,
       "fiftyTwoWeekHigh": 135.16,
       "fiftyTwoWeekLow": 102.15,
-      "ema200": 115.5008,
+      "ema200": 115.6247,
       "currency": "USD"
     },
     {
@@ -3190,7 +3190,7 @@
       "npm": 50.343,
       "fiftyTwoWeekHigh": 212.94,
       "fiftyTwoWeekLow": 106.37,
-      "ema200": 162.3065,
+      "ema200": 162.1193,
       "currency": "USD"
     },
     {
@@ -3198,7 +3198,7 @@
       "name": "The Procter & Gamble Company",
       "price": 169.37,
       "marketCap": 392562900992.0,
-      "pe": 25.50753,
+      "pe": 25.279104,
       "forwardPE": 22.80715,
       "pegRatio": 4.31,
       "pb": 7.2229095,
@@ -3209,7 +3209,7 @@
       "npm": 18.229,
       "fiftyTwoWeekHigh": 173.59,
       "fiftyTwoWeekLow": 137.62,
-      "ema200": 152.0615,
+      "ema200": 152.2337,
       "currency": "USD"
     },
     {
@@ -3217,7 +3217,7 @@
       "name": "PepsiCo, Inc.",
       "price": 140.54,
       "marketCap": 191519621120.0,
-      "pe": 17.677986,
+      "pe": 17.480099,
       "forwardPE": 16.353537,
       "pegRatio": 1.49,
       "pb": 8.5994,
@@ -3228,7 +3228,7 @@
       "npm": 11.091,
       "fiftyTwoWeekHigh": 171.48,
       "fiftyTwoWeekLow": 123.47,
-      "ema200": 141.339,
+      "ema200": 141.331,
       "currency": "USD"
     },
     {
@@ -3237,7 +3237,7 @@
       "price": 101.97,
       "marketCap": 26997925888.0,
       "pe": 0,
-      "forwardPE": 42.497772,
+      "forwardPE": 41.532936,
       "pegRatio": 0.48,
       "pb": 1.9366418,
       "roe": -4.6830002,
@@ -3247,7 +3247,7 @@
       "npm": -12.894,
       "fiftyTwoWeekHigh": 284.74,
       "fiftyTwoWeekLow": 101.71,
-      "ema200": 182.4932,
+      "ema200": 181.6919,
       "currency": "USD"
     },
     {
@@ -3266,7 +3266,7 @@
       "npm": 16.203,
       "fiftyTwoWeekHigh": 290.25,
       "fiftyTwoWeekLow": 199.91,
-      "ema200": 248.5092,
+      "ema200": 248.7277,
       "currency": "USD"
     },
     {
@@ -3274,7 +3274,7 @@
       "name": "3M Company",
       "price": 177.99,
       "marketCap": 91972698112.0,
-      "pe": 26.565674,
+      "pe": 26.64521,
       "forwardPE": 17.94104,
       "pegRatio": 1.55,
       "pb": 22.284964,
@@ -3285,7 +3285,7 @@
       "npm": 14.005999999999998,
       "fiftyTwoWeekHigh": 196.9,
       "fiftyTwoWeekLow": 139.34,
-      "ema200": 166.0286,
+      "ema200": 166.1477,
       "currency": "USD"
     },
     {
@@ -3304,7 +3304,7 @@
       "npm": 3.5290000000000004,
       "fiftyTwoWeekHigh": 461.62,
       "fiftyTwoWeekLow": 255.97,
-      "ema200": 380.996,
+      "ema200": 380.5866,
       "currency": "USD"
     },
     {
@@ -3323,7 +3323,7 @@
       "npm": 32.377,
       "fiftyTwoWeekHigh": 341.75,
       "fiftyTwoWeekLow": 229.2,
-      "ema200": 273.7436,
+      "ema200": 273.7386,
       "currency": "USD"
     },
     {
@@ -3331,8 +3331,8 @@
       "name": "Amgen Inc.",
       "price": 435.64,
       "marketCap": 235642683392.0,
-      "pe": 25.254494,
-      "forwardPE": 17.342522,
+      "pe": 25.43141,
+      "forwardPE": 17.338457,
       "pegRatio": 2.58,
       "pb": 16.41818,
       "roe": 78.353,
@@ -3342,7 +3342,7 @@
       "npm": 24.139999,
       "fiftyTwoWeekHigh": 483.99,
       "fiftyTwoWeekLow": 312.39,
-      "ema200": 389.5705,
+      "ema200": 390.0289,
       "currency": "USD"
     },
     {
@@ -3361,7 +3361,7 @@
       "npm": 4.68,
       "fiftyTwoWeekHigh": 345.37,
       "fiftyTwoWeekLow": 212.02257,
-      "ema200": 297.1604,
+      "ema200": 297.2284,
       "currency": "USD"
     },
     {
@@ -3370,9 +3370,9 @@
       "price": 339.04,
       "marketCap": 338256691200.0,
       "pe": 23.544445,
-      "forwardPE": 21.494715,
+      "forwardPE": 21.531736,
       "pegRatio": 1.78,
-      "pb": 26.35572,
+      "pb": 18.603018,
       "roe": 94.803,
       "dividendYield": 2.748938178386031,
       "de": 3.4173899999999997,
@@ -3380,7 +3380,7 @@
       "npm": 8.375,
       "fiftyTwoWeekHigh": 397.63,
       "fiftyTwoWeekLow": 277.15,
-      "ema200": 333.4033,
+      "ema200": 333.4594,
       "currency": "USD"
     },
     {
@@ -3388,7 +3388,7 @@
       "name": "Berkshire Hathaway Inc.",
       "price": 570.0,
       "marketCap": 1210976043008.0,
-      "pe": 15.952981,
+      "pe": 16.006739,
       "forwardPE": 24.98179,
       "pegRatio": 10.06,
       "pb": 0.001062614,
@@ -3399,7 +3399,7 @@
       "npm": 19.497,
       "fiftyTwoWeekHigh": 596.92,
       "fiftyTwoWeekLow": 464.01,
-      "ema200": 511.8989,
+      "ema200": 512.477,
       "currency": "USD"
     },
     {
@@ -3407,7 +3407,7 @@
       "name": "Caterpillar Inc.",
       "price": 510.45,
       "marketCap": 233578954752.0,
-      "pe": 20.03336,
+      "pe": 21.092976,
       "forwardPE": 15.86362,
       "pegRatio": 0.94,
       "pb": 10.872667,
@@ -3418,7 +3418,7 @@
       "npm": 15.212,
       "fiftyTwoWeekHigh": 1073.46,
       "fiftyTwoWeekLow": 508.11,
-      "ema200": 747.0716,
+      "ema200": 744.7171,
       "currency": "USD"
     },
     {
@@ -3437,7 +3437,7 @@
       "npm": 3.0429999999999997,
       "fiftyTwoWeekHigh": 1123.67,
       "fiftyTwoWeekLow": 844.06,
-      "ema200": 973.0879,
+      "ema200": 974.3721,
       "currency": "USD"
     },
     {
@@ -3445,7 +3445,7 @@
       "name": "BlackRock, Inc.",
       "price": 1101.72,
       "marketCap": 170131374080.0,
-      "pe": 25.0847,
+      "pe": 25.861973,
       "forwardPE": 16.962633,
       "pegRatio": 0.94,
       "pb": 2.9301531,
@@ -3456,7 +3456,7 @@
       "npm": 24.216999,
       "fiftyTwoWeekHigh": 1242.12,
       "fiftyTwoWeekLow": 917.39,
-      "ema200": 1091.6848,
+      "ema200": 1091.7847,
       "currency": "USD"
     },
     {
@@ -3464,7 +3464,7 @@
       "name": "Berkshire Hathaway Inc.",
       "price": 855000.0,
       "marketCap": 1210975780864.0,
-      "pe": 15.951784,
+      "pe": 16.02641,
       "forwardPE": 25.793728,
       "pegRatio": 9.95,
       "pb": 1.5939211,
@@ -3475,7 +3475,7 @@
       "npm": 19.497,
       "fiftyTwoWeekHigh": 894950.0,
       "fiftyTwoWeekLow": 698000.0,
-      "ema200": 767861.1739,
+      "ema200": 768728.2269,
       "currency": "USD"
     },
     {
@@ -3484,7 +3484,7 @@
       "price": 3.2,
       "marketCap": 444890528.0,
       "pe": 0,
-      "forwardPE": 43.115063,
+      "forwardPE": -250.98041,
       "pegRatio": 2.68,
       "pb": 0.29387456,
       "roe": -97.63099600000001,
@@ -3513,7 +3513,7 @@
       "npm": -15.595001,
       "fiftyTwoWeekHigh": 54.265,
       "fiftyTwoWeekLow": 16.78,
-      "ema200": 37.2578,
+      "ema200": 37.3324,
       "currency": "USD"
     },
     {
@@ -3532,7 +3532,7 @@
       "npm": -16.482,
       "fiftyTwoWeekHigh": 99.98,
       "fiftyTwoWeekLow": 33.88,
-      "ema200": 54.5296,
+      "ema200": 54.4519,
       "currency": "USD"
     },
     {
@@ -3540,7 +3540,7 @@
       "name": "Sea Limited",
       "price": 62.63,
       "marketCap": 38359908352.0,
-      "pe": 22.528778,
+      "pe": 23.456928,
       "forwardPE": 13.131824,
       "pegRatio": 0.68,
       "pb": 2.9202218,
@@ -3551,7 +3551,7 @@
       "npm": 5.7940002999999995,
       "fiftyTwoWeekHigh": 148.26,
       "fiftyTwoWeekLow": 62.39,
-      "ema200": 101.0257,
+      "ema200": 100.6436,
       "currency": "USD"
     },
     {
@@ -3560,7 +3560,7 @@
       "price": 210.0,
       "marketCap": 39314833408.0,
       "pe": 0,
-      "forwardPE": 20.589487,
+      "forwardPE": 20.813923,
       "pegRatio": 2.82,
       "pb": 10.701182,
       "roe": -6.769,
@@ -3570,7 +3570,7 @@
       "npm": -3.7520003,
       "fiftyTwoWeekHigh": 265.94,
       "fiftyTwoWeekLow": 183.86,
-      "ema200": 220.644,
+      "ema200": 220.5381,
       "currency": "USD"
     },
     {
@@ -3589,7 +3589,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 297.79,
       "fiftyTwoWeekLow": 205.11,
-      "ema200": 248.8074,
+      "ema200": 248.3772,
       "currency": "USD"
     },
     {
@@ -3608,7 +3608,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 186.3,
       "fiftyTwoWeekLow": 144.29,
-      "ema200": 163.6925,
+      "ema200": 163.5197,
       "currency": "USD"
     },
     {
@@ -3627,7 +3627,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 85.53333,
       "fiftyTwoWeekLow": 65.236664,
-      "ema200": 73.3823,
+      "ema200": 73.3105,
       "currency": "USD"
     },
     {
@@ -3635,7 +3635,7 @@
       "name": "RTX Corporation",
       "price": 190.17,
       "marketCap": 256623099904.0,
-      "pe": 30.921951,
+      "pe": 31.433056,
       "forwardPE": 23.502064,
       "pegRatio": 2.07,
       "pb": 3.705717,
@@ -3646,7 +3646,7 @@
       "npm": 8.754000000000001,
       "fiftyTwoWeekHigh": 226.88,
       "fiftyTwoWeekLow": 166.74,
-      "ema200": 191.7123,
+      "ema200": 191.697,
       "currency": "USD"
     },
     {
@@ -3654,7 +3654,7 @@
       "name": "General Dynamics Corporation",
       "price": 341.5,
       "marketCap": 92281397248.0,
-      "pe": 20.10006,
+      "pe": 20.4491,
       "forwardPE": 17.997507,
       "pegRatio": 1.97,
       "pb": 3.376174,
@@ -3665,7 +3665,7 @@
       "npm": 8.2399994,
       "fiftyTwoWeekHigh": 400.0,
       "fiftyTwoWeekLow": 306.77,
-      "ema200": 352.2494,
+      "ema200": 352.1424,
       "currency": "USD"
     },
     {
@@ -3684,7 +3684,7 @@
       "npm": 8.76,
       "fiftyTwoWeekHigh": 379.23,
       "fiftyTwoWeekLow": 232.34,
-      "ema200": 280.153,
+      "ema200": 279.8518,
       "currency": "USD"
     },
     {
@@ -3692,7 +3692,7 @@
       "name": "Lockheed Martin Corporation",
       "price": 565.5,
       "marketCap": 130633121792.0,
-      "pe": 20.081676,
+      "pe": 20.305206,
       "forwardPE": 16.98718,
       "pegRatio": 1.05,
       "pb": 12.925124,
@@ -3703,7 +3703,7 @@
       "npm": 8.2320005,
       "fiftyTwoWeekHigh": 692.0,
       "fiftyTwoWeekLow": 437.25,
-      "ema200": 552.4671,
+      "ema200": 552.5968,
       "currency": "USD"
     },
     {
@@ -3722,7 +3722,7 @@
       "npm": 10.3690006,
       "fiftyTwoWeekHigh": 774.0,
       "fiftyTwoWeekLow": 470.06,
-      "ema200": 555.3559,
+      "ema200": 555.1465,
       "currency": "USD"
     },
     {
@@ -3741,7 +3741,7 @@
       "npm": -25.726,
       "fiftyTwoWeekHigh": 151.0,
       "fiftyTwoWeekLow": 37.57,
-      "ema200": 70.1093,
+      "ema200": 69.8636,
       "currency": "USD"
     },
     {
@@ -3760,7 +3760,7 @@
       "npm": -2.0709999999999997,
       "fiftyTwoWeekHigh": 93.03,
       "fiftyTwoWeekLow": 29.13,
-      "ema200": 63.4195,
+      "ema200": 63.3483,
       "currency": "USD"
     },
     {
@@ -3779,7 +3779,7 @@
       "npm": -95.13200499999999,
       "fiftyTwoWeekHigh": 51.76,
       "fiftyTwoWeekLow": 10.345,
-      "ema200": 20.8021,
+      "ema200": 20.6999,
       "currency": "USD"
     },
     {
@@ -3798,7 +3798,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 8.9,
       "fiftyTwoWeekLow": 0.99,
-      "ema200": 2.9316,
+      "ema200": 2.9127,
       "currency": "USD"
     },
     {
@@ -3817,7 +3817,7 @@
       "npm": -18.065001,
       "fiftyTwoWeekHigh": 46.75,
       "fiftyTwoWeekLow": 7.78,
-      "ema200": 16.2683,
+      "ema200": 16.1937,
       "currency": "USD"
     },
     {
@@ -3836,7 +3836,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 133.86,
       "fiftyTwoWeekLow": 22.72,
-      "ema200": 62.3251,
+      "ema200": 61.9365,
       "currency": "USD"
     },
     {
@@ -3855,7 +3855,7 @@
       "npm": -4.1690003,
       "fiftyTwoWeekHigh": 17.78,
       "fiftyTwoWeekLow": 11.05,
-      "ema200": 12.9766,
+      "ema200": 12.9587,
       "currency": "USD"
     },
     {
@@ -3864,9 +3864,9 @@
       "price": 19.69,
       "marketCap": 3396355584.0,
       "pe": 0,
-      "forwardPE": 490.0131,
+      "forwardPE": 81.668846,
       "pegRatio": 0.35,
-      "pb": 19.116245,
+      "pb": 16.85825,
       "roe": -34.133,
       "dividendYield": 0.0,
       "de": 5.94104,
@@ -3874,7 +3874,7 @@
       "npm": -7.964,
       "fiftyTwoWeekHigh": 24.45,
       "fiftyTwoWeekLow": 14.85,
-      "ema200": 20.3556,
+      "ema200": 20.349,
       "currency": "USD"
     },
     {
@@ -3893,7 +3893,7 @@
       "npm": 6.74,
       "fiftyTwoWeekHigh": 69.14,
       "fiftyTwoWeekLow": 31.97,
-      "ema200": 44.5017,
+      "ema200": 44.3864,
       "currency": "USD"
     },
     {
@@ -3912,7 +3912,7 @@
       "npm": 6.1300002,
       "fiftyTwoWeekHigh": 92.78,
       "fiftyTwoWeekLow": 63.29,
-      "ema200": 73.5111,
+      "ema200": 73.4112,
       "currency": "USD"
     },
     {
@@ -3931,7 +3931,7 @@
       "npm": 27.934998,
       "fiftyTwoWeekHigh": 329.88,
       "fiftyTwoWeekLow": 70.69,
-      "ema200": 189.829,
+      "ema200": 189.1569,
       "currency": "USD"
     },
     {
@@ -3950,7 +3950,7 @@
       "npm": 26.36,
       "fiftyTwoWeekHigh": 250.25,
       "fiftyTwoWeekLow": 100.2505,
-      "ema200": 154.9785,
+      "ema200": 154.4432,
       "currency": "USD"
     },
     {
@@ -3969,7 +3969,7 @@
       "npm": -20.071,
       "fiftyTwoWeekHigh": 384.56,
       "fiftyTwoWeekLow": 118.3,
-      "ema200": 270.2434,
+      "ema200": 270.09,
       "currency": "USD"
     },
     {
@@ -3988,7 +3988,7 @@
       "npm": 21.990000000000002,
       "fiftyTwoWeekHigh": 269.11,
       "fiftyTwoWeekLow": 146.32,
-      "ema200": 214.7412,
+      "ema200": 214.4016,
       "currency": "USD"
     },
     {
@@ -4007,7 +4007,7 @@
       "npm": 2.1170001000000003,
       "fiftyTwoWeekHigh": 93.7,
       "fiftyTwoWeekLow": 68.19,
-      "ema200": 80.1417,
+      "ema200": 80.1275,
       "currency": "USD"
     },
     {
@@ -4015,7 +4015,7 @@
       "name": "Starbucks Corporation",
       "price": 103.13,
       "marketCap": 117578506240.0,
-      "pe": 46.665157,
+      "pe": 47.307335,
       "forwardPE": 27.685236,
       "pegRatio": 1.13,
       "pb": -15.330755,
@@ -4026,7 +4026,7 @@
       "npm": 6.665,
       "fiftyTwoWeekHigh": 111.5,
       "fiftyTwoWeekLow": 81.97,
-      "ema200": 99.8961,
+      "ema200": 99.9283,
       "currency": "USD"
     },
     {
@@ -4045,7 +4045,7 @@
       "npm": 10.463000000000001,
       "fiftyTwoWeekHigh": 188.5,
       "fiftyTwoWeekLow": 114.19,
-      "ema200": 154.8757,
+      "ema200": 154.9266,
       "currency": "USD"
     },
     {
@@ -4064,7 +4064,7 @@
       "npm": 11.923,
       "fiftyTwoWeekHigh": 236.48,
       "fiftyTwoWeekLow": 146.49,
-      "ema200": 196.205,
+      "ema200": 196.3261,
       "currency": "USD"
     },
     {
@@ -4072,7 +4072,7 @@
       "name": "Philip Morris International Inc.",
       "price": 184.09,
       "marketCap": 286932893696.0,
-      "pe": 26.874453,
+      "pe": 27.232246,
       "forwardPE": 20.358847,
       "pegRatio": 2.46,
       "pb": -36.152786,
@@ -4083,7 +4083,7 @@
       "npm": 24.825001,
       "fiftyTwoWeekHigh": 214.35,
       "fiftyTwoWeekLow": 146.35,
-      "ema200": 184.9253,
+      "ema200": 184.917,
       "currency": "USD"
     },
     {
@@ -4102,7 +4102,7 @@
       "npm": -6.651,
       "fiftyTwoWeekHigh": 40.99,
       "fiftyTwoWeekLow": 13.74,
-      "ema200": 29.0915,
+      "ema200": 28.9473,
       "currency": "USD"
     },
     {
@@ -4110,7 +4110,7 @@
       "name": "International Business Machines Corporation",
       "price": 224.44,
       "marketCap": 212122927104.0,
-      "pe": 19.150171,
+      "pe": 19.101276,
       "forwardPE": 16.953415,
       "pegRatio": 2.11,
       "pb": 5.969149,
@@ -4121,7 +4121,7 @@
       "npm": 15.989,
       "fiftyTwoWeekHigh": 332.46,
       "fiftyTwoWeekLow": 199.19,
-      "ema200": 247.4651,
+      "ema200": 247.236,
       "currency": "USD"
     },
     {
@@ -4140,7 +4140,7 @@
       "npm": 49.07,
       "fiftyTwoWeekHigh": 324.63,
       "fiftyTwoWeekLow": 208.86,
-      "ema200": 282.3977,
+      "ema200": 282.6412,
       "currency": "USD"
     },
     {
@@ -4148,7 +4148,7 @@
       "name": "Adobe Inc.",
       "price": 217.71,
       "marketCap": 84732731392.0,
-      "pe": 12.15578,
+      "pe": 12.376919,
       "forwardPE": 7.9435387,
       "pegRatio": 0.53,
       "pb": 7.236016,
@@ -4159,7 +4159,7 @@
       "npm": 28.048000000000002,
       "fiftyTwoWeekHigh": 362.71,
       "fiftyTwoWeekLow": 190.12,
-      "ema200": 261.149,
+      "ema200": 260.7168,
       "currency": "USD"
     },
     {
@@ -4167,7 +4167,7 @@
       "name": "Western Digital Corporation",
       "price": 261.11,
       "marketCap": 97739538432.0,
-      "pe": 9.184312,
+      "pe": 10.440224,
       "forwardPE": 6.4623446,
       "pegRatio": 0.43,
       "pb": 10.446488,
@@ -4178,7 +4178,7 @@
       "npm": 69.196,
       "fiftyTwoWeekHigh": 799.87,
       "fiftyTwoWeekLow": 132.43,
-      "ema200": 384.3461,
+      "ema200": 383.1199,
       "currency": "USD"
     },
     {
@@ -4197,7 +4197,7 @@
       "npm": 0.8340000000000001,
       "fiftyTwoWeekHigh": 286.99,
       "fiftyTwoWeekLow": 85.68,
-      "ema200": 192.1474,
+      "ema200": 192.5184,
       "currency": "USD"
     },
     {
@@ -4216,7 +4216,7 @@
       "npm": 31.857002,
       "fiftyTwoWeekHigh": 1145.0,
       "fiftyTwoWeekLow": 228.61,
-      "ema200": 666.1574,
+      "ema200": 664.0763,
       "currency": "USD"
     },
     {
@@ -4224,8 +4224,8 @@
       "name": "Sandisk Corporation",
       "price": 79.24,
       "marketCap": 90200072192.0,
-      "pe": 5.066496,
-      "forwardPE": 2.1930854,
+      "pe": 6.035034,
+      "forwardPE": 2.2072418,
       "pegRatio": 0,
       "pb": 5.0339875,
       "roe": 141.174,
@@ -4254,7 +4254,7 @@
       "npm": 39.138,
       "fiftyTwoWeekHigh": 170.14,
       "fiftyTwoWeekLow": 134.26,
-      "ema200": 151.6553,
+      "ema200": 151.7453,
       "currency": "USD"
     },
     {
@@ -4262,7 +4262,7 @@
       "name": "Nasdaq, Inc.",
       "price": 102.92,
       "marketCap": 57116766208.0,
-      "pe": 28.120218,
+      "pe": 28.430939,
       "forwardPE": 21.672615,
       "pegRatio": 1.61,
       "pb": 4.789873,
@@ -4273,7 +4273,7 @@
       "npm": 36.055002,
       "fiftyTwoWeekHigh": 111.45,
       "fiftyTwoWeekLow": 76.55,
-      "ema200": 94.0012,
+      "ema200": 94.09,
       "currency": "USD"
     },
     {
@@ -4292,7 +4292,7 @@
       "npm": 39.040002,
       "fiftyTwoWeekHigh": 139.75,
       "fiftyTwoWeekLow": 61.75,
-      "ema200": 96.1535,
+      "ema200": 95.8153,
       "currency": "USD"
     },
     {
@@ -4311,7 +4311,7 @@
       "npm": 5.015,
       "fiftyTwoWeekHigh": 10.37,
       "fiftyTwoWeekLow": 4.0,
-      "ema200": 7.2904,
+      "ema200": 7.2591,
       "currency": "USD"
     },
     {
@@ -4330,7 +4330,7 @@
       "npm": 63.482000000000006,
       "fiftyTwoWeekHigh": 329.16,
       "fiftyTwoWeekLow": 218.31,
-      "ema200": 279.6486,
+      "ema200": 279.9263,
       "currency": "USD"
     },
     {
@@ -4349,7 +4349,7 @@
       "npm": 32.105,
       "fiftyTwoWeekHigh": 263.5,
       "fiftyTwoWeekLow": 84.595,
-      "ema200": 154.2876,
+      "ema200": 153.6014,
       "currency": "USD"
     },
     {
@@ -4368,7 +4368,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 72.5,
       "fiftyTwoWeekLow": 27.14,
-      "ema200": 52.1017,
+      "ema200": 52.1706,
       "currency": "USD"
     },
     {
@@ -4406,7 +4406,7 @@
       "npm": -12.540999999999999,
       "fiftyTwoWeekHigh": 89.09,
       "fiftyTwoWeekLow": 40.77,
-      "ema200": 63.1034,
+      "ema200": 63.0132,
       "currency": "USD"
     },
     {
@@ -4425,7 +4425,7 @@
       "npm": 0,
       "fiftyTwoWeekHigh": 198.4,
       "fiftyTwoWeekLow": 77.69,
-      "ema200": 148.7638,
+      "ema200": 148.0577,
       "currency": "USD"
     },
     {
@@ -4444,7 +4444,7 @@
       "npm": -81.987,
       "fiftyTwoWeekHigh": 5.285,
       "fiftyTwoWeekLow": 2.52,
-      "ema200": 3.2568,
+      "ema200": 3.2498,
       "currency": "USD"
     },
     {
@@ -4452,7 +4452,7 @@
       "name": "Semiconductor Manufacturing International Corporation",
       "price": 125.46,
       "marketCap": 1074243633152.0,
-      "pe": 134.90323,
+      "pe": 137.86813,
       "forwardPE": 81.7329,
       "pegRatio": 2.71,
       "pb": 6.2136593,
@@ -4468,7 +4468,7 @@
     },
     {
       "ticker": "2809.HK",
-      "name": "Global X ETF Series OFC - Global X China Clean Energy ETF",
+      "name": "Global X China Clean Energy ETF",
       "price": 85.3,
       "marketCap": 0,
       "pe": 0,
@@ -4490,7 +4490,7 @@
       "name": "PDD Holdings Inc.",
       "price": 83.68,
       "marketCap": 119109820416.0,
-      "pe": 9.22602,
+      "pe": 9.476784,
       "forwardPE": 6.6588736,
       "pegRatio": 0.75,
       "pb": 1.6539007,
@@ -4509,7 +4509,7 @@
       "name": "BYD Company Limited",
       "price": 62.35,
       "marketCap": 568457232384.0,
-      "pe": 15.824872,
+      "pe": 16.069588,
       "forwardPE": 10.629226,
       "pegRatio": 0.47,
       "pb": 1.9363108,
@@ -4547,7 +4547,7 @@
       "name": "China Mobile Limited",
       "price": 108.71,
       "marketCap": 2357234499584.0,
-      "pe": 17.821312,
+      "pe": 17.968594,
       "forwardPE": 17.7546,
       "pegRatio": 86.97,
       "pb": 1.6885679,
@@ -4642,7 +4642,7 @@
       "name": "China Mobile Limited",
       "price": 80.05,
       "marketCap": 1735779942400.0,
-      "pe": 11.947762,
+      "pe": 11.85926,
       "forwardPE": 11.03123,
       "pegRatio": 54.43,
       "pb": 1.058227,
@@ -4717,8 +4717,8 @@
       "ticker": "601318.SS",
       "name": "Ping An Insurance (Group) Company of China, Ltd.",
       "price": 55.46,
-      "marketCap": 1004249808896.0,
-      "pe": 10.960474,
+      "marketCap": 0,
+      "pe": 11.114229,
       "forwardPE": 6.321179,
       "pegRatio": 0.47,
       "pb": 0.9615951,
@@ -4737,7 +4737,7 @@
       "name": "Tencent Holdings Limited",
       "price": 344.0,
       "marketCap": 3097584992256.0,
-      "pe": 12.108413,
+      "pe": 12.956686,
       "forwardPE": 10.2013645,
       "pegRatio": 1.23,
       "pb": 2.2913308,
@@ -4757,9 +4757,9 @@
       "price": 83.35,
       "marketCap": 1658828357632.0,
       "pe": 20.68238,
-      "forwardPE": 9.558556,
+      "forwardPE": 9.455091,
       "pegRatio": 0.39,
-      "pb": 1.1547648,
+      "pb": 1.2423953,
       "roe": 9.6999995,
       "dividendYield": 1.2357528494301142,
       "de": 0.21571,
@@ -4813,7 +4813,7 @@
       "name": "Ping An Insurance (Group) Company of China, Ltd.",
       "price": 49.7,
       "marketCap": 899949789184.0,
-      "pe": 8.906811,
+      "pe": 8.780919,
       "forwardPE": 4.7618628,
       "pegRatio": 0.4,
       "pb": 0.7333938,
@@ -4832,7 +4832,7 @@
       "name": "Baidu, Inc.",
       "price": 64.05,
       "marketCap": 174419787776.0,
-      "pe": 20.931374,
+      "pe": 20.078371,
       "forwardPE": 10.088432,
       "pegRatio": 1.42,
       "pb": 0.5429473,
@@ -4851,7 +4851,7 @@
       "name": "Semiconductor Manufacturing International Corporation",
       "price": 49.12,
       "marketCap": 420587012096.0,
-      "pe": 49.61616,
+      "pe": 48.156864,
       "forwardPE": 25.764093,
       "pegRatio": 0.9,
       "pb": 2.07047,
@@ -4927,7 +4927,7 @@
       "name": "BYD Company Limited",
       "price": 79.68,
       "marketCap": 726458302464.0,
-      "pe": 22.962536,
+      "pe": 23.16279,
       "forwardPE": 16.426834,
       "pegRatio": 0.71,
       "pb": 2.9074986,
@@ -4945,7 +4945,7 @@
       "ticker": "600519.SS",
       "name": "Kweichow Moutai Co., Ltd.",
       "price": 1485.75,
-      "marketCap": 1857308852224.0,
+      "marketCap": 0,
       "pe": 22.238438,
       "forwardPE": 20.631794,
       "pegRatio": 2.87,
@@ -4966,7 +4966,7 @@
       "price": 357.0,
       "marketCap": 451247538176.0,
       "pe": 22.899294,
-      "forwardPE": 22.788887,
+      "forwardPE": 22.59498,
       "pegRatio": 2.22,
       "pb": 8.090835,
       "roe": 35.784,
@@ -5022,7 +5022,7 @@
       "name": "JD.com, Inc.",
       "price": 97.95,
       "marketCap": 267564253184.0,
-      "pe": 15.376766,
+      "pe": 15.473933,
       "forwardPE": 5.894385,
       "pegRatio": 0.51,
       "pb": 1.0156795,
